@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="public/styles/style.css" /> -->
+    <link rel="stylesheet" href="public/styles/style.css" />
+    <!-- <link rel="stylesheet" href="public/styles/main.css" /> -->
+    <link rel="stylesheet" href="public/styles/main.css" />
+
+    <style>
+      :root {
+        /* hsl(264, 57%, 28%) */
+        /* hsl(316, 26%, 41%)
+         */
+        --clr-primary-500-h: 264;
+        --clr-primary-500-s: 57%;
+        --clr-primary-500-l: 28%;
+
+        --clr-primary-300-h: 316;
+        --clr-primary-300-s: 26%;
+        --clr-primary-300-l: 41%;
+
+        --clr-primary-300: #824d74;
+        --clr-primary-500: #401f71;
+        --clr-primary-700: #000;
+        --clr-primary-700: #261344; /* TODO darken this */
+        --clr-primary-700: #000;
+
+        --clr-accent-300: #fdaf7b; /* TODO lighten this */
+        --clr-accent-500: #fdaf7b;
+        --clr-accent-700: #be7b72;
+
+        --ff-primary: "Be Vietman Pro", sans-serif;
+      }
+      .hero-image-container {
+        background-image: url(public/images/qasim/cover.jpeg), url(public/images/qasim/cover.jpeg);
+      }
+    </style>
+  </head>
+  <body>
+    <template>
+      <div class="msg welcome-msg container msg-tip">
+        <h4>
+          Welcome to your new website. You must enter some additional information about your work for the site to work properly from
+          <a href="/settings">here.</a>
+        </h4>
+      </div>
+    </template>
+
+    <header class="header">
+      <div class="container">
+        <div class="header-container">
+          <!-- LOGO -->
+          <a href="#" role="link" aria-label="#" class="main-logo">
+            <img src="public/images/default/logo.svg" alt="logo" />
+          </a>
+          <!-- HAMBURGER -->
+          <input class="hidden" type="checkbox" id="hamburger-checkbox" />
+          <label for="hamburger-checkbox" id="hamburger-label">
+            <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="21" height="22">
+              <path
+                fill="#242D52"
+                fill-rule="evenodd"
+                d="M17.925.747l2.828 2.828L13.328 11l7.425 7.425-2.828 2.828-7.425-7.425-7.425 7.425-2.828-2.828L7.671 11 .247 3.575 3.075.747 10.5 8.171 17.925.747z"
+              />
+            </svg>
+            <svg class="icon-hamburger" xmlns="http://www.w3.org/2000/svg" width="25" height="22">
+              <g fill="#242D52" fill-rule="evenodd"><path d="M0 0h25v4H0zM0 7h25v4H0zM0 14h25v4H0z" /></g>
+            </svg>
+          </label>
+          <label for="hamburger-checkbox" id="hamburger-second-label"></label>
+          <!-- MENU -->
+          <nav class="main-nav">
+            <a href="#" class="main-nav-item">Home</a>
+            <a href="#features-section" class="main-nav-item">features</a>
+            <a href="/user/login" class="main-nav-item">log in</a>
+            <a href="/user/logout" class="main-nav-item">log out</a>
+            <a href="tel:552 587 75 31">552 587 75 31</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <div class="msg welcome-msg container msg-tip">
+      <p>
+        Welcome to your new website. You must enter some additional information about your work for the site to work properly from
+        <a href="/settings">here.</a>
+      </p>
+    </div>
+    <main>
+      <!-- Hero section -->
+      <section class="hero-section">
+        <!-- TODO
+				What could the hero image be?
+				Provide a set of hero images along with ideas to help users upload their images.
+				ideas:
+				- Barber in Action.
+				- image of the interior of the barbershop, highlighting the cozy and welcoming atmosphere.
+				- Close-up shots of barber tools.
+				- Barber Shop Sign.
+				- A stylish Haircut.
+			-->
+        <div class="hero-image-container"></div>
+        <div class="hero-msg-con even-columns">
+          <h1 class="fs-h1">Welcome to [Barber's Name] Barbershop, where grooming meets style and tradition!</h1>
+          <p class="fs-subheader">
+            At [Barber's Name] Barbershop, we take pride in providing top-notch grooming services tailored to your unique style and personality. Our
+            skilled barbers combine classic techniques with modern trends to deliver exceptional results that exceed your expectations.
+          </p>
+        </div>
+      </section>
+      <!-- Business Info Section -->
+      <section class="business-info-section">
+        <div class="container two-columns m-b-2">
+          <div class="m-b-2">
+            <h3 class="text-center fw-bold p-b-sm">LOCATION</h3>
+            <p class="fs-small">Gülük Mah. Yunus Emre Cad. 60/9 MELİKGAZİ/KAYSERİ</p>
+          </div>
+          <div class="divider"></div>
+          <div class="m-b-2">
+            <h3 class="text-center fw-bold p-b-sm">OPENING HOURS</h3>
+            <p class="fs-small">Mon to Fri: 9.00am - 8.30pm <br />Sat: 10.00am - 6.30pm <br />Sun: Closed</p>
+          </div>
+        </div>
+      </section>
+      <!-- Our Services -->
+      <section class="services-section">
+        <div class="container"></div>
+      </section>
+      <!-- Appointment Section -->
+      <section class="appointment-section">
+        <h2 class="fs-section-title m-b-3 text-center">Book an Appointmant</h2>
+        <div class="container">
+          <!-- TODO
+						Choose worker and time using a dropbox.
+						rewrite js for the form and be sure of the sending form of the data.
+						make sure fetching data is working and redering the form.
+						send only naccery data.
+					-->
+
+          <form action="javascript:send()" class="form" id="appointmantform">
+            <!--  -->
+            <fieldset class="fieldset">
+              <div class="field">
+                <label class="field-label" for="name">Name</label>
+                <input class="field-input" id="name" type="text" name="name" required maxlength="23" />
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="phone">Phone</label>
+                <input
+                  class="field-input"
+                  id="phone"
+                  type="tel"
+                  name="phone"
+                  required
+                  pattern="^[0-9]+$"
+                  maxlength="14"
+                  minlength="8"
+                  title="enter only numbers to this field"
+                />
+                <small class="field-note">5xx xxx xx xx</small>
+              </div>
+            </fieldset>
+
+            <!--  -->
+            <fieldset class="fieldset">
+              <div class="field">
+                <label class="field-label" for="branch-input">branch</label>
+                <select class="field-input" name="branch" id="branch-input" required></select>
+              </div>
+              <div class="field">
+                <label class="field-label" for="barber-input">barber</label>
+                <select class="field-input" name="barber" id="barber-input" required></select>
+              </div>
+            </fieldset>
+
+            <!--  -->
+            <fieldset class="fieldset">
+              <div class="field">
+                <label class="field-label" for="date-input">Date</label>
+                <select class="field-input" id="date-input" name="date" required></select>
+              </div>
+              <div class="field">
+                <label class="field-label" for="time-input">Time</label>
+                <select class="field-input" name="time" id="time-input" required></select>
+              </div>
+            </fieldset>
+            <div class="notification"></div>
+            <input type="submit" class="submit-button" value="Book " />
+          </form>
+        </div>
+      </section>
+      <!-- Gallery Section  (OUR SHOP IN IMAGES) -->
+
+      <section class="gallery-section">
+        <h2 class="fs-section-title m-b-3 text-center">Gallery</h2>
+        <div class="x-carousel">
+          <img class="x-carousel-img" src="public/images/user9/gallery/img-0.webp" alt="" draggable="false" />
+          <img class="x-carousel-img" src="public/images/user9/gallery/img-1.webp" alt="" draggable="false" />
+          <img class="x-carousel-img" src="public/images/user9/gallery/img-2.webp" alt="" draggable="false" />
+          <img class="x-carousel-img" src="public/images/user9/gallery/img-3.webp" alt="" draggable="false" />
+          <img class="x-carousel-img" src="public/images/user9/gallery/img-4.webp" alt="" draggable="false" />
+        </div>
+      </section>
+
+      <!-- Shop -->
+      <section class="shop-section">
+        <h2 class="fs-section-title m-b-2 text-center">Shop</h2>
+        <p class="section-description m-b-3 text-center fs-small gray">Products avaliable at our store</p>
+        <div class="container products-container">
+          <div class="full-screen-cover">
+            <div class="product-card">
+              <div class="wrapper">
+                <img src="public/images/user9/products/prod-1.jpg" alt="Product Image" />
+                <h3>SkinMedica TNS Advanced+ Serum</h3>
+                <p class="price">$295.00</p>
+                <p class="description">A powerful anti-aging serum that targets fine lines, deep wrinkles and sagging skin.</p>
+                <a href="https://api.whatsapp.com/send/?phone=905525877531" class="button secondary-button">Buy</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="wrapper">
+              <img src="public/images/user9/products/prod-2.jpg" alt="Product Image" />
+              <h3>SkinCeuticals Triple Lipid Restore 242</h3>
+              <p class="price">$150.00</p>
+              <p class="description">An anti-aging facial treatment with essential lipids for mature skin types.</p>
+              <a href="https://api.whatsapp.com/send/?phone=905525877531" class="button secondary-button">Buy</a>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="wrapper">
+              <img src="public/images/user9/products/prod-3.jpg" alt="Product Image" />
+              <h3>Augustinus Bader The Rich Cream 50ml</h3>
+              <p class="price">$300.00</p>
+              <p class="description">
+                Formulated with high potency botanicals rich in omega 6 fatty acids and antioxidants this cream helps to revive the complexion and
+                help soothe dryness for skin that looks and feels smoother, softer and more supple. Backed by 30 years of visionary science. Powered
+                by TFC8®.
+              </p>
+              <a href="https://api.whatsapp.com/send/?phone=905525877531" class="button secondary-button">Buy</a>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="wrapper">
+              <img src="public/images/user9/products/prod-4.jpg" alt="Product Image" />
+              <h3>Neocutis LUMIÈRE FIRM Illuminating & Tightening Eye Cream</h3>
+              <p class="price">$114.00</p>
+              <p class="description">
+                An anti-aging eye cream that firms, smooths and restores delicate eye area. Neocutis LUMIÈRE® FIRM Illuminating & Tightening Eye Cream
+                targets dull and aging skin surrounding the eyes. A blend of growth factors and proprietary peptides boost collagen production,
+                encouraging firmer, smoother and more resilient skin without the appearance of fine lines and wrinkles. Caffeine helps reduce
+                under-eye puffiness, while vitamin C delivers antioxidant protection.
+              </p>
+              <a href="https://api.whatsapp.com/send/?phone=905525877531" class="button secondary-button">Buy</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Contact Us Section -->
+      <section class="map-section">
+        <h2 class="fs-section-title m-b-3 text-center">Us on The Map</h2>
+        <div class="container">
+          <iframe
+            id="map"
+            height="450"
+            style="border: 0; width: 100%"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src=""
+          >
+          </iframe>
+        </div>
+      </section>
+      <!-- Contact Us Section -->
+      <section class="contact-section">
+        <h2 class="fs-section-title m-b-3 text-center">Contact Us</h2>
+        <div class="container contact-section-container">
+          <div class="contact-info-container">
+            <h3 class="fs-h4 m-b-2">Contact Information</h3>
+            <p>
+              <a href="tel:552 587 75 31">552 587 75 31</a><br />
+              email: mail@busines.com <br />
+              Insta: accountname
+            </p>
+          </div>
+
+          <div class="contact-form-container">
+            <h3 class="fs-h4 m-b-2">Contact Form</h3>
+            <form action="/contact">
+              <div class="field">
+                <label class="field-label">Name</label>
+                <input class="field-input" type="text" name="name" required maxlength="23" />
+              </div>
+              <div class="field">
+                <label class="field-label">Phone</label>
+                <input class="field-input" type="tel" name="phone" required />
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div id="overlay" class="overlay hidden">Press again to close</div>
+    <footer>
+      <div class="footer-section-1 hidden">
+        <div class="container two-columns">
+          <div>
+            <h4 class="fs-h4 underline m-b-2">Contact</h4>
+            <p class="fs-small">Phone name: +90 552 587 75 31<br />Email: info@example.com</p>
+          </div>
+          <div class="divider"></div>
+          <div>
+            <h4 class="fs-h4 underline m-b-2">About Us</h4>
+            <p class="fs-small">
+              Business name: Name of busines.<br />Loaction: Turkey, Kayseri<br />Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, in nam
+              rem beatae repellendus impedit odit.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-section-2">
+        <div class="footer container">
+          <p>&copy; Business name</p>
+          <p>Powered by: thebarberswebsite.com</p>
+        </div>
+      </div>
+    </footer>
+
+    <template id="appointmant-info-msg-template">
+      <div class="msg msg-ok">
+        <p>
+          You have an appointmant at {{date}}.<br />
+          Branch: {{branch}}. <br />
+          Barber: {{employee}}. <br />
+
+          Appointment Code: {{code}}. You can <a href="/data/cancel/{{code}}" class="link">cancel your appointmant here</a>.
+        </p>
+      </div>
+    </template>
+    <template id="appointmant-fail-msg-template">
+      <div class="msg msg-warning">
+        <p>
+          <strong class="fw-bold">Sorry, couldn't take an appointmant.</strong> <br />
+          Reason: {{failReason}}
+        </p>
+      </div>
+    </template>
+
+    <template id="error-msg-template">
+      <div class="msg msg-error">
+        <p>
+          <strong class="fw-bold">Something went wrong!</strong> <br />
+          Failed to take an appointmant due to a server error. <br />
+        </p>
+      </div>
+    </template>
+
+    <template id="product-template">
+      <div class="product-card">
+        <div class="wrapper">
+          <img src="{{image}}" alt="Product Image" />
+          <h3>{{title}}</h3>
+          <p class="price">{{price}}</p>
+          <p class="description">{{description}}</p>
+          <a href="{{link}}" class="button secondary-button">Buy</a>
+        </div>
+      </div>
+    </template>
+    <!-- <script type="text/javascript" src="public/scripts/main.js"></script> -->
+    <script type="text/javascript" src="public/scripts/main.js"></script>
+  </body>
+</html>

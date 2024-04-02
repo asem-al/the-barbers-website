@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings</title>
+    <link rel="stylesheet" href="public/styles/style.css" />
+    <link rel="stylesheet" href="public/styles/settings.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form action="javascript:send()" class="form" id="settings-form">
+        <!-- User Info -->
+        <label class="section-label fs-big m-b-3 dis-b">User Info<input type="checkbox" /></label>
+
+        <fieldset class="fieldset foldable-section">
+          <div class="field m-b-2"><label for="username">Username</label><input type="text" id="username" name="username" disabled /></div>
+          <div class="field m-b-2"><label for="password">Password</label><input type="text" id="password" name="password" /></div>
+          <div class="field m-b-2"><label for="email">Email</label><input type="Email" id="email" name="email" /></div>
+          <div class="field m-b-2"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" /></div>
+        </fieldset>
+        <!-- Business info -->
+        <label class="section-label fs-big m-b-3 dis-b">Business Info<input type="checkbox" /></label>
+        <fieldset class="fieldset foldable-section">
+          <div class="field m-b-2"><label for="businessName">Business Name</label><input type="text" id="businessName" name="businessName" /></div>
+          <div class="field m-b-2">
+            <label for="branchesnumber">Branches Number</label><input type="number" id="branchesnumber" min="1" value="1" />
+          </div>
+          <!-- Branches info -->
+          <h3 class="fs-mid m-b-3">Branches</h3>
+          <div class="branches-container">
+            <!-- Main Branch -->
+            <fieldset class="fieldset branch">
+              <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+              <div class="field m-b-2">
+                <label>Name</label><input type="text" name="branches.name" value="Main Branch" class="branch-name-input" />
+              </div>
+              <div class="field m-b-2"><label>Phone</label><input type="tel" name="branches.phone" /></div>
+              <label class="section-label fw-semi-bold m-b-3 dis-b">Address<input type="checkbox" /></label>
+              <fieldset class="fieldset foldable-section">
+                <div class="field m-b-2"><label>Country</label><input type="text" name="branches.country" /></div>
+                <div class="field m-b-2"><label>City</label><input type="text" name="branches.city" /></div>
+                <div class="field m-b-2"><label>District</label><input type="text" name="branches.district" /></div>
+                <div class="field m-b-2"><label>Neighborhood</label><input type="text" name="branches.neighborhood" /></div>
+                <div class="field m-b-2"><label>Street</label><input type="text" name="branches.street" /></div>
+                <div class="field m-b-2"><label>Full address</label><input type="text" name="branches.fulladdress" /></div>
+              </fieldset>
+              <!-- Employees -->
+              <label class="section-label fw-semi-bold m-b-3 dis-b">Employees<input type="checkbox" /></label>
+              <fieldset class="fieldset foldable-section">
+                <div class="fields-list-container">
+                  <div class="fields-list employees-fields-list" id="employees-fields-list">
+                    <div class="employee m-b-3">
+                      <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+                      <div>
+                        <div class="field m-b-2"><label>Name</label><input type="text" name="branches.employees.name" /></div>
+                        <div class="field m-b-2"><label>Phone</label><input type="tel" name="branches.employees.phone" /></div>
+                        <div class="field m-b-2"><label>Avaliable</label><input type="checkbox" name="branches.employees.avaliable" checked /></div>
+                      </div>
+                    </div>
+                  </div>
+                  <template id="employee-field-template">
+                    <div class="employee m-b-3">
+                      <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+                      <div>
+                        <div class="field m-b-2"><label>Name</label><input type="text" name="branches.employees.name" /></div>
+                        <div class="field m-b-2"><label>Phone</label><input type="tel" name="branches.employees.phone" /></div>
+                        <div class="field m-b-2"><label>Avaliable</label><input type="checkbox" name="branches.employees.avaliable" checked /></div>
+                      </div>
+                    </div>
+                  </template>
+                  <button class="button button-green" type="button" onclick="render('employee-field-template', this.parentNode.children[0])">
+                    Add
+                  </button>
+                </div>
+              </fieldset>
+              <!-- Work hours -->
+              <label class="section-label fw-semi-bold m-b-3 dis-b">Work Hours<input type="checkbox" /></label>
+              <fieldset class="fieldset foldable-section">
+                <div class="field m-b-2"><label>Appointment duration</label><input type="number" name="branches.shortestAppointmant" /></div>
+                <div class="field m-b-2">
+                  <label>Weekend Days:</label>
+                  <div class="weekdays-selector">
+                    <label><input type="checkbox" name="branches.weekend" value="1" />Mon</label>
+                    <label><input type="checkbox" name="branches.weekend" value="2" />Tue</label>
+                    <label><input type="checkbox" name="branches.weekend" value="3" />Wed</label>
+                    <label><input type="checkbox" name="branches.weekend" value="4" />Thu</label>
+                    <label><input type="checkbox" name="branches.weekend" value="5" />Fri</label>
+                    <label><input type="checkbox" name="branches.weekend" value="6" />Sat</label>
+                    <label><input type="checkbox" name="branches.weekend" value="0" />Sun</label>
+                  </div>
+                </div>
+                <!-- xxxxx -->
+                <h3 class="fs-mid fw-semi-bold">Weekdays</h3>
+                <div class="weekdays">
+                  <div class="field aday m-b-3">
+                    <label class="dis-b">Monday</label>
+                    <fieldset class="fs-small">
+                      <div class="field">
+                        <label>Opening:</label>
+                        <input type="time" name="branches.openinghour" />
+                      </div>
+                      <div class="field">
+                        <label>Closeing:</label>
+                        <input type="time" name="branches.closeinghour" />
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="field aday m-b-3">
+                    <label>Tuesday</label>
+                    <fieldset class="fs-small">
+                      <div class="field">
+                        <label>Opening:</label>
+                        <input type="time" name="branches.openinghour" />
+                      </div>
+                      <div class="field">
+                        <label>Closeing:</label>
+                        <input type="time" name="branches.closeinghour" />
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="field aday m-b-3">
+                    <label>Wednesday</label>
+                    <fieldset class="fs-small">
+                      <div class="field">
+                        <label>Opening:</label>
+                        <input type="time" name="branches.openinghour" />
+                      </div>
+                      <div class="field">
+                        <label>Closeing:</label>
+                        <input type="time" name="branches.closeinghour" />
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="field aday m-b-3">
+                    <label>Thursday</label>
+                    <fieldset class="fs-small">
+                      <div class="field">
+                        <label>Opening:</label>
+                        <input type="time" name="branches.openinghour" />
+                      </div>
+                      <div class="field">
+                        <label>Closeing:</label>
+                        <input type="time" name="branches.closeinghour" />
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="field aday m-b-3">
+                    <label>Friday</label>
+                    <fieldset class="fs-small">
+                      <div class="field">
+                        <label>Opening:</label>
+                        <input type="time" name="branches.openinghour" />
+                      </div>
+                      <div class="field">
+                        <label>Closeing:</label>
+                        <input type="time" name="branches.closeinghour" />
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="field aday m-b-3">
+                    <label>Saturday</label>
+                    <fieldset class="fs-small">
+                      <div class="field">
+                        <label>Opening:</label>
+                        <input type="time" name="branches.openinghour" />
+                      </div>
+                      <div class="field">
+                        <label>Closeing:</label>
+                        <input type="time" name="branches.closeinghour" />
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="field aday m-b-3">
+                    <label>Sunday</label>
+                    <fieldset class="fs-small">
+                      <div class="field">
+                        <label>Opening:</label>
+                        <input type="time" name="branches.openinghour" />
+                      </div>
+                      <div class="field">
+                        <label>Closeing:</label>
+                        <input type="time" name="branches.closeinghour" />
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+
+                <h3 class="fs-mid fw-semi-bold">Breaks</h3>
+                <div>
+                  <div class="breaks-list-container">
+                    <div class="break m-b-2">
+                      <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+                      <div>
+                        <div class="field m-b-2">
+                          <label>Start:</label>
+                          <input type="time" name="branches.breaks.start" value="12:30" />
+                        </div>
+                        <div class="field m-b-2">
+                          <label>End:</label>
+                          <input type="time" name="branches.breaks.end" value="13:30" />
+                        </div>
+                        <div class="field m-b-2">
+                          <label>for:</label>
+                          <select name="branches.breaks.for" class="assaigning-break">
+                            <option value="everyday">Every Day</option>
+                            <option value="0">Monday</option>
+                            <option value="1">Tuesday</option>
+                            <option value="2">Wednesday</option>
+                            <option value="3">Thursday</option>
+                            <option value="4">Friday</option>
+                            <option value="5">Saturday</option>
+                            <option value="6">Sunday</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="button button-green" type="button" onclick="render('break-item-template', this.parentNode.children[0])">Add</button>
+                  <template id="break-item-template">
+                    <div class="break m-b-2">
+                      <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+                      <div>
+                        <div class="field m-b-2">
+                          <label>Start:</label>
+                          <input type="time" name="branches.breaks.start" />
+                        </div>
+                        <div class="field m-b-2">
+                          <label>End:</label>
+                          <input type="time" name="branches.breaks.end" />
+                        </div>
+                        <div class="field m-b-2">
+                          <label>for:</label>
+                          <select name="branches.breaks.for" class="assaigning-break">
+                            <option value="everyday">Every Day</option>
+                            <option value="0">Monday</option>
+                            <option value="1">Tuesday</option>
+                            <option value="2">Wednesday</option>
+                            <option value="3">Thursday</option>
+                            <option value="4">Friday</option>
+                            <option value="5">Saturday</option>
+                            <option value="6">Sunday</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+                <!-- xxxxx -->
+                <div class="field m-b-2">
+                  <label class="fw-semi-bold" for="holidays">Holidays</label>
+                  <div class="inputs-list-container">
+                    <div class="holidays-list-container inputs-list">
+                      <div class="holiday input-item p-b-sm">
+                        <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+                        <input type="date" name="branches.holidays" />
+                      </div>
+                    </div>
+                    <button class="button button-green" type="button" onclick="render('holydays-input-template', this.parentNode.children[0])">
+                      Add
+                    </button>
+                    <template id="holydays-input-template">
+                      <div class="holiday input-item p-b-sm">
+                        <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+                        <input type="date" name="branches.holidays" />
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </fieldset>
+            </fieldset>
+          </div>
+        </fieldset>
+        <!-- Media & Content -->
+        <label class="section-label fs-big m-b-3 dis-b">Media & Content<input type="checkbox" /></label>
+        <fieldset class="fieldset foldable-section">
+          <h3 class="fs-mid m-b-3">Images</h3>
+          <fieldset class="fieldset">
+            <table>
+              <tbody id="images-table">
+                <tr>
+                  <td>
+                    <label class="button button-blue"
+                      >Change Logo
+                      <input class="hidden" type="file" name="logo" accept="image/jpeg, image/png, image/webp" />
+                    </label>
+                  </td>
+                  <td>
+                    <img class="preview-img" src="public/images/default/logo.svg" loading="lazy" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="button button-blue"
+                      >Change Cover Image
+                      <input class="hidden" type="file" name="cover" accept="image/jpeg, image/png, image/webp" />
+                    </label>
+                  </td>
+                  <td>
+                    <img class="preview-img" src="public/images/default/hero.webp" loading="lazy" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button id="addimagebutton" class="button button-green" type="button" onclick="handleAddGallaryImage()">Add gallery image</button>
+            <template id="gallery-img-row-template">
+              <tr>
+                <td>
+                  <label class="button button-blue"
+                    >Change Gallery Image
+                    <input class="hidden" type="file" name="img-" accept="image/jpeg, image/png, image/webp" />
+                  </label>
+                  <button class="button delete-button" onclick="handleImageDelete(this)">Delete</button>
+                </td>
+                <td>
+                  <img class="preview-img" src="" loading="lazy" />
+                </td>
+              </tr>
+            </template>
+          </fieldset>
+          <h3 class="fs-mid m-b-3">Other</h3>
+          <fieldset class="fieldset">
+            <div class="field m-b-2">
+              <label>Languages</label>
+              <div class="weekdays-selector languages-selector">
+                <template id="language-checkbox-template">
+                  <label
+                    ><input class="lang-checkbox" type="checkbox" name="userMediaAndContent.media.languages" value="en" /><span class="content-span"
+                      >en</span
+                    ></label
+                  >
+                </template>
+              </div>
+            </div>
+            <div class="field m-b-2"><label for="zzz">Theme</label><input type="color" id="zzz" name="zzz" /></div>
+          </fieldset>
+          <h3 class="fs-mid m-b-3">Content</h3>
+          <div class="content-fieldsets-container"></div>
+          <template id="content-fieldset-template">
+            <fieldset class="fieldset">
+              <div class="m-b-3 content-header-section">
+                <label class="fw-semi-bold dis-b">Header <span class="lang-tag">(EN)</span></label>
+                <textarea name="userMediaAndContent.content.{{lan}}.header" cols="40" rows="3" maxlength="120" placeholder="Advice"></textarea>
+              </div>
+              <div class="m-b-3 content-subheader-section">
+                <label class="fw-semi-bold dis-b">Sub-header <span class="lang-tag">(EN)</span></label>
+                <textarea name="userMediaAndContent.content.{{lan}}.sub_header" cols="40" rows="4" maxlength="300" placeholder="Advice"></textarea>
+              </div>
+            </fieldset>
+          </template>
+        </fieldset>
+        <button class="button submit-button" type="submit">Submit</button>
+      </form>
+    </div>
+    <script type="text/javascript" src="public/scripts/settings.js"></script>
+  </body>
+</html>

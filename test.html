@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/register" method="POST">
+      <!-- User Information -->
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required /><br />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required /><br />
+
+      <label for="passwordConfirmation">Confirm Password:</label>
+      <input type="password" id="passwordConfirmation" name="passwordConfirmation" required /><br />
+
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" required /><br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br />
+
+      <label for="businessName">Business Name:</label>
+      <input type="text" id="businessName" name="businessName" required /><br />
+
+      <!-- Branch Information -->
+      <h4>Main Branch:</h4>
+      <label for="branch_name">Branch Name:</label>
+      <input type="text" id="branch_name" name="branches[0][name]" required /><br />
+
+      <label for="branch_phoneNumber">Branch Phone Number:</label>
+      <input type="tel" id="branch_phoneNumber" name="branches[0][phoneNumber]" required /><br />
+
+      <label for="branch_country">Country:</label>
+      <input type="text" id="branch_country" name="branches[0][country]" required /><br />
+
+      <label for="branch_city">City:</label>
+      <input type="text" id="branch_city" name="branches[0][city]" required /><br />
+
+      <label for="branch_district">District:</label>
+      <input type="text" id="branch_district" name="branches[0][district]" required /><br />
+
+      <label for="branch_neighborhood">Neighborhood:</label>
+      <input type="text" id="branch_neighborhood" name="branches[0][neighborhood]" required /><br />
+
+      <label for="branch_street">Street:</label>
+      <input type="text" id="branch_street" name="branches[0][street]" required /><br />
+
+      <!-- Branch Employees -->
+      <h5>Employees:</h5>
+      <label for="employee1_name">Name:</label>
+      <input type="text" id="employee1_name" name="branches[0][employees][0][name]" required /><br />
+
+      <label for="employee1_available">Available:</label>
+      <input type="checkbox" id="employee1_available" name="branches[0][employees][0][available]" /><br />
+
+      <label for="employee1_phoneNumber">Phone Number:</label>
+      <input type="tel" id="employee1_phoneNumber" name="branches[0][employees][0][phoneNumber]" required /><br />
+
+      <!-- Opening Hours -->
+      <label for="openinghour">Opening Hour:</label>
+      <input type="number" id="openinghour" name="openinghour" required /><br />
+
+      <label for="closinghour">Closing Hour:</label>
+      <input type="number" id="closinghour" name="closinghour" required /><br />
+
+      <label for="shortestAppointmant">Shortest Appointment Time (in minutes):</label>
+      <input type="number" id="shortestAppointmant" name="shortestAppointmant" required /><br />
+
+      <label for="breakstart">Break Start:</label>
+      <input type="number" id="breakstart" name="breakstart" required /><br />
+
+      <label for="breakend">Break End:</label>
+      <input type="number" id="breakend" name="breakend" required /><br />
+
+      <label for="weekend">Weekend Days:</label>
+      <input type="text" id="weekend" name="weekend" required /><br />
+
+      <label for="holiday">Holiday:</label>
+      <input type="text" id="holiday" name="holidays[0][name]" required /><br />
+      <input type="text" id="holiday_date" name="holidays[0][date]" required /><br />
+
+      <!-- User Media and Content -->
+      <label for="en_header">English Header:</label>
+      <input type="text" id="en_header" name="userMediaAndContent[content][en][header]" required /><br />
+
+      <!-- Continue with other content fields -->
+
+      <label for="logo">Logo URL:</label>
+      <input type="text" id="logo" name="userMediaAndContent[media][logo]" required /><br />
+
+      <label for="heroImage">Hero Image URL:</label>
+      <input type="text" id="heroImage" name="userMediaAndContent[media][heroImage]" required /><br />
+
+      <!-- Continue with other media fields -->
+
+      <label for="themeColor">Theme Color:</label>
+      <input type="text" id="themeColor" name="userMediaAndContent[media][themeColor]" required /><br />
+
+      <input type="submit" value="Register" />
+    </form>
+  </body>
+</html>

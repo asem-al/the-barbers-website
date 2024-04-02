@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="public/styles/style.css" />
+    <link rel="stylesheet" href="public/styles/loginsignin.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <h1 class="fs-big fw-bold text-center">Login</h1>
+        <form action="javascript:send()" id="login-form" class="form">
+          <div class="field"><input type="tel" name="phone" placeholder="Phone Number" required /></div>
+          <div class="field"><input type="password" name="password" placeholder="Password" required /></div>
+          <div class="field text-center hidden" id="msg-wrong-passowrd">Wrong number or password</div>
+          <div class="field button"><input type="submit" value="Login" /></div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const send = async () => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const redirectParam = queryParams.get("redirect");
+        const redirectUrl = redirectParam ? redirectParam : "/dashboard";
+        const response = await fetch("/user/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(gatherFormData()),
+        });
+        if (response.status == 200) {
+          window.location.href = redirectUrl;
+        } else if (response.status == 401) {
+          document.getElementById("msg-wrong-passowrd").classList.remove("hidden");
+        }
+        console.log(response);
+      };
+      const gatherFormData = function () {
+        const formData = new FormData(document.getElementById("login-form"));
+        return {
+          phoneNumber: formData.get("phone"),
+          password: formData.get("password"),
+        };
+      };
+    </script>
+  </body>
+</html>

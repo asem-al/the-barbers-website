@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>معلومات المستخدم</h2>
+    <form id="initform" action="/user" method="post">
+      <fieldset>
+        <legend>معلومات المستخدم</legend>
+
+        <div>
+          <label for="username">اسم المستخدم</label>
+          <input type="text" id="username" name="username" />
+        </div>
+        <div>
+          <label for="password">كلمة المرور</label>
+          <input type="text" id="password" name="password" />
+        </div>
+        <div>
+          <label for="email">ايميل</label>
+          <input type="text" id="email" name="email" />
+        </div>
+        <div>
+          <label for="phonenumber">رقم الهاتف</label>
+          <input type="text" id="phonenumber" name="phonenumber" />
+        </div>
+      </fieldset>
+      <br />
+      <fieldset id="businessinfo">
+        <legend>معلومات العمل</legend>
+        <div>
+          <label for="businessname">اسم العمل</label>
+          <input type="text" id="businessname" name="businessname" />
+        </div>
+        <div>
+          <label for="openinghour">ساعة بدء العمل</label>
+          <input type="time" id="openinghour" name="openinghour" /><br />
+          <small>سيتم استخدامها في توليد المواعيد المتاحة للعملاء. يمكن تغييرها لاحقاً</small>
+        </div>
+        <div>
+          <label for="closeinghour">وقت الاغلاق</label>
+          <input type="time" id="closeinghour" name="closeinghour" />
+        </div>
+        <div>
+          <label for="breakstart">وقت بدء الاستراحة</label>
+          <input type="time" id="breakstart" name="breakstart" />
+          <label for="breakend">وقت انتهاء الاستراحة</label>
+          <input type="time" id="breakend" name="breakend" />
+        </div>
+        <div>
+          <label for="shortestappointmant">المدة التي يستغرقها الموعد عادةً</label>
+          <input type="number" id="shortestappointmant" name="shortestappointmant" />
+        </div>
+        <br />
+
+        <div>
+          <fieldset id="workers-names-field">
+            <legend>العطلة الاسبوعية</legend>
+
+            <span><input type="checkbox" id="day0" name="weekend" value="0" /><label for="monday">الاثنين</label> </span>
+
+            <span><input type="checkbox" id="day1" name="weekend" value="1" /><label for="tuesday">الثلاثاء</label></span>
+
+            <span><input type="checkbox" id="day2" name="weekend" value="2" /><label for="wednesday">الاربعاء</label> </span>
+
+            <span><input type="checkbox" id="day3" name="weekend" value="3" /><label for="thursday">الخميس</label> </span>
+
+            <span><input type="checkbox" id="day4" name="weekend" value="4" /><label for="friday">الجمعة</label> </span>
+
+            <span><input type="checkbox" id="day5" name="weekend" value="5" /><label for="saturday">السبت</label> </span>
+
+            <span><input type="checkbox" id="day6" name="weekend" value="6" /><label for="sunday">الاحد</label> </span>
+          </fieldset>
+          <br />
+        </div>
+        <div>
+          <fieldset id="holydays">
+            <legend>العطل السنوية</legend>
+            <div>
+              <label for="holydayname1">اسم العطلة</label>
+              <input type="text" id="holydayname1" name="holydayname1" /><br />
+              <label for="holydaydate1">تاريخ العطلة </label>
+              <input type="date" id="holydaydate1" name="holydaydate1" />
+              <button type="button" onclick="this.parentNode.remove()">حذف</button>
+              <br /><br />
+            </div>
+            <button type="button" id="addholydaybutton" onclick="duplicateElement(getLastDiv(this))">اضافة عطلة</button>
+          </fieldset>
+          <br />
+        </div>
+        <fieldset>
+          <legend>الافرع</legend>
+          <div>
+            <label for="numberofbranches">عدد الافرع</label>
+            <input id="numberofbranches" type="number" name="numberofbranches" />
+          </div>
+          <br />
+          <!-- ************************************ -->
+          <fieldset class="branch" id="branch1">
+            <legend>الفرع 1</legend>
+            <div>
+              <label for="branchname">اسم الفرع</label>
+              <input type="text" id="branchname" name="branchname" />
+              <br />
+              <small>استخدم معلومات منطقة تواجد الفرع مثل اسم الحي او البلدية لتوليد اسم فريد لكل فرع. مثل: فرع تقسيم</small>
+            </div>
+            <div>
+              <label for="openinghour">ساعة بدء العمل</label>
+              <input type="time" id="openinghour" name="openinghour" /><br />
+              <small>سيتم استخدامها في توليد المواعيد المتاحة للعملاء. يمكن تغييرها لاحقاً</small>
+            </div>
+            <div>
+              <label for="closeinghour">وقت الاغلاق</label>
+              <input type="time" id="closeinghour" name="closeinghour" />
+            </div>
+            <div>
+              <label for="breakstart">وقت بدء الاستراحة</label>
+              <input type="time" id="breakstart" name="breakstart" />
+              <label for="breakend">وقت انتهاء الاستراحة</label>
+              <input type="time" id="breakend" name="breakend" />
+            </div>
+            <div>
+              <label for="shortestappointmant">المدة التي يستغرقها الموعد عادةً</label>
+              <input type="number" id="shortestappointmant" name="shortestappointmant" />
+            </div>
+            <div>
+              <label for="xxx">البلد</label>
+              <input type="text" id="xxx" name="xxx" />
+            </div>
+            <div>
+              <label for="xxx">المدينة</label>
+              <input type="text" id="xxx" name="xxx" />
+            </div>
+            <div>
+              <label for="xxx">البلدية</label>
+              <input type="text" id="xxx" name="xxx" />
+            </div>
+            <div>
+              <label for="xxx">الحي</label>
+              <input type="text" id="xxx" name="xxx" />
+            </div>
+            <div>
+              <label for="xxx">الشارع</label>
+              <input type="text" id="xxx" name="xxx" />
+            </div>
+            <div>
+              <label for="xxx">العنوان الكامل</label>
+              <input type="text" id="xxx" name="xxx" />
+            </div>
+            <br />
+
+            <div>
+              <fieldset id="workers-names-field">
+                <legend>العطلة الاسبوعية</legend>
+
+                <span><input type="checkbox" id="day0" name="monday" value="0" /><label for="monday">الاثنين</label> </span>
+
+                <span><input type="checkbox" id="day1" name="tuesday" value="1" /><label for="tuesday">الثلاثاء</label></span>
+
+                <span><input type="checkbox" id="day2" name="wednesday" value="2" /><label for="wednesday">الاربعاء</label> </span>
+
+                <span><input type="checkbox" id="day3" name="thursday" value="3" /><label for="thursday">الخميس</label> </span>
+
+                <span><input type="checkbox" id="day4" name="friday" value="4" /><label for="friday">الجمعة</label> </span>
+
+                <span><input type="checkbox" id="day5" name="saturday" value="5" /><label for="saturday">السبت</label> </span>
+
+                <span><input type="checkbox" id="day6" name="sunday" value="6" /><label for="sunday">الاحد</label> </span>
+              </fieldset>
+              <br />
+            </div>
+            <div>
+              <fieldset id="holydays-branches">
+                <legend>العطل السنوية</legend>
+                <div>
+                  <label for="holydayname1">اسم العطلة</label>
+                  <input type="text" id="holydayname1" name="holydayname1" /><br />
+                  <label for="holydaydate1">تاريخ العطلة </label>
+                  <input type="date" id="holydaydate1" name="holydaydate1" /><button type="button" onclick="this.parentNode.remove()">حذف</button>
+                  <br /><br />
+                </div>
+                <button type="button" id="addholydaybutton" onclick="duplicateElement(getLastDiv(this))">اضافة عطلة</button>
+              </fieldset>
+              <br />
+            </div>
+            <fieldset id="employees">
+              <legend>معلومات العاملين</legend>
+              <div>
+                <label for="employee1">اسم الموظف</label>
+                <input type="text" id="employee1" name="employee1" /><br />
+                <label for="employee1-number">رقم الهاتف</label>
+                <input type="text" id="employee1-number" name="employee1-number" />
+                <button type="button" onclick="this.parentNode.remove()">حذف</button>
+                <br /><br />
+              </div>
+              <button type="button" id="addemployeebutton" onclick="duplicateElement(getLastDiv(this))">اضافة موظف</button>
+            </fieldset>
+            <br />
+          </fieldset>
+          <!-- ************************************ -->
+        </fieldset>
+        <fieldset>
+          <legend>تخصيص الموقع</legend>
+          <label>لون الثيم</label>
+          <input type="color" value="#1E2F97" id="themeColor" />
+        </fieldset>
+      </fieldset>
+
+      <br />
+      <input type="submit" />
+    </form>
+    <script>
+      document.getElementById("numberofbranches").addEventListener("change", () => {
+        let num = parseInt(document.getElementById("numberofbranches").value);
+        num = num > 0 ? num : 1;
+        const branchfield = document.getElementsByClassName("branch");
+        let diff = num - branchfield.length;
+
+        for (; diff > 0; diff--) {
+          duplicateElement(branchfield[0]);
+        }
+        for (; diff < 0; diff++) {
+          branchfield[branchfield.length - 1].remove();
+        }
+      });
+
+      function getLastDiv(el) {
+        // return the last div element in the parent element of the element passed
+        const divs = el.parentNode.getElementsByTagName("div");
+        return divs[divs.length - 1];
+      }
+
+      function duplicateElement(el) {
+        const clone = el.parentNode.insertBefore(el.cloneNode(true), el.nextSibling);
+        // function changeUniqueAttributes(el) {
+        //   console.log(el);
+        //   if (el.hasAttribute("id")) el.id += Math.floor(Math.random() * 1000);
+        //   if (el.hasAttribute("name")) el.name += Math.floor(Math.random() * 1000);
+        //   if (el.hasAttribute("for")) el.setAttribute("for", el.getAttribute("name"));
+        //   for (let i = el.children.length - 1; i > 0; i--) changeUniqueAttributes(el.children[i]);
+        // }
+        // changeUniqueAttributes(el);
+
+        return clone;
+      }
+    </script>
+  </body>
+</html>

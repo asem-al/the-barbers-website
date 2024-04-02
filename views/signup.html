@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="public/styles/style.css" />
+    <link rel="stylesheet" href="public/styles/loginsignin.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <h1 class="fs-big fw-bold text-center">Sign up</h1>
+        <form action="javascript:send()" class="form" id="signup-form">
+          <div class="field">
+            <input type="text" name="username" placeholder=" username" id="username" required />
+            <small class="fs-small hidden" id="msg-error-not-allowd-chars">Usernames can only contain letters (a-z), numbers, and hyphens (-).</small>
+            <small class="fs-small hidden" id="msg-error-username-taken">Sorry, this username is already taken. Please choose another one.</small>
+          </div>
+          <div class="field"><input type="tel" name="phone" placeholder=" Phone" id="phone" required /></div>
+          <div class="field"><input type="password" name="password" placeholder=" Password" required id="password" /></div>
+          <div class="field"><input type="password" name="passwordconfirmation" placeholder=" Confirm Password" id="password-again" required /></div>
+          <div class="field button"><input type="submit" value="Sign in" /></div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const send = async function () {
+        if (passCheck() && (await verifyphone()) && (await checkusername())) {
+          const response = await fetch("/user/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(gatherFormData()),
+          });
+          if (response.status === 201) {
+            const res = await response.json();
+            const subdomain = res.data.username;
+            const origin = window.location.origin;
+            const domain = origin.replace(/^https?:\/\//, "");
+            console.log(`http://${subdomain}.${domain}`);
+            window.location.href = `http://${subdomain}.${domain}`;
+          }
+        }
+      };
+      const gatherFormData = function () {
+        const formData = new FormData(document.getElementById("signup-form"));
+        return {
+          username: formData.get("username"),
+          phoneNumber: formData.get("phone"),
+          password: formData.get("password"),
+          passwordConfirmation: formData.get("passwordconfirmation"),
+        };
+      };
+      const checkusername = async () => {
+        const usernameInput = document.getElementById("username");
+        const username = usernameInput.value;
+        const valid = /^[0-9a-z-]+$/.test(username);
+        if (!valid) {
+          usernameInput.style.color = "red";
+          document.getElementById("msg-error-not-allowd-chars").classList.remove("hidden");
+          return false;
+        } else {
+          const unique = (
+            await (
+              await fetch("/user/checkusername", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: username }),
+              })
+            ).json()
+          ).unique;
+
+          if (!unique) {
+            usernameInput.style.color = "red";
+            document.getElementById("msg-error-username-taken").classList.remove("hidden");
+            return false;
+          } else {
+            usernameInput.style.color = "unset";
+            document.getElementById("msg-error-username-taken").classList.add("hidden");
+            document.getElementById("msg-error-not-allowd-chars").classList.add("hidden");
+            return true;
+          }
+        }
+      };
+      const passCheck = () => {
+        const pass1 = document.getElementById("password").value;
+        const pass2 = document.getElementById("password-again").value;
+        if (pass1 && pass1 === pass2) return true;
+        return false;
+      };
+      const verifyphone = async () => {
+        // valid syntax
+        // not used
+        // verify using "twilio.com"
+        return true;
+      };
+      document.getElementById("username").addEventListener("change", checkusername);
+      document.getElementById("username").addEventListener("keypress", () => {
+        document.getElementById("username").style.color = "#000";
+      });
+      document.getElementById("phone").addEventListener("change", verifyphone);
+      document.getElementById("password-again").addEventListener("change", passCheck);
+    </script>
+  </body>
+</html>

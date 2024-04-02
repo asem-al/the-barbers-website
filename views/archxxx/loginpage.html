@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{configs.lang}}" dir="{{configs.dir}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/styles/login.css" />
+    <title>{{titles.loginpage}}</title>
+  </head>
+  <body>
+    <!-- <form id="loginform" action="/login" method="POST" enctype="application/x-www-form-urlencoded"> -->
+    <div id="loginform-con">
+      <h2>{{titles.loginpage}}</h2>
+      <form id="loginform" action="javascript:login()">
+        <span> <label for="uname">{{forms_labels.username}}</label> <input type="text" id="uname" value="" name="uname" /> </span>
+        <br />
+        <span><label for="pass">{{forms_labels.password}}</label> <input type="password" id="pass" value="" name="pass" /></span><br />
+        <button type="submit">{{buttons.submit}}</button>
+      </form>
+    </div>
+
+    <script>
+      async function login() {
+        const uname = document.getElementById("uname").value;
+        const pass = document.getElementById("pass").value;
+        await fetch("/en/login", {
+          method: "POST",
+          headers: {
+            username: uname,
+            pass: pass,
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

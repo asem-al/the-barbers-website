@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="public/styles/style.css" />
+    <link rel="stylesheet" href="public/styles/index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header-container">
+          <!-- LOGO -->
+          <a href="#" role="link" aria-label="#" class="main-logo">
+            <img src="public/images/logo.svg" alt="logo" />
+          </a>
+          <!-- HAMBURGER -->
+          <input class="hidden" type="checkbox" id="hamburger-checkbox" />
+          <label for="hamburger-checkbox" id="hamburger-label">
+            <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="21" height="22">
+              <path
+                fill="#242D52"
+                fill-rule="evenodd"
+                d="M17.925.747l2.828 2.828L13.328 11l7.425 7.425-2.828 2.828-7.425-7.425-7.425 7.425-2.828-2.828L7.671 11 .247 3.575 3.075.747 10.5 8.171 17.925.747z"
+              />
+            </svg>
+            <svg class="icon-hamburger" xmlns="http://www.w3.org/2000/svg" width="25" height="22">
+              <g fill="#242D52" fill-rule="evenodd"><path d="M0 0h25v4H0zM0 7h25v4H0zM0 14h25v4H0z" /></g>
+            </svg>
+          </label>
+          <label for="hamburger-checkbox" id="hamburger-second-label"></label>
+          <!-- MENU -->
+          <nav class="main-nav">
+            <a href="#" class="main-nav-item">Home</a>
+            <a href="#features-section" class="main-nav-item">features</a>
+            <a href="#pricing-section" class="main-nav-item">Pricing</a>
+          </nav>
+          <button class="button nav-button" onclick="window.location.href='/signup'">Sign&nbspup</button>
+        </div>
+      </div>
+    </header>
+    <section id="hero-section" class="hero-section">
+      <div class="container even-columns">
+        <div>
+          <h1 class="fs-big">Custom website for barbers with appointmant booking system.</h1>
+          <p>
+            Get your own website with an appointment booking system easily by creating an account. Then easily customize your site as much as you
+            want.
+          </p>
+          <button class="button" onclick="window.location.href='/signup'">Sign&nbspup</button>
+        </div>
+
+        <img id="hero-image" src="public/images/hero.png" alt="Hero image" />
+      </div>
+    </section>
+    <section id="howitworks-section" class="howitworks-section">
+      <div class="container">
+        <h2 class="text-center fw-bold fs-section-title">How it works?</h2>
+        <div class="even-columns list-container">
+          <div class="list-item">
+            <div><span class="marker">1</span></div>
+            <div>step one Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+          </div>
+          <div class="list-item">
+            <div><span class="marker">2</span></div>
+            <div>step two Lorem ipsum, 888 dolor sit amet consectetur adipisicing elit.</div>
+          </div>
+          <div class="list-item">
+            <div><span class="marker">3</span></div>
+            <div>step three Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="features-section" class="features-section">
+      <div class="container">
+        <h2 class="text-center fw-bold fs-section-title">Features</h2>
+        <div class="flex-container">
+          <!-- TODO change even-columns to flex and align cards to center -->
+          <div class="card feature-card">
+            <p class="fw-bold">Feature one</p>
+            <img src="images/featureoneimage.jpg" alt="image" />
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+          </div>
+          <div class="card feature-card">
+            <p class="fw-bold">Feature two</p>
+            <img src="images/featureoneimage.jpg" alt="image" />
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+          </div>
+          <div class="card feature-card">
+            <p class="fw-bold">Feature three</p>
+            <img src="images/featureoneimage.jpg" alt="image" />
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="pricing-section" class="pricing-section">
+      <div class="container">
+        <h2 class="text-center fw-bold fs-section-title">Pricing</h2>
+        <div class="flex-container">
+          <div class="card">
+            <p class="fw-bold">Free trailer</p>
+            <p class="fw-semi-bold price-tag">0.00$</p>
+
+            <button class="button">Subscribe</button>
+            <small class="note">No credit card required</small>
+          </div>
+          <div class="card">
+            <p class="fw-bold">Monthly</p>
+            <p class="fw-semi-bold">9.99$</p>
+
+            <button class="button">Subscribe</button>
+          </div>
+          <div class="card">
+            <p class="fw-bold">Yearly</p>
+            <p class="fw-semi-bold">71.99$</p>
+
+            <button class="button" onclick="window.location.href='/signup'">Subscribe</button>
+            <small class="note">Save 40%</small>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="closing-section" class="closing-section">
+      <div class="container even-columns">
+        <div>
+          <p class="fs-big">Call to action</p>
+          <p class="">If you have a question you can reach us <a href="" class="link">here</a>.</p>
+        </div>
+        <button class="button">Sign&nbspup</button>
+      </div>
+    </section>
+    <footer class="footer-section">
+      <div class="footer-content container flex-container fs-small">
+        <p class="text-center" style="width: fit-content">&copy; The barbers website</p>
+        <div class="footer-nav flex-container">
+          <a href="#" role="link">Contact</a>
+          <a href="#" role="link">About&nbspus</a>
+          <a href="#" role="link">Terms</a>
+          <a href="#" role="link">Privacy</a>
+          <a href="#" role="link">Help</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

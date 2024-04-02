@@ -1,0 +1,61 @@
+{
+  "en": {
+    "configs": {
+      "lang": "en",
+      "dir": "ltr"
+    },
+    "msgs": {
+      "default_msg": "Hay!",
+      "new_user_msg": "Welcome to your new website. Please enter some additional information about your work",
+      "invalid_username": "invalid username",
+      "used_username": "Sorry, this username is taken"
+    },
+    "navItems": {
+      "home": "Home",
+      "login": "login",
+      "pricing": "Pricing",
+      "signup": "signup",
+      "about": "About"
+    },
+    "buttons": {
+      "submit": "submit",
+      "call_to_action": "Create your website",
+      "here": "here"
+    },
+    "forms_labels": {
+      "name": "name",
+      "username": "Username",
+      "password": "Password",
+      "phone_number": "phone number",
+      "date": "date"
+    },
+    "titles": {
+      "loginpage": "Log in to dashboard"
+    },
+    "content": {
+      "headline": "headline TODO",
+      "sub_headline": "sub_headline TODO",
+      "Benefits": {
+        "first": {
+          "heading": "",
+          "description": ""
+        },
+        "second": {
+          "heading": "",
+          "description": ""
+        },
+        "third": {
+          "heading": "",
+          "description": ""
+        },
+        "features": ["Make your own website within 5 minutes.", "Customize it as you want.", "Designed specifically for your business"]
+      }
+    }
+  },
+  "ar": {
+    "default_msg": "مرحباً بكم"
+  },
+  "tr": {
+    "default_msg": "Merhabalar."
+  }
+}

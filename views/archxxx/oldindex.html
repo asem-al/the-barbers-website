@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="keywords" content="TODO" />
+        <meta name="description" content="TODO" />
+
+        <title>Appointmants App</title>
+
+        <link rel="stylesheet" href="oldstyle.css" />
+
+        <link rel="icon" type="image/x-icon" href="/public/favicons/favicon.ico" loading="lazy" />
+    </head>
+    <body>
+        <header>
+            <a href="/">
+                <img src="/public/logos/logo.webp" alt="logo" width="100px" />
+            </a>
+
+            <ul>
+                <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+            </ul>
+        </header>
+
+        <section id="main_message" class="container" style="height: 400px">
+            <p>مرحباً بكم</p>
+        </section>
+
+        <section id="slider" class="container" style=>
+            %IMAGES%
+            <!-- <img src="/assets/Buzz-Cut-Fade-Haircut.webp" alt="z" loading="lazy" />
+            <img src="/assets/Faux-Hawk-Haircut.webp" alt="z" loading="lazy"/>
+            <img src="/assets/Pointed-Bangs.webp" alt="z" loading="lazy"/>
+            <img src="/assets/Pompadour-Haircut.webp" alt="z" loading="lazy"/>
+            <img src="/assets/Quiff-Haircut.webp" alt="z" loading="lazy"/>
+            <img src="/assets/Skin-Fade-Crop.webp" alt="z" loading="lazy"/> -->
+        </section>
+
+        <section id="appointment_section" class="container">
+            <form id="appointment_form" action="javascript:send()" dir="rtl">
+                <br />
+                <span><label for="fname">الاسم:</label> <input type="text" id="fname" value="" /></span>
+                <span> <label for="phone">رقم الهاتف:</label> <input type="tel" id="phone" placeholder="555 555 55 55" /></span>
+                <fieldset id="workers-names-field">
+                    <span><input type="radio" id="anyemployee" name="workerRadio" value="anyemployee"> <label for="anyemployee">any</label></span>
+                </fieldset>
+
+                <input type="date" id="date" dir="ltr" />
+
+                <div id="box" class="cont">
+                    <span id="%ID%" class="" onclick="sellectTime(this.id)">%TIME%</span>
+                    <span id="%ID%" class="" onclick="sellectTime(this.id)">%TIME%</span>
+                    <span id="%ID%" class="" onclick="sellectTime(this.id)">%TIME%</span>
+                    <span id="%ID%" class="" onclick="sellectTime(this.id)">%TIME%</span>
+                </div>
+                <div id="notifications"><p></p></div>
+                <input id="submitb" type="submit" value="Submit" />
+                <br />
+            </form>
+            
+        </section>
+
+        <section id="map" style="height: 200px">d</section>
+        <footer></footer>
+        <script src="/public/scripts/script.js"></script>
+    </body>
+</html>

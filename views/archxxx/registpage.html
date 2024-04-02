@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>تسجيل حساب مستخدم جديد</h1>
+    <h2>انشئ حسابك لتحصل على موقعك الخاص. والذي يمكنك تخصيصه اكثر لاحقاً.</h2>
+    <form id="form" action="javascript:send()">
+      <fieldset>
+        <div>
+          <label for="username">اسم المستخدم:</label>
+          <input type="text" id="username" name="username" /><br />
+          <small id="usernamemsg">يجب ان يكون اسم المستخدم بالاحرف الانجليزية لانه سوف يتم استخدامه في تكوين رابط موقعكم.</small>
+        </div>
+        <div>
+          <label for="password">كلمة المرور:</label>
+          <input type="text" id="password" name="password" />
+        </div>
+        <div>
+          <label for="password-again">تاكيد كلمة المرور:</label>
+          <input type="text" id="password-again" name="password-again" />
+        </div>
+        <div>
+          <label for="email">الايميل</label>
+          <input type="email" id="email" name="email" />
+        </div>
+        <div>
+          <label for="phonenumber">رقم الهاتف</label>
+          <input type="text" id="phonenumber" name="phonenumber" />
+        </div>
+        <input type="submit" id="submitbutton" />
+      </fieldset>
+    </form>
+    <script>
+      const verifyphone = async () => {
+        // valid syntax
+        // not used
+        // verify using "twilio.com"
+        return true;
+      };
+      const checkusername = async () => {
+        const usernameInput = document.getElementById("username");
+        const username = usernameInput.value;
+        const valid = /^[0-9a-z-]+$/.test(username);
+        if (!valid) {
+          usernameInput.style.color = "red";
+          document.getElementById("usernamemsg").innerHTML = "الاحرف المسموحة في اسم المستخدم هي a-z و - فقط.";
+          return false;
+        } else {
+          const unique = (
+            await (
+              await fetch("/user/checkusername", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: username }),
+              })
+            ).json()
+          ).unique;
+
+          if (!unique) {
+            usernameInput.style.color = "red";
+            document.getElementById("usernamemsg").innerHTML = "هذا الاسم مستخدم";
+            return false;
+          } else {
+            usernameInput.style.color = "#000";
+            document.getElementById("usernamemsg").innerHTML = "";
+            return true;
+          }
+        }
+      };
+
+      const passCheck = () => {
+        const pass1 = document.getElementById("password").value;
+        const pass2 = document.getElementById("password-again").value;
+        console.log(pass2, "  ", pass1);
+        if (pass1 && pass1 === pass2) return true;
+        return false;
+      };
+
+      const send = async () => {
+        if ((await checkusername()) && (await verifyphone()) && passCheck()) {
+          const reqBody = {
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
+            phoneNumber: document.getElementById("phonenumber").value,
+            email: document.getElementById("email").value,
+          };
+          try {
+            const req = await fetch("/user", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(reqBody),
+            });
+            document.getElementById("form").reset();
+            console.log("user created");
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      };
+
+      document.getElementById("username").addEventListener("change", checkusername);
+      document.getElementById("username").addEventListener("keypress", () => {
+        document.getElementById("username").style.color = "#000";
+      });
+      document.getElementById("phonenumber").addEventListener("change", verifyphone);
+      document.getElementById("password-again").addEventListener("change", passCheck);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,178 @@
+{
+  "username": "asem",
+  "password": "5525877531",
+  "phoneNumber": "5525877531",
+  "email": "asem@gmail.com",
+  "businessName": "Name of business (asem)",
+  "branches": [
+    {
+      "name": "Branch 1",
+      "phoneNumber": "5525877531",
+      "country": "Türkiye",
+      "city": "Melikgazi",
+      "district": "Kayseri",
+      "neighborhood": "guluk mah.",
+      "street": "YUNUS EMRE CAD.",
+      "fulladdress": "GÜLÜK MAH. YUNUS EMRE CAD.  ATALAY APT. 60/9",
+      "shortestAppointmant": "30",
+      "weekend": [6],
+      "holidays": ["2024-04-01", "2024-04-04"],
+      "employees": [
+        {
+          "name": "barber 1",
+          "phoneNumber": "111",
+          "avaliable": true
+        },
+        {
+          "name": "barber 2",
+          "phoneNumber": "222",
+          "avaliable": true
+        },
+        {
+          "name": "barber 3",
+          "phoneNumber": "333",
+          "avaliable": true
+        }
+      ],
+      "weekschedule": [
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 780
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        }
+      ],
+      "breaks": [
+        {
+          "start": 750,
+          "end": 870,
+          "for": "everyday"
+        },
+        {
+          "start": 600,
+          "end": 630,
+          "for": "everyday"
+        }
+      ]
+    },
+    {
+      "name": "Unnamed Branch",
+      "phoneNumber": "5525877531",
+      "country": "Türkiye",
+      "city": "Melikgazi",
+      "district": "Kayseri",
+      "neighborhood": "guluk mah.",
+      "street": "YUNUS EMRE CAD.",
+      "fulladdress": "GÜLÜK MAH. YUNUS EMRE CAD.  ATALAY APT. 60/9",
+      "shortestAppointmant": "35",
+      "weekend": [1, 2],
+      "holidays": ["2024-04-02"],
+      "employees": [
+        {
+          "name": "barber 1",
+          "phoneNumber": "111",
+          "avaliable": true
+        },
+        {
+          "name": "barber 2",
+          "phoneNumber": "222",
+          "avaliable": true
+        }
+      ],
+      "weekschedule": [
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        },
+        {
+          "opening": 540,
+          "closing": 780
+        },
+        {
+          "opening": 540,
+          "closing": 1020
+        }
+      ],
+      "breaks": [
+        {
+          "start": 750,
+          "end": 870,
+          "for": "everyday"
+        }
+      ]
+    }
+  ],
+  "userMediaAndContent": {
+    "content": {
+      "en": {
+        "header": "Welcome to [Barber's Name] Barbershop, where grooming meets style and tradition!",
+        "sub_header": "At [Barber's Name] Barbershop, we take pride in providing top-notch grooming services tailored to your unique style and personality. Our skilled barbers combine classic techniques with modern trends to deliver exceptional results that exceed your expectations."
+      },
+      "tr": {
+        "header": "TR Header",
+        "sub_header": "TR Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut nisi culpa atque non dolorem aperiam dolor, sapiente facere perferendis beatae repellat quos ex sunt nihil vitae modi necessitatibus a deleniti."
+      },
+      "ar": {
+        "header": "AR header",
+        "sub_header": "AR Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut nisi culpa atque non dolorem aperiam dolor, sapiente facere perferendis beatae repellat quos ex sunt nihil vitae modi necessitatibus a deleniti."
+      }
+    },
+    "media": {
+      "languages": ["en", "tr", "ar"]
+    }
+  },
+  "products": [
+    {
+      "title": "product 1",
+      "price": "$50",
+      "description": "String",
+      "image": "String",
+      "link": "String"
+    },
+    {
+      "title": "product 2",
+      "price": "$30",
+      "description": "String",
+      "image": "String",
+      "link": "String"
+    }
+  ]
+}
