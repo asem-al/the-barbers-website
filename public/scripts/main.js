@@ -37,14 +37,27 @@ const getAppData = async () => {
 
   console.log(userInfo);
 
+  if (userInfo.branches.length < 1) {
+    showWelcomeMsg();
+    return;
+  }
+
+  fillcarousel();
+
   form.init();
 
   populateProducts();
   products_addEventListener();
 
   initMap();
+
+  fillBusinessInfo();
+  fillContactInfo();
 })();
 
+function showWelcomeMsg() {
+  document.getElementById("welcome-msg").classList.remove("hidden");
+}
 //console.log(document.forms[0].elements["name"]);
 // init form ------------------------
 const form = {
@@ -481,6 +494,7 @@ window.addEventListener("resize", () => {
 function populateProducts() {
   const productTemplate = document.getElementById("product-template");
   const productsContainer = document.querySelector(".products-container");
+  productsContainer.innerHTML = "";
   for (let i = 0; i < userInfo.products.length; i++) {
     const product = productTemplate.content.cloneNode(true);
 
@@ -490,7 +504,6 @@ function populateProducts() {
     productsContainer.appendChild(product);
   }
 }
-document.addEventListener("DOMContentLoaded", function () {});
 
 function products_addEventListener() {
   document.querySelectorAll(".product-card").forEach((card) => {
@@ -540,6 +553,46 @@ function initMap() {
   document.getElementById("map").src = `https://www.google.com/maps/embed/v1/${mode}?key=${key}&q=${quiry}`;
 }
 
+// business info ------------------------
+
+function fillBusinessInfo() {
+  document.getElementById("p-address").innerHTML = userInfo.branches[0].fulladdress;
+
+  let open, close, weekDay;
+  const date = new Date(Date.UTC(2012, 11, 16, 3, 0, 0));
+  let scheduleString = "";
+
+  for (let i = 0; i < 7; i++) {
+    open = minutesToTime(userInfo.branches[0].weekschedule[i].opening);
+    close = minutesToTime(userInfo.branches[0].weekschedule[i].closing);
+    weekDay = date.toLocaleDateString(undefined, { weekday: "long" });
+    scheduleString += weekDay + ": " + open + " - " + close + "<br/>";
+    date.setDate(date.getDate() + 1);
+  }
+
+  document.getElementById("p-weekschedule").innerHTML = scheduleString;
+}
+
+// Contact Us ------------------------
+
+function fillContactInfo() {
+  const phone = userInfo.phoneNumber;
+  const email = userInfo.email;
+  document.getElementById("p-phone").innerHTML = `<a href="tel:${phone}">${phone}</a>`;
+  document.getElementById("a-phone").innerHTML = `<a href="tel:${phone}">${phone}</a>`;
+  document.getElementById("p-email").innerHTML = email;
+  document.getElementById("p-businessname").innerHTML = "&copy; " + userInfo.businessName;
+}
+
+// carousel ------------------------
+
+function fillcarousel() {
+  const carousel = document.getElementById("carousel-con");
+  carousel.innerHTML = "";
+  userInfo.userMediaAndContent.media.images.forEach((image) => {
+    carousel.innerHTML += `<img class="x-carousel-img" src="${image}" alt="" draggable="false" />`;
+  });
+}
 function getLocation() {
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);

@@ -41,7 +41,6 @@ exports.EditUserInfo = async (req, res) => {
       req.body, // update to
       { new: true, runValidators: true } // options
     );
-    console.log(user);
     res.status(204).json({
       status: "success",
       data: user,

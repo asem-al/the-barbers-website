@@ -40,15 +40,6 @@
     </style>
   </head>
   <body>
-    <template>
-      <div class="msg welcome-msg container msg-tip">
-        <h4>
-          Welcome to your new website. You must enter some additional information about your work for the site to work properly from
-          <a href="/settings">here.</a>
-        </h4>
-      </div>
-    </template>
-
     <header class="header">
       <div class="container">
         <div class="header-container">
@@ -73,16 +64,17 @@
           <label for="hamburger-checkbox" id="hamburger-second-label"></label>
           <!-- MENU -->
           <nav class="main-nav">
-            <a href="#" class="main-nav-item">Home</a>
-            <a href="#features-section" class="main-nav-item">features</a>
-            <a href="/user/login" class="main-nav-item">log in</a>
-            <a href="/user/logout" class="main-nav-item">log out</a>
-            <a href="tel:552 587 75 31">552 587 75 31</a>
+            <a href="#appointment-section" class="main-nav-item">appointment</a>
+            <a href="#shop-section" class="main-nav-item">Shop</a>
+            <a href="#map-section" class="main-nav-item">Map</a>
+            <a href="/user/login" class="main-nav-item">Dashboard</a>
+            <!-- <a href="/user/logout" class="main-nav-item">log out</a> -->
+            <span id="a-phone"><a href="tel:552 587 75 31">552 587 75 31</a></span>
           </nav>
         </div>
       </div>
     </header>
-    <div class="msg welcome-msg container msg-tip">
+    <div id="welcome-msg" class="msg welcome-msg container msg-tip">
       <p>
         Welcome to your new website. You must enter some additional information about your work for the site to work properly from
         <a href="/settings">here.</a>
@@ -115,12 +107,12 @@
         <div class="container two-columns m-b-2">
           <div class="m-b-2">
             <h3 class="text-center fw-bold p-b-sm">LOCATION</h3>
-            <p class="fs-small">Gülük Mah. Yunus Emre Cad. 60/9 MELİKGAZİ/KAYSERİ</p>
+            <p id="p-address" class="fs-small">Gülük Mah. Yunus Emre Cad. 60/9 MELİKGAZİ/KAYSERİ</p>
           </div>
           <div class="divider"></div>
           <div class="m-b-2">
             <h3 class="text-center fw-bold p-b-sm">OPENING HOURS</h3>
-            <p class="fs-small">Mon to Fri: 9.00am - 8.30pm <br />Sat: 10.00am - 6.30pm <br />Sun: Closed</p>
+            <p id="p-weekschedule" class="fs-small">Mon to Fri: 9.00am - 8.30pm <br />Sat: 10.00am - 6.30pm <br />Sun: Closed</p>
           </div>
         </div>
       </section>
@@ -129,7 +121,7 @@
         <div class="container"></div>
       </section>
       <!-- Appointment Section -->
-      <section class="appointment-section">
+      <section id="appointment-section" class="appointment-section">
         <h2 class="fs-section-title m-b-3 text-center">Book an Appointmant</h2>
         <div class="container">
           <!-- TODO
@@ -196,7 +188,7 @@
 
       <section class="gallery-section">
         <h2 class="fs-section-title m-b-3 text-center">Gallery</h2>
-        <div class="x-carousel">
+        <div id="carousel-con" class="x-carousel">
           <img class="x-carousel-img" src="public/images/user9/gallery/img-0.webp" alt="" draggable="false" />
           <img class="x-carousel-img" src="public/images/user9/gallery/img-1.webp" alt="" draggable="false" />
           <img class="x-carousel-img" src="public/images/user9/gallery/img-2.webp" alt="" draggable="false" />
@@ -206,7 +198,7 @@
       </section>
 
       <!-- Shop -->
-      <section class="shop-section">
+      <section id="shop-section" class="shop-section">
         <h2 class="fs-section-title m-b-2 text-center">Shop</h2>
         <p class="section-description m-b-3 text-center fs-small gray">Products avaliable at our store</p>
         <div class="container products-container">
@@ -260,7 +252,7 @@
         </div>
       </section>
       <!-- Contact Us Section -->
-      <section class="map-section">
+      <section id="map-section" class="map-section">
         <h2 class="fs-section-title m-b-3 text-center">Us on The Map</h2>
         <div class="container">
           <iframe
@@ -278,28 +270,12 @@
       <!-- Contact Us Section -->
       <section class="contact-section">
         <h2 class="fs-section-title m-b-3 text-center">Contact Us</h2>
-        <div class="container contact-section-container">
-          <div class="contact-info-container">
-            <h3 class="fs-h4 m-b-2">Contact Information</h3>
+        <div class="container contact-section-con">
+          <div>
             <p>
-              <a href="tel:552 587 75 31">552 587 75 31</a><br />
-              email: mail@busines.com <br />
-              Insta: accountname
+              Phone: <span id="p-phone"><a href="tel:552 587 75 31">552 587 75 31</a></span>
             </p>
-          </div>
-
-          <div class="contact-form-container">
-            <h3 class="fs-h4 m-b-2">Contact Form</h3>
-            <form action="/contact">
-              <div class="field">
-                <label class="field-label">Name</label>
-                <input class="field-input" type="text" name="name" required maxlength="23" />
-              </div>
-              <div class="field">
-                <label class="field-label">Phone</label>
-                <input class="field-input" type="tel" name="phone" required />
-              </div>
-            </form>
+            <p>email: <span id="p-email">mail@busines.com</span></p>
           </div>
         </div>
       </section>
@@ -325,7 +301,7 @@
 
       <div class="footer-section-2">
         <div class="footer container">
-          <p>&copy; Business name</p>
+          <p id="p-businessname">&copy; Business name</p>
           <p>Powered by: thebarberswebsite.com</p>
         </div>
       </div>

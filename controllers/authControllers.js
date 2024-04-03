@@ -40,8 +40,6 @@ exports.signup = async (req, res) => {
   try {
     const newUser = await users.create(req.body);
     const token = signToken({ id: newUser._id });
-    res.cookie("jwt", token, cookie_options);
-    console.log("Cookie added:", res.getHeaders()["set-cookie"]);
     newUser.password = undefined;
     await copyDirectory(`${__dirname}/../public/images/default`, `${__dirname}/../public/images/${newUser.username}`);
     res.status(201).json({
@@ -58,8 +56,6 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  // console.log(req.headers.referer);
-  // console.log("req.query.redirect: ", req.query.redirect);
   try {
     const { phoneNumber, password } = req.body;
     if (!phoneNumber || !password) {
@@ -92,12 +88,7 @@ exports.login = async (req, res) => {
 exports.protect = async (req, res, next) => {
   try {
     // 1. check for token
-    console.log("Cookies: ", req.cookies);
-
     let token;
-    // if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
-    //   token = req.headers.authorization.split(" ")[1];
-    // }
     token = req.cookies.jwt;
 
     if (!token) {
@@ -124,7 +115,7 @@ exports.protect = async (req, res, next) => {
 
     next();
   } catch (err) {
-    console.log(err);
+
     if (
       err.name === "JsonWebTokenError" ||
       err.message === "OwnerOfTokenNoLongerAUser" ||
@@ -144,6 +135,7 @@ exports.protect = async (req, res, next) => {
       // Redirect the user to the login page with the original URL as a parameter
       return res.redirect(`/login?redirect=${encodeURIComponent(originalUrl)}`);
     }
+    console.log(err);
     return res.status(500).json({
       status: "fail",
       msg: err,

@@ -387,24 +387,14 @@ section {
   line-height: 5vh;
 }
 
-.contact-section {
-  height: 500px;
-}
-/*  */
+/* contact section */
 
-.contact-section-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-.contact-section-container > * {
-  padding: 1.2rem;
-}
-.contact-form-container {
+.contact-section {
   background-color: var(--clr-gray-bg);
 }
-.contact-info-container {
+.contact-section-con {
+  display: flex;
+  justify-content: center;
 }
 /* Footer */
 footer {

@@ -13,6 +13,7 @@ usersRouter.route("/").get(handlers.serve_user_main);
 usersRouter.route("/login").get(handlers.serve_login);
 
 usersRouter.route("/settings").get(auth.protect, handlers.serve_initPage);
+usersRouter.route("/dashboard").get(auth.protect, handlers.serve_dashboard);
 
 router.use(async (req, res, next) => {
   if (req.username) {

@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
+const compression = require("compression");
 
 const AppointmanRouter = require("./routes/dataRouter");
 const userRouter = require("./routes/userRouter");
@@ -46,12 +47,14 @@ app.use((req, res, next) => {
 
   // console.log("------------------------");
   // console.log("req.username: ", req.username);
-  console.log("req.url: ", req.url);
+  // console.log("req.url: ", req.url);
   // console.log("req.query: ", req.query);
   // console.log("req.headers ", req.headers);
   // console.log("req.body ", req.body);
   next();
 });
+
+app.use(compression());
 
 //
 ///      Routing     ///
@@ -110,8 +113,6 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// special requist
-// NOTE: I made it to render the checkbox of languages in settings.js and I could use it to add language switch in home and index pages.
 app.get("/avaliablelanguages", (req, res) =>
   res.status(200).json({
     avaliablelanguages: avaliable_languages,
@@ -133,7 +134,7 @@ app.get("/:language?", (req, res, next) => {
   }
 });
 
-app.use("/:language", serverRouter); // the main router for serving pages.
+app.use("/:language", serverRouter);
 
 app.use((req, res) => {
   res.status(404).sendFile("404.html", { root: `${__dirname}/views` });

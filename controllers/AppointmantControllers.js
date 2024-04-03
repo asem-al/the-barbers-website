@@ -61,10 +61,7 @@ exports.createAppo = async (req, res) => {
     }
 
     const [hours, minutes] = req.body.time.split(":").map(Number);
-    console.log(req.body.time, hours, minutes);
     const date = new Date(new Date(req.body.date).setHours(hours, minutes));
-    console.log(date);
-    // const [year, month, day] = req.body.date.split("-").map(Number);
 
     let barber = req.body.barber;
 
@@ -94,8 +91,6 @@ exports.createAppo = async (req, res) => {
     };
 
     newAppo = await Appointment.create(appoData);
-
-    console.log("new: ", newAppo);
 
     res.status(201).json({
       status: "success",
@@ -220,8 +215,6 @@ exports.getPublicData = async (req, res) => {
     const data = await Appointment.find({ user: user, date: { $gte: date.toISOString() } });
 
     const publicData = data;
-
-    console.log(data);
 
     res.json({
       status: "success",

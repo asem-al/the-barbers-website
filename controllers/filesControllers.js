@@ -173,7 +173,6 @@ exports.deleteFile = async (req, res) => {
       // 3. update the pathes array of user images in db.
       const updatedUser = await updateUserImages(dir, req.username);
       if (updatedUser) {
-        console.log("user images has been updated.");
         res.status(204).end();
       } else {
         throw Error("Could not update user images");
