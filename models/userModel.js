@@ -103,34 +103,45 @@ const userSchema = new mongoose.Schema({
       en: {
         header: {
           type: String,
-          default: "Welcome to [Barber's Name] Barbershop, where grooming meets style and tradition!",
+          default: "Welcome to our Barbershop, where grooming meets style and tradition!",
         },
         sub_header: {
           type: String,
           default:
-            "At [Barber's Name] Barbershop, we take pride in providing top-notch grooming services tailored to your unique style and personality. Our skilled barbers combine classic techniques with modern trends to deliver exceptional results that exceed your expectations.",
+            "At our Barbershop, we take pride in providing top-notch grooming services tailored to your unique style and personality. Our skilled barbers combine classic techniques with modern trends to deliver exceptional results that exceed your expectations.",
         },
       },
       tr: {
         header: {
           type: String,
-          default: "TR Header",
+          default: "Kuaförümüze hoş geldiniz, bakım ve tarzın buluştuğu yer!",
         },
         sub_header: {
           type: String,
           default:
-            "TR Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut nisi culpa atque non dolorem aperiam dolor, sapiente facere perferendis beatae repellat quos ex sunt nihil vitae modi necessitatibus a deleniti.",
+            "Kuaförümüzde, benzersiz tarzınıza ve kişiliğinize uygun üstün bakım hizmetleri sunmaktan gurur duyuyoruz. Usta berberlerimiz klasik teknikleri modern trendlerle birleştirerek, beklentilerinizi aşan olağanüstü sonuçlar sunuyor.",
         },
       },
       ar: {
         header: {
           type: String,
-          default: "AR header",
+          default: "مرحبًا بك في متجر الحلاقة الخاص بنا، حيث تجتمع العناية بالمظهر مع الأناقة والتقاليد!",
         },
         sub_header: {
           type: String,
           default:
-            "AR Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut nisi culpa atque non dolorem aperiam dolor, sapiente facere perferendis beatae repellat quos ex sunt nihil vitae modi necessitatibus a deleniti.",
+            "في متجر الحلاقة الخاص بنا، نفخر بتقديم خدمات عناية بالمظهر عالية الجودة مصممة خصيصًا لأسلوبك وشخصيتك الفريدة. يجمع حلاقونا المهرة بين التقنيات الكلاسيكية والاتجاهات الحديثة لتقديم نتائج استثنائية تتجاوز توقعاتك.",
+        },
+      },
+      de: {
+        header: {
+          type: String,
+          default: "Willkommen in unserem Friseursalon, wo Pflege auf Stil und Tradition trifft!",
+        },
+        sub_header: {
+          type: String,
+          default:
+            "In unserem Friseursalon legen wir Wert auf hochwertige Pflegeleistungen, die Ihrem einzigartigen Stil und Ihrer Persönlichkeit entsprechen. Unsere erfahrenen Friseure kombinieren klassische Techniken mit modernen Trends, um außergewöhnliche Ergebnisse zu erzielen, die Ihre Erwartungen übertreffen.",
         },
       },
     },
@@ -152,7 +163,7 @@ const userSchema = new mongoose.Schema({
       }, // the theme color of the website should be used to generate other colors. let this be the darkest
       languages: {
         type: [String],
-        default: ["tr", "ar", "en"],
+        default: ["tr", "ar", "en", "de"],
       },
     },
   },
@@ -166,7 +177,16 @@ const userSchema = new mongoose.Schema({
       link: String,
     },
   ],
-  passwordChangedAt: Date,
+
+  accountdata: {
+    passwordChangedAt: Date,
+    subscriptiondate: {
+      type: Date,
+      default: new Date(),
+    },
+    subscriptionlastupdatedate: Date,
+    subscriptiontype: String,
+  },
 });
 
 // colors: {

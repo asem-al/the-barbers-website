@@ -12,7 +12,7 @@ const ViewEngine = require("./modules/ViewEngine");
 
 const app = express();
 
-const avaliable_languages = ["en", "tr", "ar"]; // lan at index 0 is the default.
+const avaliable_languages = ["en", "tr", "ar", "de"]; // lan at index 0 is the default.
 
 const users = require("./models/userModel");
 
@@ -107,6 +107,7 @@ app.use(async (req, res, next) => {
         }
       }
     }
+    console.log(req.preferredLanguage);
     if (!req.preferredLanguage) req.preferredLanguage = avaliableLanguages[0];
   }
 
@@ -122,6 +123,7 @@ app.get("/avaliablelanguages", (req, res) =>
 // 4) Redirect
 app.get("/:language?", (req, res, next) => {
   const language = req.params.language;
+
   let url;
   if (!language) {
     url = `${req.preferredLanguage}${req.url}`;
@@ -134,7 +136,15 @@ app.get("/:language?", (req, res, next) => {
   }
 });
 
-app.use("/:language", serverRouter);
+app.use(
+  "/:language",
+  (req, res, next) => {
+    const language = req.params.language;
+    req.preferredLanguage = language;
+    next();
+  },
+  serverRouter
+);
 
 app.use((req, res) => {
   res.status(404).sendFile("404.html", { root: `${__dirname}/views` });

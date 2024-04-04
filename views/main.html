@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="%%i18n.configs.lan%%" dir="%%i18n.configs.dir%%">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,7 +35,7 @@
         --ff-primary: "Be Vietman Pro", sans-serif;
       }
       .hero-image-container {
-        background-image: url(public/images/qasim/cover.jpeg), url(public/images/qasim/cover.jpeg);
+        background-image: url(%%media.heroImage%%), url(%%media.heroImage%%);
       }
     </style>
   </head>
@@ -45,7 +45,7 @@
         <div class="header-container">
           <!-- LOGO -->
           <a href="#" role="link" aria-label="#" class="main-logo">
-            <img src="public/images/default/logo.svg" alt="logo" />
+            <img id="img-logo" src="%%media.logo%%" alt="logo" />
           </a>
           <!-- HAMBURGER -->
           <input class="hidden" type="checkbox" id="hamburger-checkbox" />
@@ -64,21 +64,18 @@
           <label for="hamburger-checkbox" id="hamburger-second-label"></label>
           <!-- MENU -->
           <nav class="main-nav">
-            <a href="#appointment-section" class="main-nav-item">appointment</a>
-            <a href="#shop-section" class="main-nav-item">Shop</a>
-            <a href="#map-section" class="main-nav-item">Map</a>
-            <a href="/user/login" class="main-nav-item">Dashboard</a>
+            <a href="#appointment-section" class="main-nav-item">%%i18n.navItems.appointment%%</a>
+            <a href="#shop-section" class="main-nav-item">%%i18n.navItems.shop%%</a>
+            <a href="#map-section" class="main-nav-item">%%i18n.navItems.map%%</a>
+            <a href="/user/login" class="main-nav-item">%%i18n.navItems.dashboard%%</a>
             <!-- <a href="/user/logout" class="main-nav-item">log out</a> -->
             <span id="a-phone"><a href="tel:552 587 75 31">552 587 75 31</a></span>
           </nav>
         </div>
       </div>
     </header>
-    <div id="welcome-msg" class="msg welcome-msg container msg-tip">
-      <p>
-        Welcome to your new website. You must enter some additional information about your work for the site to work properly from
-        <a href="/settings">here.</a>
-      </p>
+    <div id="welcome-msg" class="hidden msg welcome-msg container msg-tip">
+      <p>%%i18n.msgs.new_user_msg%%</p>
     </div>
     <main>
       <!-- Hero section -->
@@ -95,23 +92,20 @@
 			-->
         <div class="hero-image-container"></div>
         <div class="hero-msg-con even-columns">
-          <h1 class="fs-h1">Welcome to [Barber's Name] Barbershop, where grooming meets style and tradition!</h1>
-          <p class="fs-subheader">
-            At [Barber's Name] Barbershop, we take pride in providing top-notch grooming services tailored to your unique style and personality. Our
-            skilled barbers combine classic techniques with modern trends to deliver exceptional results that exceed your expectations.
-          </p>
+          <h1 class="fs-h1">%%content.header%%</h1>
+          <p class="fs-subheader">%%content.sub_header%%</p>
         </div>
       </section>
       <!-- Business Info Section -->
       <section class="business-info-section">
         <div class="container two-columns m-b-2">
           <div class="m-b-2">
-            <h3 class="text-center fw-bold p-b-sm">LOCATION</h3>
+            <h3 class="text-center fw-bold p-b-sm">%%i18n.main_content.businessinfo.title1%%</h3>
             <p id="p-address" class="fs-small">Gülük Mah. Yunus Emre Cad. 60/9 MELİKGAZİ/KAYSERİ</p>
           </div>
           <div class="divider"></div>
           <div class="m-b-2">
-            <h3 class="text-center fw-bold p-b-sm">OPENING HOURS</h3>
+            <h3 class="text-center fw-bold p-b-sm">%%i18n.main_content.businessinfo.title2%%</h3>
             <p id="p-weekschedule" class="fs-small">Mon to Fri: 9.00am - 8.30pm <br />Sat: 10.00am - 6.30pm <br />Sun: Closed</p>
           </div>
         </div>
@@ -122,7 +116,7 @@
       </section>
       <!-- Appointment Section -->
       <section id="appointment-section" class="appointment-section">
-        <h2 class="fs-section-title m-b-3 text-center">Book an Appointmant</h2>
+        <h2 class="fs-section-title m-b-3 text-center">%%i18n.main_content.appointmentsection.title%%</h2>
         <div class="container">
           <!-- TODO
 						Choose worker and time using a dropbox.
@@ -135,12 +129,12 @@
             <!--  -->
             <fieldset class="fieldset">
               <div class="field">
-                <label class="field-label" for="name">Name</label>
+                <label class="field-label" for="name">%%i18n.forms_labels.name%%</label>
                 <input class="field-input" id="name" type="text" name="name" required maxlength="23" />
               </div>
 
               <div class="field">
-                <label class="field-label" for="phone">Phone</label>
+                <label class="field-label" for="phone">%%i18n.forms_labels.phone%%</label>
                 <input
                   class="field-input"
                   id="phone"
@@ -159,11 +153,11 @@
             <!--  -->
             <fieldset class="fieldset">
               <div class="field">
-                <label class="field-label" for="branch-input">branch</label>
+                <label class="field-label" for="branch-input">%%i18n.forms_labels.branch%%</label>
                 <select class="field-input" name="branch" id="branch-input" required></select>
               </div>
               <div class="field">
-                <label class="field-label" for="barber-input">barber</label>
+                <label class="field-label" for="barber-input">%%i18n.forms_labels.barber%%</label>
                 <select class="field-input" name="barber" id="barber-input" required></select>
               </div>
             </fieldset>
@@ -171,11 +165,11 @@
             <!--  -->
             <fieldset class="fieldset">
               <div class="field">
-                <label class="field-label" for="date-input">Date</label>
+                <label class="field-label" for="date-input">%%i18n.forms_labels.date%%</label>
                 <select class="field-input" id="date-input" name="date" required></select>
               </div>
               <div class="field">
-                <label class="field-label" for="time-input">Time</label>
+                <label class="field-label" for="time-input">%%i18n.forms_labels.time%%</label>
                 <select class="field-input" name="time" id="time-input" required></select>
               </div>
             </fieldset>
@@ -187,7 +181,7 @@
       <!-- Gallery Section  (OUR SHOP IN IMAGES) -->
 
       <section class="gallery-section">
-        <h2 class="fs-section-title m-b-3 text-center">Gallery</h2>
+        <h2 class="fs-section-title m-b-3 text-center">%%i18n.main_content.gallerysection.title%%</h2>
         <div id="carousel-con" class="x-carousel">
           <img class="x-carousel-img" src="public/images/user9/gallery/img-0.webp" alt="" draggable="false" />
           <img class="x-carousel-img" src="public/images/user9/gallery/img-1.webp" alt="" draggable="false" />
@@ -199,8 +193,8 @@
 
       <!-- Shop -->
       <section id="shop-section" class="shop-section">
-        <h2 class="fs-section-title m-b-2 text-center">Shop</h2>
-        <p class="section-description m-b-3 text-center fs-small gray">Products avaliable at our store</p>
+        <h2 class="fs-section-title m-b-2 text-center">%%i18n.main_content.shopsection.title%%</h2>
+        <p class="section-description m-b-3 text-center fs-small gray">%%i18n.main_content.shopsection.note%%</p>
         <div class="container products-container">
           <div class="full-screen-cover">
             <div class="product-card">
@@ -253,7 +247,7 @@
       </section>
       <!-- Contact Us Section -->
       <section id="map-section" class="map-section">
-        <h2 class="fs-section-title m-b-3 text-center">Us on The Map</h2>
+        <h2 class="fs-section-title m-b-3 text-center">%%i18n.main_content.mapsection.title%%</h2>
         <div class="container">
           <iframe
             id="map"
@@ -269,36 +263,19 @@
       </section>
       <!-- Contact Us Section -->
       <section class="contact-section">
-        <h2 class="fs-section-title m-b-3 text-center">Contact Us</h2>
+        <h2 class="fs-section-title m-b-3 text-center">%%i18n.main_content.contactsection.title%%</h2>
         <div class="container contact-section-con">
           <div>
             <p>
-              Phone: <span id="p-phone"><a href="tel:552 587 75 31">552 587 75 31</a></span>
+              %%i18n.forms_labels.phone%%: <span id="p-phone"><a href="tel:552 587 75 31">552 587 75 31</a></span>
             </p>
-            <p>email: <span id="p-email">mail@busines.com</span></p>
+            <p>%%i18n.forms_labels.email%%: <span id="p-email">mail@busines.com</span></p>
           </div>
         </div>
       </section>
     </main>
     <div id="overlay" class="overlay hidden">Press again to close</div>
     <footer>
-      <div class="footer-section-1 hidden">
-        <div class="container two-columns">
-          <div>
-            <h4 class="fs-h4 underline m-b-2">Contact</h4>
-            <p class="fs-small">Phone name: +90 552 587 75 31<br />Email: info@example.com</p>
-          </div>
-          <div class="divider"></div>
-          <div>
-            <h4 class="fs-h4 underline m-b-2">About Us</h4>
-            <p class="fs-small">
-              Business name: Name of busines.<br />Loaction: Turkey, Kayseri<br />Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, in nam
-              rem beatae repellendus impedit odit.
-            </p>
-          </div>
-        </div>
-      </div>
-
       <div class="footer-section-2">
         <div class="footer container">
           <p id="p-businessname">&copy; Business name</p>
@@ -309,30 +286,18 @@
 
     <template id="appointmant-info-msg-template">
       <div class="msg msg-ok">
-        <p>
-          You have an appointmant at {{date}}.<br />
-          Branch: {{branch}}. <br />
-          Barber: {{employee}}. <br />
-
-          Appointment Code: {{code}}. You can <a href="/data/cancel/{{code}}" class="link">cancel your appointmant here</a>.
-        </p>
+        <p>%%i18n.msgs.appointmant_confirmation%%</p>
       </div>
     </template>
     <template id="appointmant-fail-msg-template">
       <div class="msg msg-warning">
-        <p>
-          <strong class="fw-bold">Sorry, couldn't take an appointmant.</strong> <br />
-          Reason: {{failReason}}
-        </p>
+        <p>%%i18n.msgs.appointmant_fail%%</p>
       </div>
     </template>
 
     <template id="error-msg-template">
       <div class="msg msg-error">
-        <p>
-          <strong class="fw-bold">Something went wrong!</strong> <br />
-          Failed to take an appointmant due to a server error. <br />
-        </p>
+        <p>%%i18n.msgs.appointmant_error%%</p>
       </div>
     </template>
 

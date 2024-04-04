@@ -6,56 +6,489 @@
     },
     "msgs": {
       "default_msg": "Hay!",
-      "new_user_msg": "Welcome to your new website. Please enter some additional information about your work",
+      "new_user_msg": "Welcome to your new website. Please enter some additional information about your work for the site to work properly from <a href='/settings'>here.</a>",
       "invalid_username": "invalid username",
-      "used_username": "Sorry, this username is taken"
+      "taken_username": "Sorry, this username is taken",
+      "appointmant_confirmation": "You have an appointmant at {{date}}.<br /> Branch: {{branch}}. <br /> Barber: {{employee}}. <br /> Appointment Code: {{code}}. You can <a href='/data/cancel/{{code}}' class='link'>cancel your appointmant here</a>.",
+      "appointmant_fail": "<strong class='fw-bold'>Sorry, couldn't take an appointmant.</strong> <br /> Reason: {{failReason}}",
+      "appointmant_error": "<strong class='fw-bold'>Something went wrong!</strong> <br /> Failed to take an appointmant due to a server error. <br />",
+      "pressagain": "Press again to close"
     },
     "navItems": {
       "home": "Home",
+      "features": "Features",
       "login": "login",
       "pricing": "Pricing",
-      "signup": "signup",
-      "about": "About"
+      "signup": "Sign&nbspup",
+      "about": "About",
+      "appointment": "Appointment",
+      "shop": "Shop",
+      "map": "Map",
+      "dashboard": "Dashboard"
     },
     "buttons": {
       "submit": "submit",
       "call_to_action": "Create your website",
-      "here": "here"
+      "here": "here",
+      "signup": "Sign&nbspup",
+      "book": "Book"
     },
     "forms_labels": {
-      "name": "name",
+      "name": "Name",
       "username": "Username",
       "password": "Password",
-      "phone_number": "phone number",
-      "date": "date"
+      "phone": "Phone",
+      "email": "Email",
+      "date": "Date",
+      "time": "Time",
+      "branch": "Branch",
+      "barber": "Barber"
     },
+
     "titles": {
-      "loginpage": "Log in to dashboard"
+      "howitworks": "How it works?"
     },
-    "content": {
-      "headline": "headline TODO",
-      "sub_headline": "sub_headline TODO",
-      "Benefits": {
+    "index_content": {
+      "title": "The barbers' website",
+      "headline": "Custom website for barbers with appointmant booking system.",
+      "sub_headline": "Get your own website with an appointment booking system easily by creating an account. Then easily customize your site as much as you want.",
+      "howitworks": {
+        "title": "How it works?",
+        "step1": "Sign up",
+        "step2": "Get your website ready.",
+        "step3": "Customize it."
+      },
+      "features": {
+        "title": "Features",
         "first": {
-          "heading": "",
-          "description": ""
+          "heading": "Customizable",
+          "description": "You can customize your website just as you need."
         },
         "second": {
-          "heading": "",
-          "description": ""
+          "heading": "Appointments",
+          "description": "Includes a full appointment booking system."
         },
         "third": {
-          "heading": "",
-          "description": ""
+          "heading": "Shop",
+          "description": "A shop to show the products you are selling to your clients."
+        }
+      },
+      "pricing": {
+        "title": "Pricing",
+        "first": {
+          "title": "Free trailer",
+          "price": "$0.00",
+          "note": "No credit card required"
         },
-        "features": ["Make your own website within 5 minutes.", "Customize it as you want.", "Designed specifically for your business"]
+        "second": {
+          "title": "Monthly",
+          "note": ""
+        },
+        "third": {
+          "title": "Yearly",
+          "note": "Save 30%"
+        }
+      },
+      "closing": {
+        "title": "Sing up now and try it for free!",
+        "note": "<p class=''>If you have a question you can <a href='' class='link'>reach us here</a>.</p>"
+      },
+      "footer": {
+        "businessname": "The barbers website"
+      },
+      "featuresxx": ["Make your own website within 5 minutes.", "Customize it as you want.", "Designed specifically for your business"]
+    },
+
+    "main_content": {
+      "businessinfo": {
+        "title1": "LOCATION",
+        "title2": "OPENING HOURS"
+      },
+      "appointmentsection": {
+        "title": "Book an Appointmant"
+      },
+      "gallerysection": {
+        "title": "Gallery"
+      },
+      "shopsection": {
+        "title": "Shop",
+        "note": "Products avaliable at our store"
+      },
+      "mapsection": {
+        "title": "Us on The Map"
+      },
+      "contactsection": {
+        "title": "Contact Us"
       }
     }
   },
   "ar": {
-    "default_msg": "مرحباً بكم"
+    "configs": {
+      "lang": "ar",
+      "dir": "rtl"
+    },
+    "msgs": {
+      "default_msg": "هاي!",
+      "new_user_msg": "مرحبًا بك في موقعك الجديد. يرجى إدخال بعض المعلومات الإضافية حول عملك ليعمل الموقع بشكل صحيح من <a href='/settings'>هنا.</a>",
+      "invalid_username": "اسم مستخدم غير صالح",
+      "taken_username": "عذرًا، هذا الاسم مستخدم بالفعل",
+      "appointmant_confirmation": "لديك موعد في {{date}}.<br /> الفرع: {{branch}}. <br /> الحلاق: {{employee}}. <br /> كود الموعد: {{code}}. يمكنك <a href='/data/cancel/{{code}}' class='link'>إلغاء الموعد هنا</a>.",
+      "appointmant_fail": "<strong class='fw-bold'>عذرًا، لم يتمكن من حجز موعد.</strong> <br /> السبب: {{failReason}}",
+      "appointmant_error": "<strong class='fw-bold'>حدث خطأ!</strong> <br /> فشل في حجز الموعد بسبب خطأ في الخادم. <br />",
+      "pressagain": "اضغط مرة أخرى للإغلاق"
+    },
+    "navItems": {
+      "home": "الرئيسية",
+      "features": "المميزات",
+      "login": "تسجيل الدخول",
+      "pricing": "الأسعار",
+      "signup": "التسجيل",
+      "about": "عنا",
+      "appointment": "الموعد",
+      "shop": "المتجر",
+      "map": "الخريطة",
+      "dashboard": "لوحة التحكم"
+    },
+    "buttons": {
+      "submit": "إرسال",
+      "call_to_action": "أنشئ موقعك",
+      "here": "هنا",
+      "signup": "التسجيل",
+      "book": "حجز"
+    },
+    "forms_labels": {
+      "name": "الاسم",
+      "username": "اسم المستخدم",
+      "password": "كلمة المرور",
+      "phone": "الهاتف",
+      "email": "الايميل",
+      "date": "التاريخ",
+      "time": "الوقت",
+      "branch": "الفرع",
+      "barber": "الحلاق"
+    },
+    "titles": {
+      "howitworks": "كيف يعمل؟"
+    },
+    "index_content": {
+      "title": "موقع الحلاقين",
+      "headline": "موقع مخصص للحلاقين مع نظام حجز المواعيد.",
+      "sub_headline": "احصل على موقعك الخاص مع نظام حجز مواعيد بسهولة عن طريق إنشاء حساب. ثم قم بتخصيص موقعك بسهولة بقدر ما تريد.",
+      "howitworks": {
+        "title": "كيف يعمل؟",
+        "step1": "التسجيل",
+        "step2": "إعداد موقعك.",
+        "step3": "تخصيصه."
+      },
+      "features": {
+        "title": "المميزات",
+        "first": {
+          "heading": "قابل للتخصيص",
+          "description": "يمكنك تخصيص موقعك بالشكل الذي تريده."
+        },
+        "second": {
+          "heading": "المواعيد",
+          "description": "يتضمن نظام حجز مواعيد كامل."
+        },
+        "third": {
+          "heading": "المتجر",
+          "description": "متجر لعرض المنتجات التي تبيعها لعملائك."
+        }
+      },
+      "pricing": {
+        "title": "الأسعار",
+        "first": {
+          "title": "تجربة مجانية",
+          "price": "$0.00",
+          "note": "لا يلزم بطاقة ائتمانية"
+        },
+        "second": {
+          "title": "شهريًا",
+          "note": ""
+        },
+        "third": {
+          "title": "سنويًا",
+          "note": "وفر 30%"
+        }
+      },
+      "closing": {
+        "title": "سجل الآن وجرب مجانًا!",
+        "note": "<p class=''>إذا كان لديك أي سؤال يمكنك <a href='' class='link'>الوصول إلينا هنا</a>.</p>"
+      },
+      "footer": {
+        "businessname": "موقع الحلاقين"
+      },
+      "featuresxx": ["أنشئ موقعك الخاص في غضون 5 دقائق.", "قم بتخصيصه كما تريد.", "مصمم خصيصًا لعملك"]
+    },
+    "main_content": {
+      "businessinfo": {
+        "title1": "الموقع",
+        "title2": "ساعات العمل"
+      },
+      "appointmentsection": {
+        "title": "حجز موعد"
+      },
+      "gallerysection": {
+        "title": "المعرض"
+      },
+      "shopsection": {
+        "title": "المتجر",
+        "note": "المنتجات المتوفرة في متجرنا"
+      },
+      "mapsection": {
+        "title": "على الخريطة"
+      },
+      "contactsection": {
+        "title": "اتصل بنا"
+      }
+    }
   },
+
   "tr": {
-    "default_msg": "Merhabalar."
+    "configs": {
+      "lang": "tr",
+      "dir": "ltr"
+    },
+    "msgs": {
+      "default_msg": "Merhaba!",
+      "new_user_msg": "Yeni web sitenize hoş geldiniz. Lütfen sitedeki işinizle ilgili ek bilgileri girmek için <a href='/settings'>buradan</a> girin.",
+      "invalid_username": "Geçersiz kullanıcı adı",
+      "taken_username": "Üzgünüz, bu kullanıcı adı kullanılıyor",
+      "appointmant_confirmation": "{{date}} tarihinde bir randevunuz var.<br /> Şube: {{branch}}. <br /> Berber: {{employee}}. <br /> Randevu Kodu: {{code}}. Randevunuzu <a href='/data/cancel/{{code}}' class='link'>buradan iptal edebilirsiniz</a>.",
+      "appointmant_fail": "<strong class='fw-bold'>Üzgünüz, randevu alınamadı.</strong> <br /> Sebep: {{failReason}}",
+      "appointmant_error": "<strong class='fw-bold'>Bir şeyler ters gitti!</strong> <br /> Sunucu hatası nedeniyle randevu alınamadı. <br />",
+      "pressagain": "Kapatmak için tekrar basın"
+    },
+    "navItems": {
+      "home": "Ana Sayfa",
+      "features": "Özellikler",
+      "login": "Giriş",
+      "pricing": "Fiyatlandırma",
+      "signup": "Kayıt Ol",
+      "about": "Hakkında",
+      "appointment": "Randevu",
+      "shop": "Mağaza",
+      "map": "Harita",
+      "dashboard": "Kontrol Paneli"
+    },
+    "buttons": {
+      "submit": "Gönder",
+      "call_to_action": "Web sitenizi oluşturun",
+      "here": "buraya",
+      "signup": "Kayıt Ol",
+      "book": "Rezervasyon"
+    },
+    "forms_labels": {
+      "name": "Ad",
+      "username": "Kullanıcı Adı",
+      "password": "Şifre",
+      "phone": "Telefon",
+      "date": "Tarih",
+      "email": "e-posta",
+      "time": "Saat",
+      "branch": "Şube",
+      "barber": "Berber"
+    },
+    "titles": {
+      "howitworks": "Nasıl Çalışır?"
+    },
+    "index_content": {
+      "title": "Berberlerin Web Sitesi",
+      "headline": "Randevu rezervasyon sistemiyle berberler için özel web sitesi.",
+      "sub_headline": "Hesap oluşturarak kendi web sitenizi ve randevu rezervasyon sisteminizi kolayca edinin. Sonra istediğiniz kadar sitede özelleştirme yapın.",
+      "howitworks": {
+        "title": "Nasıl Çalışır?",
+        "step1": "Kayıt Olun",
+        "step2": "Web sitenizi hazırlayın.",
+        "step3": "Özelleştirin."
+      },
+      "features": {
+        "title": "Özellikler",
+        "first": {
+          "heading": "Özelleştirilebilir",
+          "description": "Web sitenizi ihtiyacınıza göre özelleştirebilirsiniz."
+        },
+        "second": {
+          "heading": "Randevular",
+          "description": "Tam randevu rezervasyon sistemi içerir."
+        },
+        "third": {
+          "heading": "Mağaza",
+          "description": "Müşterilerinize sattığınız ürünleri göstermek için bir mağaza."
+        }
+      },
+      "pricing": {
+        "title": "Fiyatlandırma",
+        "first": {
+          "title": "Ücretsiz Deneme",
+          "price": "$0.00",
+          "note": "Kredi kartı gerektirmez"
+        },
+        "second": {
+          "title": "Aylık",
+          "note": ""
+        },
+        "third": {
+          "title": "Yıllık",
+          "note": "%30 tasarruf edin"
+        }
+      },
+      "closing": {
+        "title": "Şimdi kaydolun ve ücretsiz deneyin!",
+        "note": "<p class=''>Sorunuz varsa <a href='' class='link'>buradan bize ulaşabilirsiniz</a>.</p>"
+      },
+      "footer": {
+        "businessname": "Berberlerin Web Sitesi"
+      },
+      "featuresxx": ["Kendi web sitenizi 5 dakika içinde oluşturun.", "İstediğiniz gibi özelleştirin.", "İşletmeniz için özel olarak tasarlandı"]
+    },
+    "main_content": {
+      "businessinfo": {
+        "title1": "Lokasyon",
+        "title2": "Açılış Saatleri"
+      },
+      "appointmentsection": {
+        "title": "Randevu Al"
+      },
+      "gallerysection": {
+        "title": "Galeri"
+      },
+      "shopsection": {
+        "title": "Mağaza",
+        "note": "Mağazamızda bulunan ürünler"
+      },
+      "mapsection": {
+        "title": "Haritada Biz"
+      },
+      "contactsection": {
+        "title": "Bize Ulaşın"
+      }
+    }
+  },
+
+  "de": {
+    "configs": {
+      "lang": "de",
+      "dir": "ltr"
+    },
+    "msgs": {
+      "default_msg": "Hallo!",
+      "new_user_msg": "Willkommen auf Ihrer neuen Website. Bitte geben Sie zusätzliche Informationen zu Ihrer Arbeit ein, damit die Website ordnungsgemäß funktioniert. Sie können dies von <a href='/settings'>hier</a> aus tun.",
+      "invalid_username": "Ungültiger Benutzername",
+      "taken_username": "Entschuldigung, dieser Benutzername ist bereits vergeben",
+      "appointmant_confirmation": "Sie haben einen Termin am {{date}}.<br /> Filiale: {{branch}}. <br /> Friseur: {{employee}}. <br /> Termincode: {{code}}. Sie können Ihren Termin <a href='/data/cancel/{{code}}' class='link'>hier stornieren</a>.",
+      "appointmant_fail": "<strong class='fw-bold'>Entschuldigung, der Termin konnte nicht gebucht werden.</strong> <br /> Grund: {{failReason}}",
+      "appointmant_error": "<strong class='fw-bold'>Es ist ein Fehler aufgetreten!</strong> <br /> Der Termin konnte aufgrund eines Serverfehlers nicht gebucht werden. <br />",
+      "pressagain": "Erneut drücken, um zu schließen"
+    },
+    "navItems": {
+      "home": "Startseite",
+      "features": "Funktionen",
+      "login": "Anmelden",
+      "pricing": "Preise",
+      "signup": "Registrieren",
+      "about": "Über uns",
+      "appointment": "Termin",
+      "shop": "Shop",
+      "map": "Karte",
+      "dashboard": "Dashboard"
+    },
+    "buttons": {
+      "submit": "Absenden",
+      "call_to_action": "Erstellen Sie Ihre Website",
+      "here": "hier",
+      "signup": "Registrieren",
+      "book": "Buchen"
+    },
+    "forms_labels": {
+      "name": "Name",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "phone": "Telefon",
+      "email": "Email",
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "branch": "Filiale",
+      "barber": "Friseur"
+    },
+    "titles": {
+      "howitworks": "Wie funktioniert es?"
+    },
+    "index_content": {
+      "title": "Die Website der Friseure",
+      "headline": "Benutzerdefinierte Website für Friseure mit Terminbuchungssystem.",
+      "sub_headline": "Erstellen Sie Ihr eigenes Website mit einem Terminbuchungssystem, indem Sie ein Konto erstellen. Passen Sie dann Ihre Website ganz nach Ihren Wünschen an.",
+      "howitworks": {
+        "title": "Wie funktioniert es?",
+        "step1": "Registrieren",
+        "step2": "Ihre Website fertigstellen.",
+        "step3": "Anpassen."
+      },
+      "features": {
+        "title": "Funktionen",
+        "first": {
+          "heading": "Anpassbar",
+          "description": "Sie können Ihre Website nach Bedarf anpassen."
+        },
+        "second": {
+          "heading": "Termine",
+          "description": "Enthält ein vollständiges Terminbuchungssystem."
+        },
+        "third": {
+          "heading": "Shop",
+          "description": "Ein Shop, um die Produkte zu zeigen, die Sie Ihren Kunden verkaufen."
+        }
+      },
+      "pricing": {
+        "title": "Preise",
+        "first": {
+          "title": "Kostenlose Testversion",
+          "price": "$0.00",
+          "note": "Keine Kreditkarte erforderlich"
+        },
+        "second": {
+          "title": "Monatlich",
+          "note": ""
+        },
+        "third": {
+          "title": "Jährlich",
+          "note": "30% sparen"
+        }
+      },
+      "closing": {
+        "title": "Jetzt registrieren und kostenlos testen!",
+        "note": "<p class=''>Wenn Sie Fragen haben, können Sie uns <a href='' class='link'>hier erreichen</a>.</p>"
+      },
+      "footer": {
+        "businessname": "Die Website der Friseure"
+      },
+      "featuresxx": [
+        "Erstellen Sie Ihre eigene Website in 5 Minuten.",
+        "Passen Sie sie nach Ihren Wünschen an.",
+        "Speziell für Ihr Unternehmen entwickelt"
+      ]
+    },
+    "main_content": {
+      "businessinfo": {
+        "title1": "Standort",
+        "title2": "Öffnungszeiten"
+      },
+      "appointmentsection": {
+        "title": "Termin buchen"
+      },
+      "gallerysection": {
+        "title": "Galerie"
+      },
+      "shopsection": {
+        "title": "Shop",
+        "note": "Produkte in unserem Geschäft erhältlich"
+      },
+      "mapsection": {
+        "title": "Uns auf der Karte"
+      },
+      "contactsection": {
+        "title": "Kontaktieren Sie uns"
+      }
+    }
   }
 }

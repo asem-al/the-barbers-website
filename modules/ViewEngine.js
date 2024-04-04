@@ -8,7 +8,12 @@ function ViewEngine(filePath, options, callback) {
       const rendered = content.replace(/%%(.*?)%%/g, (match, key) => {
         const kays = key.trim().split(".");
         let x = options;
-        for (let i = 0; i < kays.length; i++) x = x[kays[i]];
+
+        for (let i = 0; i < kays.length; i++) {
+          if (x) {
+            x = x[kays[i]];
+          }
+        }
         return x;
       });
 
@@ -20,9 +25,3 @@ function ViewEngine(filePath, options, callback) {
 }
 
 module.exports = ViewEngine;
-
-// {
-//     URL: "/",
-//     userInfo: req.userInfo,
-//     lan: req.parsed_accept_language
-// }

@@ -279,9 +279,7 @@ body {
 .dis-b {
   display: block;
 }
-.hidden {
-  display: none;
-}
+
 .container {
   --max-width: 1200px;
   --horizontal-padding: 1.5rem;
@@ -425,4 +423,8 @@ body {
   --lightness: var(--clr-primary-300-l);
   background-color: hsl(var(--hue), var(--saturation), var(--lightness));
   color: #fff;
+}
+
+.hidden {
+  display: none !important;
 }

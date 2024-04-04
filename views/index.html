@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="%%configs.lan%%" dir="%%configs.dir%%">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="public/styles/style.css" />
     <link rel="stylesheet" href="public/styles/index.css" />
-    <title>Document</title>
+    <title>%%index_content.title%%</title>
   </head>
   <body>
     <header class="header">
@@ -32,93 +32,91 @@
           <label for="hamburger-checkbox" id="hamburger-second-label"></label>
           <!-- MENU -->
           <nav class="main-nav">
-            <a href="#" class="main-nav-item">Home</a>
-            <a href="#features-section" class="main-nav-item">features</a>
-            <a href="#pricing-section" class="main-nav-item">Pricing</a>
+            <a href="#" class="main-nav-item">%%navItems.home%%</a>
+            <a href="#features-section" class="main-nav-item">%%navItems.features%%</a>
+            <a href="#pricing-section" class="main-nav-item">%%navItems.pricing%%</a>
           </nav>
-          <button class="button nav-button" onclick="window.location.href='/signup'">Sign&nbspup</button>
+          <button class="button nav-button" onclick="window.location.href='/signup'">%%navItems.signup%%</button>
         </div>
       </div>
     </header>
     <section id="hero-section" class="hero-section">
       <div class="container even-columns">
         <div>
-          <h1 class="fs-big">Custom website for barbers with appointmant booking system.</h1>
-          <p>
-            Get your own website with an appointment booking system easily by creating an account. Then easily customize your site as much as you
-            want.
-          </p>
-          <button class="button" onclick="window.location.href='/signup'">Sign&nbspup</button>
+          <h1 class="fs-big">%%index_content.headline%%</h1>
+          <p>%%index_content.sub_headline%%</p>
+          <button class="button" onclick="window.location.href='/signup'">%%buttons.signup%%</button>
         </div>
-
         <img id="hero-image" src="public/images/hero.png" alt="Hero image" />
       </div>
     </section>
     <section id="howitworks-section" class="howitworks-section">
       <div class="container">
-        <h2 class="text-center fw-bold fs-section-title">How it works?</h2>
-        <div class="even-columns list-container">
-          <div class="list-item">
-            <div><span class="marker">1</span></div>
-            <div>step one Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
-          </div>
-          <div class="list-item">
-            <div><span class="marker">2</span></div>
-            <div>step two Lorem ipsum, 888 dolor sit amet consectetur adipisicing elit.</div>
-          </div>
-          <div class="list-item">
-            <div><span class="marker">3</span></div>
-            <div>step three Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+        <h2 class="text-center fw-bold fs-section-title">%%index_content.howitworks.title%%</h2>
+        <div class="list-container">
+          <div class="even-columns">
+            <div class="list-item">
+              <div><span class="marker">1</span></div>
+              <div>%%index_content.howitworks.step1%%</div>
+            </div>
+            <div class="list-item">
+              <div><span class="marker">2</span></div>
+              <div>%%index_content.howitworks.step2%%</div>
+            </div>
+            <div class="list-item">
+              <div><span class="marker">3</span></div>
+              <div>%%index_content.howitworks.step3%%</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
     <section id="features-section" class="features-section">
       <div class="container">
-        <h2 class="text-center fw-bold fs-section-title">Features</h2>
+        <h2 class="text-center fw-bold fs-section-title">%%index_content.features.title%%</h2>
         <div class="flex-container">
           <!-- TODO change even-columns to flex and align cards to center -->
           <div class="card feature-card">
-            <p class="fw-bold">Feature one</p>
-            <img src="images/featureoneimage.jpg" alt="image" />
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            <p class="fw-bold fs-h4">%%index_content.features.first.heading%%</p>
+            <img src="public/images/feature-1.jpg" alt="image" />
+            <p>%%index_content.features.first.description%%</p>
           </div>
           <div class="card feature-card">
-            <p class="fw-bold">Feature two</p>
-            <img src="images/featureoneimage.jpg" alt="image" />
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            <p class="fw-bold fs-h4">%%index_content.features.second.heading%%</p>
+            <img src="public/images/feature-2.jpg" alt="image" />
+            <p>%%index_content.features.second.description%%</p>
           </div>
           <div class="card feature-card">
-            <p class="fw-bold">Feature three</p>
-            <img src="images/featureoneimage.jpg" alt="image" />
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            <p class="fw-bold fs-h4">%%index_content.features.third.heading%%</p>
+            <img src="public/images/feature-3.jpg" alt="image" />
+            <p>%%index_content.features.third.description%%</p>
           </div>
         </div>
       </div>
     </section>
     <section id="pricing-section" class="pricing-section">
       <div class="container">
-        <h2 class="text-center fw-bold fs-section-title">Pricing</h2>
+        <h2 class="text-center fw-bold fs-section-title">%%index_content.pricing.title%%</h2>
         <div class="flex-container">
           <div class="card">
-            <p class="fw-bold">Free trailer</p>
-            <p class="fw-semi-bold price-tag">0.00$</p>
+            <p class="fw-bold">%%index_content.pricing.first.title%%</p>
+            <p class="fw-semi-bold price-tag">%%index_content.pricing.first.price%%</p>
 
-            <button class="button">Subscribe</button>
-            <small class="note">No credit card required</small>
+            <button class="button" onclick="window.location.href='/signup'">%%buttons.signup%%</button>
+            <small class="note">%%index_content.pricing.first.note%%</small>
           </div>
-          <div class="card">
+          <div class="hidden card">
             <p class="fw-bold">Monthly</p>
             <p class="fw-semi-bold">9.99$</p>
 
-            <button class="button">Subscribe</button>
+            <button class="button" onclick="window.location.href='/signup'">%%buttons.signup%%</button>
           </div>
-          <div class="card">
+          <div class="hidden card">
             <p class="fw-bold">Yearly</p>
             <p class="fw-semi-bold">71.99$</p>
 
-            <button class="button" onclick="window.location.href='/signup'">Subscribe</button>
-            <small class="note">Save 40%</small>
+            <button class="button" onclick="window.location.href='/signup'">%%buttons.signup%%</button>
+            <small class="note">%%index_content.pricing.third.note%%</small>
           </div>
         </div>
       </div>
@@ -126,10 +124,10 @@
     <section id="closing-section" class="closing-section">
       <div class="container even-columns">
         <div>
-          <p class="fs-big">Call to action</p>
-          <p class="">If you have a question you can reach us <a href="" class="link">here</a>.</p>
+          <p class="fs-big">%%index_content.closing.title%%</p>
+          <p class="">%%index_content.closing.note%%</p>
         </div>
-        <button class="button">Sign&nbspup</button>
+        <button class="button" onclick="window.location.href='/signup'">%%buttons.signup%%</button>
       </div>
     </section>
     <footer class="footer-section">
