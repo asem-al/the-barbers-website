@@ -43,11 +43,10 @@ app.use(cookieParser());
 // 3) Add some information to the request obj
 app.use((req, res, next) => {
   // 1) Add user name to req.
-  if (req.subdomains !== "thebarberswebsite-bd23b144c280") {
+  if (req.subdomains[0] !== "thebarberswebsite-bd23b144c280") {
     req.username = req.subdomains[0];
   }
 
-  console.log(req.subdomains);
   // console.log("------------------------");
   // console.log("req.username: ", req.username);
   // console.log("req.url: ", req.url);
