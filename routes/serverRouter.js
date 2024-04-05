@@ -17,9 +17,7 @@ usersRouter.route("/dashboard").get(auth.protect, handlers.serve_dashboard);
 
 router.use(async (req, res, next) => {
   if (req.username) {
-    // const userInfo = await users.findOne({ username: req.subdomains[0] }).select("-password");
     if (req.userInfo) {
-      // req.userInfo = userInfo;
       usersRouter(req, res, next);
     } else {
       res.status(404).end("Not a registered user");

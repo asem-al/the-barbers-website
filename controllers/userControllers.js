@@ -1,7 +1,7 @@
 const users = require("../models/userModel");
 
 exports.getUserInfo = async (req, res) => {
-  const user = req.subdomains[0];
+  const user = req.username;
   try {
     const userInfo = await users.findOne({ username: user });
     res.status(200).json({
@@ -17,7 +17,7 @@ exports.getUserInfo = async (req, res) => {
   }
 };
 exports.EditUserInfo = async (req, res) => {
-  const username = req.subdomains[0];
+  const username = req.username;
   // console.log("-----EditUserInfo-----");
   // console.log(req.body);
   // console.log("-----EditUserInfo-----");
@@ -69,7 +69,7 @@ exports.checkusername = async (req, res) => {
 };
 
 exports.getPublicData = async (req, res) => {
-  const user = req.subdomains[0];
+  const user = req.username;
   try {
     const userInfo = await users.findOne({ username: user });
 

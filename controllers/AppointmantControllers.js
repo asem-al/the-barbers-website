@@ -4,7 +4,7 @@ const { signToken } = require("../modules/utilities.js");
 
 exports.getAvailableTimes = async (req, res) => {
   try {
-    const username = req.subdomains[0];
+    const username = req.username;
     const date = new Date(new Date().setUTCHours(0, 0, 0, 0));
     //  TODO لا ياخذ بعين الاعتبار فرق المنطقة الزمنية
     const AllData = await Appointment.findOne({ username: username, date: { $gte: date.toISOString() } });
@@ -114,7 +114,7 @@ exports.createAppo = async (req, res) => {
 
 exports.getAllAppo = async (req, res) => {
   try {
-    const user = req.subdomains[0];
+    const user = req.username;
     const today = new Date(new Date().setUTCHours(0, 0, 0, 0));
 
     const data = await Appointment.find({
@@ -136,7 +136,7 @@ exports.getAllAppo = async (req, res) => {
 };
 exports.getOneAppo = async (req, res) => {
   try {
-    const user = req.subdomains[0];
+    const user = req.username;
     const name = req.body.name;
     const phoneNumber = req.body.phoneNumber;
 
@@ -160,7 +160,7 @@ exports.getOneAppo = async (req, res) => {
 
 exports.deleteAppo = async (req, res) => {
   try {
-    const user = req.subdomains[0];
+    const user = req.username;
     const name = req.body.name;
     const phoneNumber = req.body.phoneNumber;
     await Appointment.deleteOne({ user: user, name: name, phoneNumber: phoneNumber });
@@ -175,7 +175,7 @@ exports.deleteAppo = async (req, res) => {
 };
 exports.modifyAppo = async (req, res) => {
   try {
-    const user = req.subdomains[0];
+    const user = req.username;
     const searchQuery = req.body.query;
     searchQuery.user = user;
     const newData = req.body.newdata;
@@ -209,7 +209,7 @@ exports.checkForMultiAppo = async (req, res) => {}; // DELETE the check is done 
 
 exports.getPublicData = async (req, res) => {
   try {
-    const user = req.subdomains[0];
+    const user = req.username;
     const date = new Date(new Date().setUTCHours(0, 0, 0, 0));
 
     const data = await Appointment.find({ user: user, date: { $gte: date.toISOString() } });

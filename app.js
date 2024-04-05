@@ -43,8 +43,11 @@ app.use(cookieParser());
 // 3) Add some information to the request obj
 app.use((req, res, next) => {
   // 1) Add user name to req.
-  req.username = req.subdomains[0];
+  if (req.subdomains !== "thebarberswebsite-bd23b144c280") {
+    req.username = req.subdomains[0];
+  }
 
+  console.log(req.subdomains);
   // console.log("------------------------");
   // console.log("req.username: ", req.username);
   // console.log("req.url: ", req.url);
@@ -77,7 +80,7 @@ app.use("/test", (req, res) => {
 app.use(async (req, res, next) => {
   // 2) add user info
   if (req.username) {
-    req.userInfo = await users.findOne({ username: req.subdomains[0] }).select("-password");
+    req.userInfo = await users.findOne({ username: req.username }).select("-password");
   }
 
   // 3) Attach the "accept-language" prop to the req object
@@ -107,7 +110,7 @@ app.use(async (req, res, next) => {
         }
       }
     }
-    console.log(req.preferredLanguage);
+
     if (!req.preferredLanguage) req.preferredLanguage = avaliableLanguages[0];
   }
 
