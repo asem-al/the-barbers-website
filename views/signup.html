@@ -37,11 +37,10 @@
           });
           if (response.status === 201) {
             const res = await response.json();
+            const protocol = window.location.origin.split("//")[0] + "//";
+            const domain = window.location.origin.split("//")[1];
             const subdomain = res.data.username;
-            const origin = window.location.origin;
-            const domain = origin.replace(/^https?:\/\//, "");
-            console.log(`http://${subdomain}.${domain}`);
-            window.location.href = `http://${subdomain}.${domain}`;
+            window.location.href = `${protocol}${subdomain}.${domain}`;
           }
         }
       };
