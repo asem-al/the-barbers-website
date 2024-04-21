@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
+    <title>Page Title</title>
+    <link rel="stylesheet" type="text/css" href="public/styles/dashboard.css" />
   </head>
   <body>
-    <a href="/settings">settings</a>
+    <div id="content">
+      <form>
+        <span>
+          <span>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" /> </span
+          ><br />
+          <span>
+            <label for="employee">User:</label>
+            <select id="employee" name="employee"></select>
+          </span>
+        </span>
+        <br /><br />
+      </form>
+
+      <div id="tableBody">
+        <div id="timeLine"></div>
+        <table class="container">
+          <tbody id="table"></tbody>
+        </table>
+      </div>
+    </div>
+    <script src="public/scripts/dashboard.js"></script>
+    <script></script>
   </body>
 </html>

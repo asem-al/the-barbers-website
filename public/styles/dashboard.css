@@ -1,40 +1,40 @@
 #content {
-    margin: 3%;
+  margin: 3%;
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 tbody {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-    width: inherit;
-    background-color: #e4f0f5;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  width: inherit;
+  background-color: #e4f0f5;
 }
 
 .cln1 {
-    /*border: 1px solid black;*/
-    width: calc(15%);
-    text-align: center;
+  /*border: 1px solid black;*/
+  width: 15%;
+  text-align: center;
 }
 .cln2 {
-    width: calc(85%);
+  width: 85%;
 }
 
 .Row {
-    height: 35px;
-    border-top: 0.5px solid rgb(189, 189, 189);
+  height: 35px;
+  border-top: 0.5px solid rgb(189, 189, 189);
 }
 
 #timeLine {
-    height: 5px;
-    width: inherit;
-    background-color: green;
-    position: absolute;
-    opacity: 0.8;
+  height: 5px;
+  width: inherit;
+  background-color: green;
+  position: absolute;
+  opacity: 0.8;
 }
