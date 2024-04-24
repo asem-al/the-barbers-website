@@ -1,32 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page Title</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="public/styles/style.css" />
     <link rel="stylesheet" type="text/css" href="public/styles/dashboard.css" />
   </head>
   <body>
-    <div id="content">
-      <form>
-        <span>
-          <span>
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" /> </span
-          ><br />
-          <span>
-            <label for="employee">User:</label>
-            <select id="employee" name="employee"></select>
-          </span>
-        </span>
-        <br /><br />
+    <div class="container dashboard-container">
+      <div class="navigation">
+        <a class="fs-h4 button" href="/">Home</a>
+        <a class="fs-h4 button" href="/settings">Settings</a>
+      </div>
+
+      <form class="controllers-form surface">
+        <div class="field">
+          <label for="branch">branch:</label>
+          <select id="branch" name="branch"></select>
+        </div>
+        <div class="field">
+          <label for="barber">Barber:</label>
+          <select id="barber" name="barber"></select>
+        </div>
+        <div class="field">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" />
+        </div>
       </form>
 
-      <div id="tableBody">
+      <div class="surface table-wrapper">
         <div id="timeLine"></div>
-        <table class="container">
+        <table class="table">
           <tbody id="table"></tbody>
         </table>
       </div>
     </div>
+
+    <template id="appointmant-info-template">
+      <div class="appointment">
+        Client Name: {{clientName}}.<br />
+        Phone: {{phoneNumber}}.<br />
+        Appointment Code: {{code}}.<br />
+      </div>
+    </template>
     <script src="public/scripts/dashboard.js"></script>
     <script></script>
   </body>

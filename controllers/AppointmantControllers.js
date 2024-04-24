@@ -120,7 +120,7 @@ exports.getAllAppo = async (req, res) => {
     const data = await Appointment.find({
       user: user,
       date: { $gte: today.toISOString() },
-    });
+    }).select("+clientName +phoneNumber state code date duration branch employee details");
 
     res.json({
       status: "success",
