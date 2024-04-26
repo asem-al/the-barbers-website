@@ -149,14 +149,14 @@ const userSchema = new mongoose.Schema({
       logo: {
         type: String,
         default: "public/images/default/logo.svg",
-      }, // /public/logos/usernanme
+      },
       heroImage: {
         type: String,
         default: "public/images/default/cover.webp",
-      }, // /public/images/usernanme-heroimage.webp
+      },
       images: {
         type: [String],
-      }, // /public/images/usernanme-imagename
+      },
       themeColor: {
         type: String,
         default: "#1E2F97",
@@ -168,15 +168,17 @@ const userSchema = new mongoose.Schema({
     },
   },
 
-  products: [
-    {
-      title: String,
-      price: String,
-      description: String,
-      image: String,
-      link: String,
-    },
-  ],
+  products: {
+    type: [
+      {
+        id: { type: String, required: true },
+        title: { type: String, required: true },
+        price: String,
+        description: String,
+        link: String,
+      },
+    ],
+  },
 
   accountdata: {
     passwordChangedAt: Date,
@@ -215,11 +217,48 @@ userSchema.pre("save", async function (next) {
 
 userSchema.pre("save", async function (next) {
   this.userMediaAndContent.media.images = [
-    `public/images/${this.username}/gallery/img-0.webp`,
     `public/images/${this.username}/gallery/img-1.webp`,
     `public/images/${this.username}/gallery/img-2.webp`,
     `public/images/${this.username}/gallery/img-3.webp`,
     `public/images/${this.username}/gallery/img-4.webp`,
+    `public/images/${this.username}/gallery/img-5.webp`,
+    `public/images/${this.username}/gallery/img-6.webp`,
+    `public/images/${this.username}/gallery/img-7.webp`,
+  ];
+  this.products = [
+    {
+      id: "1",
+      title: "SkinMedica TNS Advanced+ Serum",
+      price: "$295.00",
+      description: "A powerful anti-aging serum that targets fine lines, deep wrinkles and sagging skin.",
+      link: `wa.me/${this.phoneNumber}`,
+    },
+    {
+      id: "2",
+      title: "SkinCeuticals Triple Lipid Restore 242",
+      price: "$150.00",
+      description: "An anti-aging facial treatment with essential lipids for mature skin types.",
+      link: `wa.me/${this.phoneNumber}`,
+    },
+    {
+      id: "3",
+      title: "Augustinus Bader The Rich Cream 50ml",
+      price: "$300.00",
+      description: `Formulated with high potency botanicals rich in omega 6 fatty acids and antioxidants this cream helps to revive the complexion and
+      help soothe dryness for skin that looks and feels smoother, softer and more supple. Backed by 30 years of visionary science. Powered
+      by TFC8®.`,
+      link: `wa.me/${this.phoneNumber}`,
+    },
+    {
+      id: "4",
+      title: "Neocutis LUMIÈRE FIRM Illuminating & Tightening Eye Cream",
+      price: "$114.00",
+      description: `An anti-aging eye cream that firms, smooths and restores delicate eye area. Neocutis LUMIÈRE® FIRM Illuminating & Tightening Eye Cream
+      targets dull and aging skin surrounding the eyes. A blend of growth factors and proprietary peptides boost collagen production,
+      encouraging firmer, smoother and more resilient skin without the appearance of fine lines and wrinkles. Caffeine helps reduce
+      under-eye puffiness, while vitamin C delivers antioxidant protection.`,
+      link: `wa.me/${this.phoneNumber}`,
+    },
   ];
   next();
 });

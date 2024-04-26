@@ -7,8 +7,29 @@ textarea {
   width: 90%;
   padding: 6px;
 }
+
+fieldset {
+  margin: auto;
+  margin-bottom: 1.4rem;
+  border: 1px solid var(--clr-dark-gray);
+
+  background-color: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border: 1px solid var(--clr-dark-gray);
+
+  background-color: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  width: min(90%, 450px);
+}
+
 .fieldset {
-  border-left: 1px solid;
   background-color: #f5f5f5;
 }
 .fieldset .fieldset {
@@ -99,12 +120,6 @@ textarea {
 .action-button:hover {
   background-color: #45a049;
 }
-.employee {
-  display: grid;
-  grid-template-columns: 45px auto;
-  justify-items: start;
-  align-items: center;
-}
 
 .foldable-section {
   display: none;
@@ -125,13 +140,6 @@ textarea {
 
 .assaigning-break {
   margin: 5px;
-}
-
-.break {
-  display: grid;
-  grid-template-columns: 45px auto;
-  justify-items: start;
-  align-items: center;
 }
 
 .preview-img {
@@ -219,4 +227,9 @@ td {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   color: #ffffff;
+}
+
+label:has(+ input[required])::after {
+  content: "*";
+  color: red;
 }

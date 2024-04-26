@@ -28,10 +28,10 @@ body {
 }
 
 .navigation {
-  align-self: flex-start;
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  width: 80%;
 }
 .navigation > a {
   background-color: #fff;

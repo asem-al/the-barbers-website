@@ -140,7 +140,7 @@ function initForm() {
     const holidayTemplate = sections_branches[i].querySelector(".holiday");
     for (let j = 0; j < userInfo.branches[i].holidays.length - 1; j++) {
       const el = holidayTemplate.cloneNode(true);
-      sections_branches[i].querySelector(".holidays-list-container").appendChild(el);
+      sections_branches[i].querySelector(".holidays-container").appendChild(el);
     }
 
     const holidays = sections_branches[i].querySelectorAll(".holiday");
@@ -151,15 +151,18 @@ function initForm() {
 
   // images
   let imagesTable = document.getElementById("images-table");
-  imagesTable.children[0].querySelector(".preview-img").src = userInfo.userMediaAndContent.media.logo;
-  imagesTable.children[1].querySelector(".preview-img").src = userInfo.userMediaAndContent.media.heroImage;
+  const userPath = `public/images/${userInfo.username}/`;
+
+  imagesTable.children[0].querySelector(".preview-img").src = userPath + userInfo.userMediaAndContent.media.logo;
+  imagesTable.children[1].querySelector(".preview-img").src = userPath + userInfo.userMediaAndContent.media.heroImage;
   for (let i = 0; i < userInfo.userMediaAndContent.media.images.length; i++) {
-    handleAddGallaryImage();
+    render2("gallery-img-row-template", "#images-table");
   }
   imagesTable = document.getElementById("images-table");
   for (let i = 0; i < imagesTable.children.length - 2; i++) {
-    imagesTable.children[i + 2].querySelector(".preview-img").src = userInfo.userMediaAndContent.media.images[i];
+    imagesTable.children[i + 2].querySelector(".preview-img").src = `${userPath}gallery/${userInfo.userMediaAndContent.media.images[i]}`;
   }
+
   // other
   const langCheckboxCon = document.querySelector(".languages-selector");
   const langCheckboxTemp = document.getElementById("language-checkbox-template");
@@ -203,23 +206,37 @@ function initForm() {
 
     contentFieldsetsContainer.appendChild(contentFieldset);
   }
+
+  // products
+  const product_template = document.getElementById("product-template");
+  const products_container = document.querySelector(".products-container");
+
+  for (let i = 0; i < userInfo.products.length; i++) {
+    const product_element = product_template.content.cloneNode(true);
+    product_element.querySelector("input[name='products.id']").value = userInfo.products[i].id;
+    product_element.querySelector("input[name='products.title']").value = userInfo.products[i].title;
+    product_element.querySelector("input[name='products.price']").value = userInfo.products[i].price;
+    product_element.querySelector("textarea[name='products.description']").value = userInfo.products[i].description;
+    product_element.querySelector("input[name='products.link']").value = userInfo.products[i].link;
+    products_container.appendChild(product_element);
+  }
 }
 
 // gatherFormData2
 const gatherFormData2 = function () {
-  const formData = new FormData(document.getElementById("settings-form"));
   const jsonData = {
     username: document.getElementById("username").value,
-    password: formData.get("password"),
-    phoneNumber: formData.get("phone"),
-    email: formData.get("email"),
-    businessName: formData.get("businessName"),
+    password: document.getElementById("password").value,
+    phoneNumber: document.getElementById("phone").value,
+    email: document.getElementById("email").value,
+    businessName: document.getElementById("businessName").value,
     branches: [],
     userMediaAndContent: { content: {}, media: {} },
+    products: [],
   };
 
   const branches = document.querySelectorAll(".branch");
-
+  // baranches
   branches.forEach((branch) => {
     const branchData = {
       name: branch.querySelector('[name="branches.name"]').value,
@@ -273,6 +290,7 @@ const gatherFormData2 = function () {
 
     jsonData.branches.push(branchData);
   });
+
   // languages
   const langs = Array.from(document.querySelectorAll(".lang-checkbox:checked"));
   jsonData.userMediaAndContent.media.languages = langs.map((lan) => lan.value);
@@ -287,28 +305,48 @@ const gatherFormData2 = function () {
     x.sub_header = lan.querySelector(`textarea[name='userMediaAndContent.content.${langs[i].value}.sub_header']`).value;
   }
 
-  return jsonData;
+  // products
+  const products = document.querySelectorAll(".product");
+  for (let i = 0; i < products.length; i++) {
+    const product = {
+      id: products[i].querySelector("input[name='products.id']").value,
+      title: products[i].querySelector("input[name='products.title']").value,
+      price: products[i].querySelector("input[name='products.price']").value,
+      description: products[i].querySelector("textarea[name='products.description']").value,
+      link: products[i].querySelector("input[name='products.link']").value,
+    };
+    jsonData.products.push(product);
+  }
+
+  // Convert to formData and add files
+  const formData = new FormData();
+  formData.append("jsonData", JSON.stringify(jsonData));
+
+  const logo = document.querySelector('input[type="file"][name="logo"]');
+  if (logo.files[0]) formData.append("logo", logo.files[0]);
+
+  const cover = document.querySelector('input[type="file"][name="cover"]');
+  if (cover.files[0]) formData.append("cover", cover.files[0]);
+
+  const galleryImages = document.querySelectorAll('input[type="file"][name="img"]');
+  for (let i = 0; i < galleryImages.length; i++) {
+    if (galleryImages[i].files[0]) formData.append("img", galleryImages[i].files[0]);
+  }
+
+  for (let i = 0; i < products.length; i++) {
+    const image = products[i].querySelector("input[type='file'][name='products.image']").files[0];
+    const id = products[i].querySelector("input[type='text'][name='products.id']").value;
+    if (image) formData.append(id, image);
+  }
+
+  return formData;
 };
 
-// Helper function to render additional input fields dynamically
-// function render(templateId, target) {
-//   const template = document.getElementById(templateId);
-//   const clone = document.importNode(template.content, true);
-//   target.appendChild(clone);
-// }
-
 const send = async function () {
-  if (!document.getElementById("password").value) {
-    alert("In order to submit changes you should write your password.");
-    return;
-  }
   try {
     const response = await fetch("/user", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(gatherFormData2()),
+      body: gatherFormData2(),
     });
   } catch (error) {
     console.error("Error:", error);
@@ -336,6 +374,13 @@ document.getElementById("branchesnumber").addEventListener("change", () => {
 const render = function (tempId, container_element) {
   const temp = document.getElementById(tempId);
   container_element.appendChild(temp.content.cloneNode(true));
+};
+
+const render2 = function (tempId, parent_sellector) {
+  const temp = document.getElementById(tempId);
+  const parent = document.querySelector(parent_sellector);
+  parent.appendChild(temp.content.cloneNode(true));
+  return parent.lastElementChild;
 };
 
 const sellect = (sellector) => {
@@ -379,7 +424,7 @@ const sendFile = async function (key, file) {
 const deleteFile = async function (key) {
   if (confirm("You are about to delete this image. Press ok to delete.")) {
     try {
-      const response = await fetch(`/data/file/${key}`, {
+      const response = await fetch(`/user/file/${key}`, {
         method: "DELETE",
       });
       return response;
@@ -389,79 +434,92 @@ const deleteFile = async function (key) {
   }
 };
 
-const handleImageChange = async (e) => {
-  const file = e.target.files[0];
-  const key = e.target.name;
-
-  // validate image
-  const acceptAttribute = e.target.getAttribute("accept");
-  const allowedTypes = acceptAttribute.split(",").map((item) => item.trim());
-
-  if (!allowedTypes.includes(file.type)) {
-    alert("Sorry this file type is not supported");
-    e.target.value = ""; // Clear the file input
-    return;
-  }
-  // let img = new Image();
-  // img.src = window.URL.createObjectURL(e.target.files[0]);
-  // img.onload = () => {
-  //   alert(img.width + " " + img.height);
-  // };
-
-  // send image
-  if (e.target.value) {
-    const response = await sendFile(key, file);
-    if (response.ok) {
-      // update review
-      const previewImg = e.target.parentNode.parentNode.parentNode.querySelector(".preview-img");
-      previewImg.src = file ? URL.createObjectURL(file) : "";
-    }
-  }
-};
-
 const handleImageDelete = async (el) => {
-  // send requist to delete the image. in the server, delete the image and loop over images to rename them.
-
-  const key = el.parentNode.children[0].children[0].name;
+  const key = el.parentNode.parentNode.querySelector("img").src.split("/").pop();
 
   const response = await deleteFile(key);
 
   if (response.status === 204) {
-    // delete the table row
     el.parentNode.parentNode.remove();
-    // loop over the rest of images in rename them
-    const inputs = document.querySelectorAll('input[type="file"]');
-    let c = 0;
-    for (let i = 0; i < inputs.length; i++) {
-      if (inputs[i].name === "cover" || inputs[i].name === "logo") continue;
-      else if (inputs[i].name.substring(0, 4) === "img-") inputs[i].name = "img-" + c++;
-    }
   }
 };
 
-const handleAddGallaryImage = () => {
-  // Get the template element by ID
-  const template = document.getElementById("gallery-img-row-template");
+// const handleAddGallaryImage = () => {
+//   // Get the template element by ID
+//   const template = document.getElementById("gallery-img-row-template");
 
-  // Clone the template content
-  const newRow = document.importNode(template.content, true);
+//   // Clone the template content
+//   const newRow = document.importNode(template.content, true);
 
-  // Change the name attribute value
-  const input = newRow.querySelector('input[type="file"]');
-  input.name = "img-" + (document.querySelectorAll('input[type="file"]').length - 2);
+//   // Change the name attribute value
+//   const input = newRow.querySelector('input[type="file"]');
+//   input.name = "img-" + (document.querySelectorAll('input[type="file"]').length - 2);
 
-  // Add event listener to input change
-  input.addEventListener("change", handleImageChange);
+//   // Add event listener to input change
+//   input.addEventListener("change", handleImageChange);
 
-  // Append the new row to your table or container
-  const table = document.getElementById("images-table");
-  return table.appendChild(newRow);
+//   // Append the new row to your table or container
+//   const table = document.getElementById("images-table");
+//   return table.appendChild(newRow);
+// };
+
+function handleLanguageCheckboxChange(event) {
+  document.querySelector(`.${event.target.value}-content-fieldset`).classList.toggle("hidden");
+}
+
+const uid = function () {
+  return "id" + Date.now().toString(36) + Math.random().toString(36).slice(2);
 };
 
-document.querySelectorAll('input[type="file"]').forEach((el) => {
-  el.addEventListener("change", handleImageChange);
-});
+const addProduct = function () {
+  const product = render2("product-template", ".products-container");
+  product.querySelector("input[type='text'][name='products.id']").value = uid();
+};
 
-const handleLanguageCheckboxChange = (event) => {
-  document.querySelector(`.${event.target.value}-content-fieldset`).classList.toggle("hidden");
+const addGalleryImage = function () {
+  const imagerow = render2("gallery-img-row-template", "#images-table");
+  const image = imagerow.querySelector(".preview-img");
+  const input = image.querySelector("input[type='file']");
+  input.addEventListener("cancel", () => {
+    if (input.files.length === 0) {
+      image.remove();
+    }
+  });
+  input.addEventListener("change", () => {
+    if (!validateImage(input)) {
+      image.remove();
+      return;
+    }
+
+    // update preview
+    image.src = URL.createObjectURL(input.files[0]);
+  });
+  input.click();
+};
+
+const handleImageChange = (target) => {
+  const input = target;
+  const image = input.parentNode.parentNode.parentNode.querySelector(".preview-img");
+
+  if (!validateImage(input)) {
+    return;
+  }
+
+  // update preview
+  image.src = URL.createObjectURL(input.files[0]);
+};
+
+const validateImage = (input) => {
+  // validate image
+  const allowedTypes = input
+    .getAttribute("accept")
+    .split(",")
+    .map((item) => item.trim());
+
+  if (!allowedTypes.includes(input.files[0].type)) {
+    alert("Sorry this file type is not supported");
+
+    return false;
+  }
+  return true;
 };

@@ -183,11 +183,7 @@
       <section class="gallery-section">
         <h2 class="fs-section-title m-b-3 text-center">%%i18n.main_content.gallerysection.title%%</h2>
         <div id="carousel-con" class="x-carousel">
-          <img class="x-carousel-img" src="public/images/user9/gallery/img-0.webp" alt="" draggable="false" />
-          <img class="x-carousel-img" src="public/images/user9/gallery/img-1.webp" alt="" draggable="false" />
-          <img class="x-carousel-img" src="public/images/user9/gallery/img-2.webp" alt="" draggable="false" />
-          <img class="x-carousel-img" src="public/images/user9/gallery/img-3.webp" alt="" draggable="false" />
-          <img class="x-carousel-img" src="public/images/user9/gallery/img-4.webp" alt="" draggable="false" />
+          
         </div>
       </section>
 
@@ -196,53 +192,7 @@
         <h2 class="fs-section-title m-b-2 text-center">%%i18n.main_content.shopsection.title%%</h2>
         <p class="section-description m-b-3 text-center fs-small gray">%%i18n.main_content.shopsection.note%%</p>
         <div class="container products-container">
-          <div class="full-screen-cover">
-            <div class="product-card">
-              <div class="wrapper">
-                <img src="public/images/user9/products/prod-1.jpg" alt="Product Image" />
-                <h3>SkinMedica TNS Advanced+ Serum</h3>
-                <p class="price">$295.00</p>
-                <p class="description">A powerful anti-aging serum that targets fine lines, deep wrinkles and sagging skin.</p>
-                <a href="https://api.whatsapp.com/send/?phone=905525877531" class="button secondary-button">Buy</a>
-              </div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="wrapper">
-              <img src="public/images/user9/products/prod-2.jpg" alt="Product Image" />
-              <h3>SkinCeuticals Triple Lipid Restore 242</h3>
-              <p class="price">$150.00</p>
-              <p class="description">An anti-aging facial treatment with essential lipids for mature skin types.</p>
-              <a href="https://api.whatsapp.com/send/?phone=905525877531" class="button secondary-button">Buy</a>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="wrapper">
-              <img src="public/images/user9/products/prod-3.jpg" alt="Product Image" />
-              <h3>Augustinus Bader The Rich Cream 50ml</h3>
-              <p class="price">$300.00</p>
-              <p class="description">
-                Formulated with high potency botanicals rich in omega 6 fatty acids and antioxidants this cream helps to revive the complexion and
-                help soothe dryness for skin that looks and feels smoother, softer and more supple. Backed by 30 years of visionary science. Powered
-                by TFC8®.
-              </p>
-              <a href="https://api.whatsapp.com/send/?phone=905525877531" class="button secondary-button">Buy</a>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="wrapper">
-              <img src="public/images/user9/products/prod-4.jpg" alt="Product Image" />
-              <h3>Neocutis LUMIÈRE FIRM Illuminating & Tightening Eye Cream</h3>
-              <p class="price">$114.00</p>
-              <p class="description">
-                An anti-aging eye cream that firms, smooths and restores delicate eye area. Neocutis LUMIÈRE® FIRM Illuminating & Tightening Eye Cream
-                targets dull and aging skin surrounding the eyes. A blend of growth factors and proprietary peptides boost collagen production,
-                encouraging firmer, smoother and more resilient skin without the appearance of fine lines and wrinkles. Caffeine helps reduce
-                under-eye puffiness, while vitamin C delivers antioxidant protection.
-              </p>
-              <a href="https://api.whatsapp.com/send/?phone=905525877531" class="button secondary-button">Buy</a>
-            </div>
-          </div>
+          <div class="full-screen-cover">    
         </div>
       </section>
       <!-- Contact Us Section -->
@@ -267,7 +217,7 @@
         <div class="container contact-section-con">
           <div>
             <p>
-              %%i18n.forms_labels.phone%%: <span id="p-phone"><a href="tel:552 587 75 31">552 587 75 31</a></span>
+              %%i18n.forms_labels.phone%%: <span id="p-phone"><a href="tel:55"></a></span>
             </p>
             <p>%%i18n.forms_labels.email%%: <span id="p-email">mail@busines.com</span></p>
           </div>
@@ -304,7 +254,7 @@
     <template id="product-template">
       <div class="product-card">
         <div class="wrapper">
-          <img src="{{image}}" alt="Product Image" />
+          <img src="{{image}}" alt="{{title}}" />
           <h3>{{title}}</h3>
           <p class="price">{{price}}</p>
           <p class="description">{{description}}</p>

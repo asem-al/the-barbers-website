@@ -1,7 +1,6 @@
 const express = require("express");
 const AppointmantControllers = require("../controllers/AppointmantControllers");
 const auth = require("../controllers/authControllers");
-const filesController = require("../controllers/filesControllers");
 const router = express.Router();
 
 /// Param Midlleware
@@ -22,7 +21,5 @@ router.route("/admin").get(auth.protect, AppointmantControllers.getAllAppo);
 router.route("/one").get(AppointmantControllers.getOneAppo);
 router.route("/deleteAll").delete(AppointmantControllers.deleteAll);
 router.route("check").get(AppointmantControllers.checkForMultiAppo); // DELETE
-router.route("/file").post(auth.protect, filesController.validateFileInfo, filesController.uploadFile);
-router.delete("/file/:id", auth.protect, filesController.deleteFile);
 
 module.exports = router;

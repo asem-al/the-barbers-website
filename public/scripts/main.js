@@ -39,7 +39,6 @@ const getAppData = async () => {
 
   if (userInfo.branches.length < 1) {
     showWelcomeMsg();
-    return;
   }
 
   fillcarousel();
@@ -499,6 +498,7 @@ function populateProducts() {
     const product = productTemplate.content.cloneNode(true);
 
     product.querySelector("div").innerHTML = product.querySelector("div").innerHTML.replace(/{{(.*?)}}/g, (match, key) => {
+      if (key === "image") return "public/images/" + userInfo.username + "/products/" + "prod-" + userInfo.products[i]["id"] + ".jpeg";
       return userInfo.products[i][key];
     });
     productsContainer.appendChild(product);
@@ -590,7 +590,9 @@ function fillcarousel() {
   const carousel = document.getElementById("carousel-con");
   carousel.innerHTML = "";
   userInfo.userMediaAndContent.media.images.forEach((image) => {
-    carousel.innerHTML += `<img class="x-carousel-img" src="${image}" alt="" draggable="false" />`;
+    carousel.innerHTML += `<img class="x-carousel-img" src="${
+      "public/images/" + userInfo.username + "/gallery/" + image
+    }" alt="" draggable="false" />`;
   });
 }
 function getLocation() {

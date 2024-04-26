@@ -11,7 +11,7 @@ const router = express.Router();
 
 // router.route("/").get();
 
-router // .post(userControllers.createUser)
+router
   .route("/")
   .get(authControllers.protect, userControllers.getUserInfo)
   .post(authControllers.protect, userControllers.EditUserInfo)
@@ -21,6 +21,6 @@ router.route("/logout").get(authControllers.logout);
 router.route("/signup").post(authControllers.signup);
 router.route("/checkusername").post(userControllers.checkusername);
 router.route("/public").get(userControllers.getPublicData);
-//router.route("/upload").post(userControllers.uploadFile);
+router.delete("/file/:id", authControllers.protect, userControllers.deleteGalleryImage);
 
 module.exports = router;

@@ -11,30 +11,27 @@
     <div class="container">
       <form action="javascript:send()" class="form" id="settings-form">
         <!-- User Info -->
-        <label class="section-label fs-big m-b-3 dis-b">User Info<input type="checkbox" /></label>
+        <label class="section-label fs-big m-b-3 dis-b">User Info<input type="checkbox" class="hidden" /></label>
 
         <fieldset class="fieldset foldable-section">
           <div class="field m-b-2"><label for="username">Username</label><input type="text" id="username" name="username" disabled /></div>
-          <div class="field m-b-2"><label for="password">Password</label><input type="text" id="password" name="password" /></div>
+          <div class="field m-b-2"><label for="password">Password</label><input type="password" id="password" name="password" required /></div>
           <div class="field m-b-2"><label for="email">Email</label><input type="Email" id="email" name="email" /></div>
-          <div class="field m-b-2"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" /></div>
+          <div class="field m-b-2"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" required /></div>
         </fieldset>
         <!-- Business info -->
-        <label class="section-label fs-big m-b-3 dis-b">Business Info<input type="checkbox" /></label>
+        <label class="section-label fs-big m-b-3 dis-b">Business Info<input type="checkbox" class="hidden" /></label>
         <fieldset class="fieldset foldable-section">
           <div class="field m-b-2"><label for="businessName">Business Name</label><input type="text" id="businessName" name="businessName" /></div>
           <div class="field m-b-2">
             <label for="branchesnumber">Branches Number</label><input type="number" id="branchesnumber" min="1" value="1" />
           </div>
           <!-- Branches info -->
-          <h3 class="fs-mid m-b-3">Branches</h3>
+          <h3 class="fs-h4 m-b-3 fw-bold">Branches</h3>
           <div class="branches-container">
             <!-- Main Branch -->
             <fieldset class="fieldset branch">
-              <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
-              <div class="field m-b-2">
-                <label>Name</label><input type="text" name="branches.name" value="Main Branch" class="branch-name-input" />
-              </div>
+              <div class="field m-b-2"><label>Name</label><input type="text" name="branches.name" value="Main Branch" required /></div>
               <div class="field m-b-2"><label>Phone</label><input type="tel" name="branches.phone" /></div>
               <label class="section-label fw-semi-bold m-b-3 dis-b">Address<input type="checkbox" /></label>
               <fieldset class="fieldset foldable-section">
@@ -50,24 +47,20 @@
               <fieldset class="fieldset foldable-section">
                 <div class="fields-list-container">
                   <div class="fields-list employees-fields-list" id="employees-fields-list">
-                    <div class="employee m-b-3">
+                    <fieldset class="fieldset employee m-b-3">
+                      <div class="field m-b-2"><label>Name</label><input type="text" name="branches.employees.name" required /></div>
+                      <div class="field m-b-2"><label>Phone</label><input type="tel" name="branches.employees.phone" /></div>
+                      <div class="field m-b-2"><label>Avaliable</label><input type="checkbox" name="branches.employees.avaliable" checked /></div>
                       <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
-                      <div>
-                        <div class="field m-b-2"><label>Name</label><input type="text" name="branches.employees.name" /></div>
-                        <div class="field m-b-2"><label>Phone</label><input type="tel" name="branches.employees.phone" /></div>
-                        <div class="field m-b-2"><label>Avaliable</label><input type="checkbox" name="branches.employees.avaliable" checked /></div>
-                      </div>
-                    </div>
+                    </fieldset>
                   </div>
                   <template id="employee-field-template">
-                    <div class="employee m-b-3">
+                    <fieldset class="fieldset employee m-b-3">
+                      <div class="field m-b-2"><label>Name</label><input type="text" name="branches.employees.name" required /></div>
+                      <div class="field m-b-2"><label>Phone</label><input type="tel" name="branches.employees.phone" /></div>
+                      <div class="field m-b-2"><label>Avaliable</label><input type="checkbox" name="branches.employees.avaliable" checked /></div>
                       <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
-                      <div>
-                        <div class="field m-b-2"><label>Name</label><input type="text" name="branches.employees.name" /></div>
-                        <div class="field m-b-2"><label>Phone</label><input type="tel" name="branches.employees.phone" /></div>
-                        <div class="field m-b-2"><label>Avaliable</label><input type="checkbox" name="branches.employees.avaliable" checked /></div>
-                      </div>
-                    </div>
+                    </fieldset>
                   </template>
                   <button class="button button-green" type="button" onclick="render('employee-field-template', this.parentNode.children[0])">
                     Add
@@ -77,7 +70,9 @@
               <!-- Work hours -->
               <label class="section-label fw-semi-bold m-b-3 dis-b">Work Hours<input type="checkbox" /></label>
               <fieldset class="fieldset foldable-section">
-                <div class="field m-b-2"><label>Appointment duration</label><input type="number" name="branches.shortestAppointmant" /></div>
+                <div class="field m-b-2">
+                  <label>Appointment duration</label><input type="number" name="branches.shortestAppointmant" value="30" required />
+                </div>
                 <div class="field m-b-2">
                   <label>Weekend Days:</label>
                   <div class="weekdays-selector">
@@ -91,18 +86,18 @@
                   </div>
                 </div>
                 <!-- xxxxx -->
-                <h3 class="fs-mid fw-semi-bold">Weekdays</h3>
+                <h3 class="fs-h4 fw-semi-bold">Weekdays</h3>
                 <div class="weekdays">
                   <div class="field aday m-b-3">
                     <label class="dis-b">Monday</label>
                     <fieldset class="fs-small">
                       <div class="field">
                         <label>Opening:</label>
-                        <input type="time" name="branches.openinghour" />
+                        <input type="time" name="branches.openinghour" value="09:00" required />
                       </div>
                       <div class="field">
                         <label>Closeing:</label>
-                        <input type="time" name="branches.closeinghour" />
+                        <input type="time" name="branches.closeinghour" value="17:00" required />
                       </div>
                     </fieldset>
                   </div>
@@ -111,11 +106,11 @@
                     <fieldset class="fs-small">
                       <div class="field">
                         <label>Opening:</label>
-                        <input type="time" name="branches.openinghour" />
+                        <input type="time" name="branches.openinghour" value="09:00" required />
                       </div>
                       <div class="field">
                         <label>Closeing:</label>
-                        <input type="time" name="branches.closeinghour" />
+                        <input type="time" name="branches.closeinghour" value="17:00" required />
                       </div>
                     </fieldset>
                   </div>
@@ -124,11 +119,11 @@
                     <fieldset class="fs-small">
                       <div class="field">
                         <label>Opening:</label>
-                        <input type="time" name="branches.openinghour" />
+                        <input type="time" name="branches.openinghour" value="09:00" required />
                       </div>
                       <div class="field">
                         <label>Closeing:</label>
-                        <input type="time" name="branches.closeinghour" />
+                        <input type="time" name="branches.closeinghour" value="17:00" required />
                       </div>
                     </fieldset>
                   </div>
@@ -137,11 +132,11 @@
                     <fieldset class="fs-small">
                       <div class="field">
                         <label>Opening:</label>
-                        <input type="time" name="branches.openinghour" />
+                        <input type="time" name="branches.openinghour" value="09:00" required />
                       </div>
                       <div class="field">
                         <label>Closeing:</label>
-                        <input type="time" name="branches.closeinghour" />
+                        <input type="time" name="branches.closeinghour" value="17:00" required />
                       </div>
                     </fieldset>
                   </div>
@@ -150,11 +145,11 @@
                     <fieldset class="fs-small">
                       <div class="field">
                         <label>Opening:</label>
-                        <input type="time" name="branches.openinghour" />
+                        <input type="time" name="branches.openinghour" value="09:00" required />
                       </div>
                       <div class="field">
                         <label>Closeing:</label>
-                        <input type="time" name="branches.closeinghour" />
+                        <input type="time" name="branches.closeinghour" value="17:00" required />
                       </div>
                     </fieldset>
                   </div>
@@ -163,11 +158,11 @@
                     <fieldset class="fs-small">
                       <div class="field">
                         <label>Opening:</label>
-                        <input type="time" name="branches.openinghour" />
+                        <input type="time" name="branches.openinghour" value="09:00" required />
                       </div>
                       <div class="field">
                         <label>Closeing:</label>
-                        <input type="time" name="branches.closeinghour" />
+                        <input type="time" name="branches.closeinghour" value="17:00" required />
                       </div>
                     </fieldset>
                   </div>
@@ -176,21 +171,55 @@
                     <fieldset class="fs-small">
                       <div class="field">
                         <label>Opening:</label>
-                        <input type="time" name="branches.openinghour" />
+                        <input type="time" name="branches.openinghour" value="09:00" required />
                       </div>
                       <div class="field">
                         <label>Closeing:</label>
-                        <input type="time" name="branches.closeinghour" />
+                        <input type="time" name="branches.closeinghour" value="17:00" required />
                       </div>
                     </fieldset>
                   </div>
                 </div>
 
-                <h3 class="fs-mid fw-semi-bold">Breaks</h3>
-                <div>
-                  <div class="breaks-list-container">
-                    <div class="break m-b-2">
+                <h3 class="fs-h4 fw-semi-bold">Breaks</h3>
+
+                <div class="breaks-list-container">
+                  <div class="field break m-b-2">
+                    <div>
+                      <label for="">break</label>
                       <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+                    </div>
+                    <div>
+                      <div class="field m-b-2">
+                        <label>Start:</label>
+                        <input type="time" name="branches.breaks.start" value="12:30" />
+                      </div>
+                      <div class="field m-b-2">
+                        <label>End:</label>
+                        <input type="time" name="branches.breaks.end" value="13:30" />
+                      </div>
+                      <div class="field m-b-2">
+                        <label>for:</label>
+                        <select name="branches.breaks.for" class="assaigning-break">
+                          <option value="everyday">Every Day</option>
+                          <option value="0">Monday</option>
+                          <option value="1">Tuesday</option>
+                          <option value="2">Wednesday</option>
+                          <option value="3">Thursday</option>
+                          <option value="4">Friday</option>
+                          <option value="5">Saturday</option>
+                          <option value="6">Sunday</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <template id="break-item-template">
+                    <div class="field break m-b-2">
+                      <div>
+                        <label for="">break</label>
+                        <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+                      </div>
                       <div>
                         <div class="field m-b-2">
                           <label>Start:</label>
@@ -215,74 +244,49 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <button class="button button-green" type="button" onclick="render('break-item-template', this.parentNode.children[0])">Add</button>
-                  <template id="break-item-template">
-                    <div class="break m-b-2">
-                      <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
-                      <div>
-                        <div class="field m-b-2">
-                          <label>Start:</label>
-                          <input type="time" name="branches.breaks.start" />
-                        </div>
-                        <div class="field m-b-2">
-                          <label>End:</label>
-                          <input type="time" name="branches.breaks.end" />
-                        </div>
-                        <div class="field m-b-2">
-                          <label>for:</label>
-                          <select name="branches.breaks.for" class="assaigning-break">
-                            <option value="everyday">Every Day</option>
-                            <option value="0">Monday</option>
-                            <option value="1">Tuesday</option>
-                            <option value="2">Wednesday</option>
-                            <option value="3">Thursday</option>
-                            <option value="4">Friday</option>
-                            <option value="5">Saturday</option>
-                            <option value="6">Sunday</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
                   </template>
                 </div>
+                <button class="button button-green" type="button" onclick="render2('break-item-template', '.breaks-list-container')">
+                  Add break
+                </button>
                 <!-- xxxxx -->
-                <div class="field m-b-2">
-                  <label class="fw-semi-bold" for="holidays">Holidays</label>
-                  <div class="inputs-list-container">
-                    <div class="holidays-list-container inputs-list">
-                      <div class="holiday input-item p-b-sm">
-                        <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
-                        <input type="date" name="branches.holidays" />
-                      </div>
+                <label class="fw-semi-bold dis-b" for="holidays">Holidays</label>
+                <div class="holidays-container">
+                  <div class="holiday field m-b-2">
+                    <div>
+                      <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
                     </div>
-                    <button class="button button-green" type="button" onclick="render('holydays-input-template', this.parentNode.children[0])">
-                      Add
-                    </button>
-                    <template id="holydays-input-template">
-                      <div class="holiday input-item p-b-sm">
-                        <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
-                        <input type="date" name="branches.holidays" />
-                      </div>
-                    </template>
+                    <input type="date" name="branches.holidays" />
                   </div>
                 </div>
+                <button class="button button-green" type="button" onclick="render2('holydays-input-template', '.holidays-container')">
+                  Add holiday
+                </button>
+                <template id="holydays-input-template">
+                  <div class="holiday field m-b-2">
+                    <div>
+                      <button onclick="this.parentNode.remove()" class="button delete-button" type="button">&times;</button>
+                    </div>
+                    <input type="date" name="branches.holidays" />
+                  </div>
+                </template>
               </fieldset>
+              <button onclick="this.parentNode.remove()" class="button delete-button" type="button">Delete this branch</button>
             </fieldset>
           </div>
         </fieldset>
         <!-- Media & Content -->
-        <label class="section-label fs-big m-b-3 dis-b">Media & Content<input type="checkbox" /></label>
+        <label class="section-label fs-big m-b-3 dis-b">Media & Content<input type="checkbox" class="hidden" /></label>
         <fieldset class="fieldset foldable-section">
-          <h3 class="fs-mid m-b-3">Images</h3>
+          <h3 class="fs-h4 m-b-3">Images</h3>
           <fieldset class="fieldset">
             <table>
               <tbody id="images-table">
                 <tr>
                   <td>
                     <label class="button button-blue"
-                      >Change Logo
-                      <input class="hidden" type="file" name="logo" accept="image/jpeg, image/png, image/webp" />
+                      >Change
+                      <input class="hidden" type="file" name="logo" accept="image/jpeg, image/png, image/webp" onchange="handleImageChange(this)" />
                     </label>
                   </td>
                   <td>
@@ -292,8 +296,8 @@
                 <tr>
                   <td>
                     <label class="button button-blue"
-                      >Change Cover Image
-                      <input class="hidden" type="file" name="cover" accept="image/jpeg, image/png, image/webp" />
+                      >Change
+                      <input class="hidden" type="file" name="cover" accept="image/jpeg, image/png, image/webp" onchange="handleImageChange(this)" />
                     </label>
                   </td>
                   <td>
@@ -302,15 +306,12 @@
                 </tr>
               </tbody>
             </table>
-            <button id="addimagebutton" class="button button-green" type="button" onclick="handleAddGallaryImage()">Add gallery image</button>
+            <button id="addimagebutton" class="button button-green" type="button" onclick="addGalleryImage()">Add gallery image</button>
             <template id="gallery-img-row-template">
               <tr>
                 <td>
-                  <label class="button button-blue"
-                    >Change Gallery Image
-                    <input class="hidden" type="file" name="img-" accept="image/jpeg, image/png, image/webp" />
-                  </label>
-                  <button class="button delete-button" onclick="handleImageDelete(this)">Delete</button>
+                  <input class="hidden" type="file" name="img" accept="image/jpeg, image/png, image/webp" />
+                  <button class="button delete-button" type="button" onclick="handleImageDelete(this)">Delete</button>
                 </td>
                 <td>
                   <img class="preview-img" src="" loading="lazy" />
@@ -318,7 +319,7 @@
               </tr>
             </template>
           </fieldset>
-          <h3 class="fs-mid m-b-3">Other</h3>
+          <h3 class="fs-h4 m-b-3">Other</h3>
           <fieldset class="fieldset">
             <div class="field m-b-2">
               <label>Languages</label>
@@ -334,7 +335,7 @@
             </div>
             <div class="field m-b-2"><label for="zzz">Theme</label><input type="color" id="zzz" name="zzz" /></div>
           </fieldset>
-          <h3 class="fs-mid m-b-3">Content</h3>
+          <h3 class="fs-h4 m-b-3">Content</h3>
           <div class="content-fieldsets-container"></div>
           <template id="content-fieldset-template">
             <fieldset class="fieldset">
@@ -349,7 +350,39 @@
             </fieldset>
           </template>
         </fieldset>
-        <button class="button submit-button" type="submit">Submit</button>
+        <!-- Shop -->
+        <label class="section-label fs-big m-b-3 dis-b">Shop Products<input type="checkbox" class="hidden" /></label>
+        <fieldset class="fieldset foldable-section">
+          <div class="products-container"></div>
+          <button class="button button-green" type="button" onclick="addProduct()">Add Product</button>
+          <template id="product-template">
+            <fieldset class="fieldset product">
+              <input name="products.id" type="text" class="hidden" disabled />
+              <div class="field product-title m-b-2">
+                <label>Title</label>
+                <input name="products.title" type="text" required />
+              </div>
+              <div class="field product-img m-b-2">
+                <label>Image</label>
+                <input name="products.image" type="file" />
+              </div>
+              <div class="field product-price m-b-2">
+                <label>Price</label>
+                <input name="products.price" type="text" />
+              </div>
+              <div class="field product-desc m-b-2">
+                <label>Description</label>
+                <textarea name="products.description" rows="7"></textarea>
+              </div>
+              <div class="field product-link m-b-2">
+                <label>Link</label>
+                <input name="products.link" type="text" />
+              </div>
+              <button onclick="this.parentNode.remove()" class="button delete-button" type="button">Delete this product</button>
+            </fieldset>
+          </template>
+        </fieldset>
+        <button class="button submit-button" type="submit">Save Changes</button>
       </form>
     </div>
     <script type="text/javascript" src="public/scripts/settings.js"></script>
