@@ -1,6 +1,6 @@
 let userInfo = {};
 let appointments = [];
-
+let map;
 // get data ------------------------
 
 const getuserinfo = async () => {
@@ -46,7 +46,6 @@ const getAppData = async () => {
   form.init();
 
   populateProducts();
-  products_addEventListener();
 
   initMap();
 
@@ -225,6 +224,8 @@ const form = {
     // Time
     this.clearOptions(this.timeSel);
 
+    this.date = new Date(this.dateSel.value);
+
     for (let i = this.start; i < this.end; i += this.appointmantDuration) {
       let disabled = false;
 
@@ -376,6 +377,8 @@ const carousel = {
   visible: false,
   dragDistance: 0,
   maxScrollWidth: 0,
+  isRTL: window.getComputedStyle(document.querySelector(".x-carousel")).direction === "rtl",
+  scrolled: 0,
 
   scroll: function (n) {
     this.sel.scrollLeft += n;
@@ -386,7 +389,7 @@ const carousel = {
       clearInterval(this.autoScrollTimer);
 
       this.autoScrollTimer = setInterval(() => {
-        this.scroll(2);
+        this.scroll(this.isRTL ? -2 : 2);
       }, 30);
 
       this.autoScrolling = true;
@@ -491,66 +494,67 @@ window.addEventListener("resize", () => {
 // shop ------------------------
 
 function populateProducts() {
-  const productTemplate = document.getElementById("product-template");
-  const productsContainer = document.querySelector(".products-container");
-  productsContainer.innerHTML = "";
-  for (let i = 0; i < userInfo.products.length; i++) {
-    const product = productTemplate.content.cloneNode(true);
+  if (userInfo.products && userInfo.products.length) {
+    const productTemplate = document.getElementById("product-template");
+    const productsContainer = document.querySelector(".products-container");
+    productsContainer.innerHTML = "";
+    for (let i = 0; i < userInfo.products.length; i++) {
+      const product = productTemplate.content.cloneNode(true);
 
-    product.querySelector("div").innerHTML = product.querySelector("div").innerHTML.replace(/{{(.*?)}}/g, (match, key) => {
-      if (key === "image") return "public/images/" + userInfo.username + "/products/" + "prod-" + userInfo.products[i]["id"] + ".jpeg";
-      return userInfo.products[i][key];
-    });
-    productsContainer.appendChild(product);
-  }
-}
+      product.querySelector("div").innerHTML = product.querySelector("div").innerHTML.replace(/{{(.*?)}}/g, (match, key) => {
+        if (key === "image") return "public/images/" + userInfo.username + "/products/" + "prod-" + userInfo.products[i]["id"] + ".jpeg";
+        return userInfo.products[i][key];
+      });
+      productsContainer.appendChild(product);
 
-function products_addEventListener() {
-  document.querySelectorAll(".product-card").forEach((card) => {
-    card.addEventListener("click", (event) => {
-      card.classList.toggle("expanded-card");
-      card.querySelector(".overflow-indicator")?.classList.toggle("hidden");
-      document.getElementById("overlay").classList.toggle("hidden");
-    });
-    const description = card.querySelector(".description");
-    if (description.scrollHeight > description.clientHeight) {
-      description.classList.add("overflowing");
+      // addEventListener
+      document.querySelectorAll(".product-card").forEach((card) => {
+        card.addEventListener("click", (event) => {
+          card.classList.toggle("expanded-card");
+          card.querySelector(".overflow-indicator")?.classList.toggle("hidden");
+          document.getElementById("overlay").classList.toggle("hidden");
+        });
+        const description = card.querySelector(".description");
+        if (description.scrollHeight > description.clientHeight) {
+          description.classList.add("overflowing");
+        }
+      });
+      document.querySelectorAll(".overflowing").forEach((el) => {
+        // Create a new span element
+        const spanElement = document.createElement("span");
+
+        spanElement.classList.add("overflow-indicator");
+        el.insertAdjacentElement("afterend", spanElement);
+      });
     }
-  });
-  document.querySelectorAll(".overflowing").forEach((el) => {
-    // Create a new span element
-    const spanElement = document.createElement("span");
-
-    spanElement.classList.add("overflow-indicator");
-    el.insertAdjacentElement("afterend", spanElement);
-  });
+  } else {
+    document.getElementById("shop-section").classList.add("hidden");
+  }
 }
 
 // Map ------------------------
 
 function initMap() {
-  let mode = "";
-  let quiry = "";
-
-  if (userInfo.branches.length < 1) {
-    mode = "place";
-    quiry = "turkey";
-  } else if (userInfo.branches.length === 1) {
-    mode = "place";
-    quiry = userInfo.branches[0].fulladdress.replace(" ", "+");
-  } else {
-    if (form.branch) {
+  if (userInfo.branches.length) {
+    let mode = "";
+    let quiry = "";
+    if (userInfo.branches.length === 1) {
       mode = "place";
-      quiry = userInfo.branches[form.selectedBranch].fulladdress.replace(" ", "+");
+      quiry = userInfo.branches[0].fulladdress.replace(" ", "+");
     } else {
-      mode = "search";
-      quiry = userInfo.businessName.replace(" ", "+");
+      if (form.branch) {
+        mode = "place";
+        quiry = userInfo.branches[form.selectedBranch].fulladdress.replace(" ", "+");
+      } else {
+        mode = "search";
+        quiry = userInfo.businessName.replace(" ", "+");
+      }
     }
+
+    let key = "AIzaSyDq-MnlCHmGHR0CJJdOnV8OWFBuUOQ42po";
+
+    document.getElementById("map").src = `https://www.google.com/maps/embed/v1/${mode}?key=${key}&q=${quiry}`;
   }
-
-  let key = "AIzaSyDq-MnlCHmGHR0CJJdOnV8OWFBuUOQ42po";
-
-  document.getElementById("map").src = `https://www.google.com/maps/embed/v1/${mode}?key=${key}&q=${quiry}`;
 }
 
 // business info ------------------------
