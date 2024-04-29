@@ -8,8 +8,8 @@
   <body>
     <div class="container dashboard-container">
       <div class="navigation">
-        <a class="fs-h4 button" href="/">Home</a>
-        <a class="fs-h4 button" href="/settings">Settings</a>
+        <a class="fs-h4 button button-white" href="/">Home</a>
+        <a class="fs-h4 button button-white" href="/settings">Settings</a>
       </div>
 
       <form class="controllers-form surface">
@@ -35,12 +35,40 @@
       </div>
     </div>
 
-    <template id="appointmant-info-template">
-      <div class="appointment">
-        Client Name: {{clientName}}.<br />
-        Phone: {{phoneNumber}}.<br />
-        Appointment Code: {{code}}.<br />
+    <div id="setBusyForm" class="set-as-busy-form fs-h4 hidden">
+      <div class="form-header"><span onclick="setBusyForm.close()" class="material-symbols--close"></span></div>
+      <div class="report m-b-4">
+        Date: <span class="date"></span><br />
+        barber: <span class="barber"></span><br />
+        branch: <span class="branch"></span><br />
       </div>
+      <button onclick="setBusyForm.setBusy()" class="button button-white">I'm busy</button>
+      <button onclick="setBusyForm.showClientInfoForm()" class="button button-white">I have an appointment</button>
+      <form action="javascript:setBusyForm.book()" id="clientInfoForm" class="clientInfoForm hidden">
+        <div class="field"><label for="">Client Name</label><input type="text" name="clientName" required /></div>
+        <div class="field"><label for="">Client Phone</label><input type="text" name="phoneNumber" required /></div>
+        <button class="button button-white" type="submit">Book</button>
+      </form>
+    </div>
+    <div id="overlay" class="overlay hidden"></div>
+
+    <template id="appointmant-info-template">
+      <div style="display: flex; gap: 1rem; align-items: baseline">
+        <div class="appointment">
+          Client Name: {{clientName}}.<br />
+          Phone: {{phoneNumber}}.<br />
+          Appointment Code: {{code}}.<br />
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <a href="wa.me/55" class="button button-white wa-button">contact</a><a href="/data/reject/{{id}}" class="button button-white">reject</a>
+        </div>
+      </div>
+    </template>
+    <template id="free-time-template">
+      <button class="button button-white" onclick="setBusyForm.show(this)">Set as busy</button>
+    </template>
+    <template id="busy-time-template">
+      <div class="busy-time"><span>busy</span> <button class="button button-white" onclick="setBusyForm.free(this)">Set as free</button></div>
     </template>
     <script src="public/scripts/dashboard.js"></script>
     <script></script>

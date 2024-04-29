@@ -138,8 +138,6 @@ const form = {
         return this.branch === el.branch && this.isDatesAtSameDay(this.date, el.date) && this.thisDateIsBookedForAllBarbers(el.date);
       })
       .map((el) => el.date.getHours() * 60 + el.date.getMinutes());
-
-    console.log(this.bookedTimes);
   },
 
   autoFillFromLocalstorage: function () {
@@ -187,10 +185,10 @@ const form = {
   populateBarber: function () {
     // barber
     this.clearOptions(this.barberSel);
-    const option = document.createElement("option");
-    option.value = "any";
-    option.text = "any";
-    this.barberSel.add(option);
+    // const option = document.createElement("option");
+    // option.value = "any";
+    // option.text = "any";
+    // this.barberSel.add(option);
     for (let i = 0; i < userInfo.branches[this.selectedBranch].employees.length; i++) {
       const option = document.createElement("option");
       option.value = option.text = userInfo.branches[this.selectedBranch].employees[i].name;
@@ -308,7 +306,6 @@ const send = async () => {
     });
 
     const response = await responseRow.json();
-    console.log("Response from server:", response);
 
     if (response.status === "success") {
       saveUserPreferences(response.data);
@@ -506,27 +503,26 @@ function populateProducts() {
         return userInfo.products[i][key];
       });
       productsContainer.appendChild(product);
-
-      // addEventListener
-      document.querySelectorAll(".product-card").forEach((card) => {
-        card.addEventListener("click", (event) => {
-          card.classList.toggle("expanded-card");
-          card.querySelector(".overflow-indicator")?.classList.toggle("hidden");
-          document.getElementById("overlay").classList.toggle("hidden");
-        });
-        const description = card.querySelector(".description");
-        if (description.scrollHeight > description.clientHeight) {
-          description.classList.add("overflowing");
-        }
-      });
-      document.querySelectorAll(".overflowing").forEach((el) => {
-        // Create a new span element
-        const spanElement = document.createElement("span");
-
-        spanElement.classList.add("overflow-indicator");
-        el.insertAdjacentElement("afterend", spanElement);
-      });
     }
+    // addEventListener
+    document.querySelectorAll(".product-card").forEach((card) => {
+      card.addEventListener("click", (event) => {
+        card.classList.toggle("expanded-card");
+        card.querySelector(".overflow-indicator")?.classList.toggle("hidden");
+        document.getElementById("overlay").classList.toggle("hidden");
+      });
+      const description = card.querySelector(".description");
+      if (description.scrollHeight > description.clientHeight) {
+        description.classList.add("overflowing");
+      }
+    });
+    document.querySelectorAll(".overflowing").forEach((el) => {
+      // Create a new span element
+      const spanElement = document.createElement("span");
+
+      spanElement.classList.add("overflow-indicator");
+      el.insertAdjacentElement("afterend", spanElement);
+    });
   } else {
     document.getElementById("shop-section").classList.add("hidden");
   }

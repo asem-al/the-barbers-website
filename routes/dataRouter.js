@@ -17,9 +17,6 @@ router
   .post(AppointmantControllers.createAppo)
   .patch(AppointmantControllers.modifyAppo) // protect in another way using the name and phonenumber
   .delete(AppointmantControllers.deleteAppo); // protect in another way using the name and phonenumber
-router.route("/admin").get(auth.protect, AppointmantControllers.getAllAppo);
-router.route("/one").get(AppointmantControllers.getOneAppo);
-router.route("/deleteAll").delete(AppointmantControllers.deleteAll);
-router.route("check").get(AppointmantControllers.checkForMultiAppo); // DELETE
-
+router.route("/admin").get(auth.protect, AppointmantControllers.getAllAppo).post(auth.protect, AppointmantControllers.createEmptyAppo);
+router.route("/admin/:id").delete(auth.protect, AppointmantControllers.freeTime);
 module.exports = router;

@@ -41,23 +41,30 @@ exports.createAppo = async (req, res) => {
     let newAppo = {};
     const user = await users.findOne({ username: req.username });
 
-    const branch = findBranch(user.branches, req.body.branch);
-
-    if (!user || !branch) {
-      throw new Error("No such user or branch.");
+    if (!user) {
+      throw new Error("No such user.");
     }
 
-    const today = new Date(new Date().setUTCHours(0, 0, 0, 0));
+    const branch = findBranch(user.branches, req.body.branch);
 
-    const duplicateAppo = await Appointment.findOne({
-      user: req.username,
-      clientName: req.body.name,
-      phoneNumber: req.body.phone,
-      date: { $gte: today.toISOString() }, // ??? iso string might couse shifts
-    });
+    if (!branch) {
+      throw new Error("No such branch.");
+    }
 
-    if (duplicateAppo) {
-      throw new Error("Duplicate appointmants");
+    const today = new Date(new Date().toISOString().slice(0, 10));
+
+    if (req.body.name && req.body.phone) {
+      const duplicateAppo = await Appointment.findOne({
+        user: req.username,
+        clientName: req.body.name,
+        phoneNumber: req.body.phone,
+        date: { $gte: today.toISOString() }, // ??? iso string might couse shifts
+      });
+      if (duplicateAppo) {
+        throw new Error("Duplicate appointmants");
+      }
+    } else {
+      throw new Error("Name and phone are required");
     }
 
     const [hours, minutes] = req.body.time.split(":").map(Number);
@@ -98,7 +105,12 @@ exports.createAppo = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    if (err.message === "conflicting appointmants" || err.message === "Duplicate appointmants" || err.message === "Bad Request") {
+    if (
+      err.message === "conflicting appointmants" ||
+      err.message === "Duplicate appointmants" ||
+      err.message === "Bad Request" ||
+      err.message === "Name and phone are required"
+    ) {
       res.status(400).json({
         status: "fail",
         message: err.message,
@@ -109,6 +121,59 @@ exports.createAppo = async (req, res) => {
         message: "Internal server error",
       });
     }
+  }
+};
+
+exports.createEmptyAppo = async (req, res) => {
+  try {
+    const [hours, minutes] = req.body.time.split(":").map(Number);
+    const date = new Date(new Date(req.body.date).setHours(hours, minutes));
+
+    const user = await users.findOne({ username: req.username });
+
+    if (!user) {
+      throw new Error("No such user.");
+    }
+
+    const branch = findBranch(user.branches, req.body.branch);
+
+    if (!branch) {
+      throw new Error("No such branch.");
+    }
+
+    const conflictingAppo = await Appointment.findOne({
+      user: req.username,
+      branch: req.body.branch,
+      employee: req.body.barber,
+      date: date,
+    });
+    if (!conflictingAppo) {
+      const appoData = {
+        date: date,
+        user: req.username,
+        duration: branch.shortestAppointmant,
+        branch: req.body.branch,
+        employee: req.body.barber,
+        clientName: "",
+        phoneNumber: "",
+      };
+
+      const newAppo = await Appointment.create(appoData);
+      res.status(201).json({
+        status: "success",
+        data: newAppo,
+      });
+    } else {
+      res.status(400).json({
+        status: "fail",
+        message: "This time is already booked.",
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      message: "server error",
+    });
   }
 };
 
@@ -134,6 +199,29 @@ exports.getAllAppo = async (req, res) => {
     });
   }
 };
+
+exports.getPublicData = async (req, res) => {
+  try {
+    const user = req.username;
+    const date = new Date(new Date().setUTCHours(0, 0, 0, 0));
+
+    const data = await Appointment.find({ user: user, date: { $gte: date.toISOString() } });
+
+    const publicData = data;
+
+    res.json({
+      status: "success",
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
 exports.getOneAppo = async (req, res) => {
   try {
     const user = req.username;
@@ -173,6 +261,21 @@ exports.deleteAppo = async (req, res) => {
     });
   }
 };
+
+exports.freeTime = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Appointment.findOneAndDelete({ _id: id });
+    res.status(204).end();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: "fail",
+      message: "server error",
+    });
+  }
+};
+
 exports.modifyAppo = async (req, res) => {
   try {
     const user = req.username;
@@ -185,40 +288,6 @@ exports.modifyAppo = async (req, res) => {
     res.status(201).json({
       status: "success",
       data: newData,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(400).json({
-      status: "fail",
-      message: err,
-    });
-  }
-};
-
-exports.deleteAll = async (req, res) => {
-  // DELETE
-  try {
-    await Appointment.deleteMany({});
-    res.status(204).end();
-  } catch (err) {
-    console.log(err);
-    res.status(400).end();
-  }
-};
-exports.checkForMultiAppo = async (req, res) => {}; // DELETE the check is done on creating.
-
-exports.getPublicData = async (req, res) => {
-  try {
-    const user = req.username;
-    const date = new Date(new Date().setUTCHours(0, 0, 0, 0));
-
-    const data = await Appointment.find({ user: user, date: { $gte: date.toISOString() } });
-
-    const publicData = data;
-
-    res.json({
-      status: "success",
-      data,
     });
   } catch (err) {
     console.log(err);

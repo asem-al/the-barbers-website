@@ -34,12 +34,12 @@ const dataSchema = new mongoose.Schema({
   }, // If the employee is not specified, in the server, assign the appointment to the least busy available employee.
   clientName: {
     type: String,
-    require: true,
+    // require: true,
     select: false,
   },
   phoneNumber: {
     type: String,
-    require: true,
+    // require: true,
     select: false,
   },
   details: String,
