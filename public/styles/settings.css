@@ -9,7 +9,7 @@ textarea {
 }
 
 fieldset {
-  margin: auto;
+  /* margin: auto; */
   margin-bottom: 1.4rem;
   border: 1px solid var(--clr-dark-gray);
 

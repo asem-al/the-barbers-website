@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="%%configs.lan%%" dir="%%configs.dir%%">
   <head>
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" href="public/styles/style.css" />
@@ -8,21 +8,21 @@
   <body>
     <div class="container dashboard-container">
       <div class="navigation">
-        <a class="fs-h4 button button-white" href="/">Home</a>
-        <a class="fs-h4 button button-white" href="/settings">Settings</a>
+        <a class="fs-h4 button button-white" href="/">%%navItems.home%%</a>
+        <a class="fs-h4 button button-white" href="/settings">%%navItems.settings%%</a>
       </div>
 
       <form class="controllers-form surface">
         <div class="field">
-          <label for="branch">branch:</label>
+          <label for="branch">%%forms_labels.branch%%:</label>
           <select id="branch" name="branch"></select>
         </div>
         <div class="field">
-          <label for="barber">Barber:</label>
+          <label for="barber">%%forms_labels.barber%%:</label>
           <select id="barber" name="barber"></select>
         </div>
         <div class="field">
-          <label for="date">Date:</label>
+          <label for="date">%%forms_labels.date%%:</label>
           <input type="date" id="date" name="date" />
         </div>
       </form>
@@ -38,16 +38,16 @@
     <div id="setBusyForm" class="set-as-busy-form fs-h4 hidden">
       <div class="form-header"><span onclick="setBusyForm.close()" class="material-symbols--close"></span></div>
       <div class="report m-b-4">
-        Date: <span class="date"></span><br />
-        barber: <span class="barber"></span><br />
-        branch: <span class="branch"></span><br />
+        %%forms_labels.date%%: <span class="date"></span><br />
+        %%forms_labels.barber%%: <span class="barber"></span><br />
+        %%forms_labels.branch%%: <span class="branch"></span><br />
       </div>
-      <button onclick="setBusyForm.setBusy()" class="button button-white">I'm busy</button>
-      <button onclick="setBusyForm.showClientInfoForm()" class="button button-white">I have an appointment</button>
+      <button onclick="setBusyForm.setBusy()" class="button button-white">%%buttons.im_busy%%</button>
+      <button onclick="setBusyForm.showClientInfoForm()" class="button button-white">%%buttons.i_have_an_appointment%%</button>
       <form action="javascript:setBusyForm.book()" id="clientInfoForm" class="clientInfoForm hidden">
-        <div class="field"><label for="">Client Name</label><input type="text" name="clientName" required /></div>
-        <div class="field"><label for="">Client Phone</label><input type="text" name="phoneNumber" required /></div>
-        <button class="button button-white" type="submit">Book</button>
+        <div class="field"><label for="">%%forms_labels.client_name%%</label><input type="text" name="clientName" required /></div>
+        <div class="field"><label for="">%%forms_labels.client_phone%%</label><input type="text" name="phoneNumber" required /></div>
+        <button class="button button-white" type="submit">%%buttons.book%%</button>
       </form>
     </div>
     <div id="overlay" class="overlay hidden"></div>
@@ -55,22 +55,23 @@
     <template id="appointmant-info-template">
       <div style="display: flex; gap: 1rem; align-items: baseline">
         <div class="appointment">
-          Client Name: {{clientName}}.<br />
-          Phone: {{phoneNumber}}.<br />
-          Appointment Code: {{code}}.<br />
+          %%forms_labels.name%%: {{clientName}}.<br />
+          %%forms_labels.phone%%: {{phoneNumber}}.<br />
+          {{code}}.<br />
         </div>
-        <div style="display: flex; flex-direction: column">
+        <div style="display: flex; flex-direction: column" class="hidden">
           <a href="wa.me/55" class="button button-white wa-button">contact</a><a href="/data/reject/{{id}}" class="button button-white">reject</a>
         </div>
       </div>
     </template>
     <template id="free-time-template">
-      <button class="button button-white" onclick="setBusyForm.show(this)">Set as busy</button>
+      <button class="button button-white" onclick="setBusyForm.show(this)">%%buttons.set_as_busy%%</button>
     </template>
     <template id="busy-time-template">
-      <div class="busy-time"><span>busy</span> <button class="button button-white" onclick="setBusyForm.free(this)">Set as free</button></div>
+      <div class="busy-time">
+        <span>%%tags.busy%%</span> <button class="button button-white" onclick="setBusyForm.free(this)">%%buttons.set_as_free%%</button>
+      </div>
     </template>
     <script src="public/scripts/dashboard.js"></script>
-    <script></script>
   </body>
 </html>
