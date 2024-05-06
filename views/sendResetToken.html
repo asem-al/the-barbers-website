@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="public/styles/style.css" />
+    <link rel="stylesheet" href="public/styles/loginsignin.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <h1 class="fs-big fw-bold text-center">Send a passoword reset to email</h1>
+        <form action="javascript:send()" id="login-form" class="form">
+          <div class="field"><input type="tel" name="email" placeholder="Your Email. (Linked to account)" required /></div>
+
+          <div class="field text-center hidden" id="msg-wrong-email">Didn't find an account for this email</div>
+          <div class="field text-center hidden" id="msg-email-sent">A password reset link was sent to your email.</div>
+          <div class="field"><input class="button" type="submit" value="Send me email" /></div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const send = async () => {
+        const response = await fetch("/user/forgotpassword", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(gatherFormData()),
+        });
+        if (response.status == 200) {
+          document.getElementById("msg-email-sent").classList.remove("hidden");
+        } else if (response.status == 400) {
+          document.getElementById("msg-wrong-email").classList.remove("hidden");
+        }
+        console.log(response);
+      };
+      const gatherFormData = function () {
+        const formData = new FormData(document.getElementById("login-form"));
+        return {
+          email: formData.get("email"),
+        };
+      };
+    </script>
+  </body>
+</html>

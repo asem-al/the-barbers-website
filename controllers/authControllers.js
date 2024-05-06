@@ -1,15 +1,23 @@
+const crypto = require("crypto");
+const fs = require("fs");
 const util = require("util");
 const users = require("../models/userModel");
 const jwt = require("jsonwebtoken");
-const { signToken } = require("../modules/utilities.js");
-const fs = require("fs");
 const path = require("path");
+const sendEmail = require("../modules/email.js");
+
+const signToken = (payload) =>
+  jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+
 const cookie_options = {
   expires: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
   // secure: true, /// !!!!!!!!!!!!! Most turn on. it prevent sending the cookie over http.
   httpOnly: true,
   // domain: `${newUser.username}.ofset.localhost`,
 };
+
 // Function to copy a directory recursively
 function copyDirectory(source, destination) {
   // Create destination folder if it doesn't exist
@@ -39,9 +47,9 @@ function copyDirectory(source, destination) {
 exports.signup = async (req, res) => {
   try {
     const newUser = await users.create(req.body);
-    const token = signToken({ id: newUser._id });
+
     newUser.password = undefined;
-    await copyDirectory(`${__dirname}/../public/images/default`, `${__dirname}/../public/images/${newUser.username}`);
+    copyDirectory(`${__dirname}/../public/images/default`, `${__dirname}/../public/images/${newUser.username}`);
     res.status(201).json({
       status: "success",
       data: newUser,
@@ -85,6 +93,7 @@ exports.login = async (req, res) => {
     });
   }
 };
+
 exports.protect = async (req, res, next) => {
   try {
     // 1. check for token
@@ -115,20 +124,14 @@ exports.protect = async (req, res, next) => {
 
     next();
   } catch (err) {
-
-    if (
-      err.name === "JsonWebTokenError" ||
-      err.message === "OwnerOfTokenNoLongerAUser" ||
-      err.message === "WrongUserForThisToken" ||
-      err.message === "oldToken"
-    ) {
+    if (err.name === "JsonWebTokenError" || err.message === "OwnerOfTokenNoLongerAUser" || err.message === "WrongUserForThisToken") {
       return res.status(401).json({
         status: "fail",
         msg: "Unauthorized", //msg: "Invalid token",
       });
     }
-    // TODO redirect users to log in page on TokenExpiredError.
-    if (err.name === "TokenExpiredError" || err.message === "noTokenError") {
+
+    if (err.name === "TokenExpiredError" || err.message === "noTokenError" || err.message === "oldToken") {
       // Store the original URL the user was trying to access
       const originalUrl = req.originalUrl;
 
@@ -158,4 +161,73 @@ exports.logout = async (req, res) => {
       msg: err,
     });
   }
+};
+
+exports.forgotPassword = async (req, res) => {
+  try {
+    // 1. Get user.
+    const user = await users.findOne({ phone: req.body.phone });
+
+    if (!user || user.username !== req.username) {
+      return res.status(400).json({
+        status: "fail",
+        msg: "Bad requist",
+      });
+    }
+    // 2. Generate reset token.
+    const resetToken = user.createPasswordResetToken();
+
+    await user.save({ validateBeforeSave: false });
+
+    // 3. send it to user via email
+    const resetURL = `${req.protocol}://${req.get("host")}/resetpassword/${resetToken}`;
+    const message = `If you forgot your password you can reset it from the password Reset page at this link: ${resetURL}
+    If you didn't, please ignore this email`;
+    const html = `<p>If you forgot your password you can reset it from <a href="${resetURL}">the password Reset page</a>.<br/>If you didn't, please ignore this email</p>`;
+
+    await sendEmail({
+      to: user.email,
+      subject: "Password reset Email",
+      text: message,
+      html: html,
+    });
+
+    res.status(200).json({
+      status: "success",
+      msg: "Token sent to email.",
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      status: "fail",
+      msg: "Server error",
+    });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  // 1. get user based on token.
+
+  const hashedToken = crypto.createHash("sha256").update(req.params.resetToken).digest("hex");
+
+  const user = await users.findOne({ ["accountdata.passwordResetToken"]: hashedToken, ["accountdata.passwordResetExpires"]: { $gt: Date.now() } });
+
+  // 2. if there is user and token not expired, set the new passowrd.
+  if (!user || user.username !== req.username) {
+    return res.status(400).json({
+      status: "fail",
+      message: "bad requist",
+    });
+  }
+
+  user.password = req.body.password;
+  user.passwordConfirmation = req.body.passwordConfirmation;
+  user.accountdata.passwordResetToken = undefined;
+  user.accountdata.passwordResetExpires = undefined;
+  await user.save();
+
+  // 3. log in.
+  const token = signToken({ id: user._id });
+  res.cookie("jwt", token, cookie_options);
+  res.status(200).redirect("/dashboard");
 };

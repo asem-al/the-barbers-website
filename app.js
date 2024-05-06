@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const compression = require("compression");
+const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
 
 const AppointmanRouter = require("./routes/dataRouter");
 const userRouter = require("./routes/userRouter");
@@ -23,11 +26,22 @@ app.engine("html", ViewEngine);
 ///     Middlewares     ///
 //
 
+// app.use(helmet());
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 100,
+  standardHeaders: "draft-7", // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+});
+
+app.use("/data", limiter);
+app.use("/user", limiter);
+
 // 1)
-app.use(express.json());
+app.use(express.json({ limit: "64kb" }));
 
 // 2)
-// app.use(bodyParser.urlencoded({ limit: "5000mb", extended: true, parameterLimit: 100000000000 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.text());
@@ -39,6 +53,8 @@ app.use(
 );
 
 app.use(cookieParser());
+
+app.use(mongoSanitize());
 
 // 3) Add some information to the request obj
 app.use((req, res, next) => {

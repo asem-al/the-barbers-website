@@ -36,6 +36,9 @@ input[type="submit"]:focus {
   border: 2px solid #000;
 }
 
+.button {
+  display: block;
+}
 /* .button {
 	padding-top: ;
 } */

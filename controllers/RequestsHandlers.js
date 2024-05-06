@@ -32,6 +32,9 @@ exports.serve_dashboard = async (req, res) => {
 exports.serve_registpage = async (req, res) => {
   res.render("../views/signup.html", i18n[req.preferredLanguage]);
 };
+exports.serve_resetPassword = async (req, res) => {
+  res.render("../views/setNewPassword.html", i18n[req.preferredLanguage]);
+};
 // exports.login = async (req, res) => {
 //   console.log("dashboard");
 //   try {
@@ -40,3 +43,6 @@ exports.serve_registpage = async (req, res) => {
 //     console.log(err);
 //   }
 // };
+exports.serve_sendMeEmail = async (req, res) => {
+  res.render("../views/sendResetToken.html", i18n[req.preferredLanguage]);
+};

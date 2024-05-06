@@ -348,10 +348,38 @@ const send = async function () {
       method: "POST",
       body: gatherFormData2(),
     });
+    if (response.status >= 200 && response.status < 300) {
+      uncheckFoldCheckboxes();
+      document.getElementById("msg-changes-saved").classList.remove("hidden");
+    } else {
+      uncheckFoldCheckboxes();
+      document.getElementById("msg-changes-field").classList.remove("hidden");
+    }
   } catch (error) {
     console.error("Error:", error);
   }
 };
+
+const submitButton1 = document.getElementById("submitButton1");
+const submitButton2 = document.getElementById("submitButton2");
+submitButton1.addEventListener("click", (event) => {
+  event.preventDefault();
+  checkFoldCheckboxes();
+  submitButton2.click();
+});
+
+function checkFoldCheckboxes() {
+  const checkboxes = document.querySelectorAll(".fold-checkbox");
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = true;
+  });
+}
+function uncheckFoldCheckboxes() {
+  const checkboxes = document.querySelectorAll(".fold-checkbox");
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
+}
 
 // Dublicate branch on "branch number" change
 document.getElementById("branchesnumber").addEventListener("change", () => {

@@ -11,7 +11,7 @@
     <div class="container">
       <form action="javascript:send()" class="form" id="settings-form">
         <!-- User Info -->
-        <label class="section-label fs-big m-b-3 dis-b">%%forms_labels.User Info%%<input type="checkbox" class="hidden" /></label>
+        <label class="section-label fs-big m-b-3 dis-b">%%forms_labels.User Info%%<input type="checkbox" class="hidden fold-checkbox" /></label>
 
         <fieldset class="fieldset foldable-section">
           <div class="field m-b-2">
@@ -20,11 +20,11 @@
           <div class="field m-b-2">
             <label for="password">%%forms_labels.Password%%</label><input type="password" id="password" name="password" required />
           </div>
-          <div class="field m-b-2"><label for="email">%%forms_labels.Email%%</label><input type="Email" id="email" name="email" /></div>
+          <div class="field m-b-2"><label for="email">%%forms_labels.Email%%</label><input type="Email" id="email" name="email" required /></div>
           <div class="field m-b-2"><label for="phone">%%forms_labels.Phone%%</label><input type="tel" id="phone" name="phone" required /></div>
         </fieldset>
         <!-- Business info -->
-        <label class="section-label fs-big m-b-3 dis-b">%%forms_labels.Business Info%%<input type="checkbox" class="hidden" /></label>
+        <label class="section-label fs-big m-b-3 dis-b">%%forms_labels.Business Info%%<input type="checkbox" class="hidden fold-checkbox" /></label>
         <fieldset class="fieldset foldable-section">
           <div class="field m-b-2">
             <label for="businessName">%%forms_labels.Business Name%%</label><input type="text" id="businessName" name="businessName" />
@@ -41,7 +41,9 @@
                 <label>%%forms_labels.Name%%</label><input type="text" name="branches.name" value="Main Branch" required />
               </div>
               <div class="field m-b-2"><label>%%forms_labels.Phone%%</label><input type="tel" name="branches.phone" /></div>
-              <label class="section-label fw-semi-bold m-b-3 dis-b">%%forms_labels.Address%%<input type="checkbox" /></label>
+              <label class="section-label fw-semi-bold m-b-3 dis-b"
+                >%%forms_labels.Address%%<input type="checkbox" class="hidden fold-checkbox"
+              /></label>
               <fieldset class="fieldset foldable-section">
                 <div class="field m-b-2"><label>%%forms_labels.Country%%</label><input type="text" name="branches.country" /></div>
                 <div class="field m-b-2"><label>%%forms_labels.City%%</label><input type="text" name="branches.city" /></div>
@@ -51,7 +53,9 @@
                 <div class="field m-b-2"><label>%%forms_labels.Full address%%</label><input type="text" name="branches.fulladdress" /></div>
               </fieldset>
               <!-- Employees -->
-              <label class="section-label fw-semi-bold m-b-3 dis-b">%%forms_labels.Employees%%<input type="checkbox" /></label>
+              <label class="section-label fw-semi-bold m-b-3 dis-b"
+                >%%forms_labels.Employees%%<input type="checkbox" class="hidden fold-checkbox"
+              /></label>
               <fieldset class="fieldset foldable-section">
                 <div class="fields-list-container">
                   <div class="fields-list employees-fields-list" id="employees-fields-list">
@@ -80,7 +84,9 @@
                 </div>
               </fieldset>
               <!-- Work hours -->
-              <label class="section-label fw-semi-bold m-b-3 dis-b">%%forms_labels.Work Hours%%<input type="checkbox" /></label>
+              <label class="section-label fw-semi-bold m-b-3 dis-b"
+                >%%forms_labels.Work Hours%%<input type="checkbox" class="hidden fold-checkbox"
+              /></label>
               <fieldset class="fieldset foldable-section">
                 <div class="field m-b-2">
                   <label>%%forms_labels.Appointment duration%%</label><input type="number" name="branches.shortestAppointmant" value="30" required />
@@ -288,7 +294,7 @@
           </div>
         </fieldset>
         <!-- Media & Content -->
-        <label class="section-label fs-big m-b-3 dis-b">%%forms_labels.Media & Content%%<input type="checkbox" class="hidden" /></label>
+        <label class="section-label fs-big m-b-3 dis-b">%%forms_labels.Media & Content%%<input type="checkbox" class="hidden fold-checkbox" /></label>
         <fieldset class="fieldset foldable-section">
           <h3 class="fs-h4 m-b-3">%%forms_labels.Images%%</h3>
           <fieldset class="fieldset">
@@ -363,7 +369,7 @@
           </template>
         </fieldset>
         <!-- Shop -->
-        <label class="section-label fs-big m-b-3 dis-b">%%forms_labels.Shop Products%%<input type="checkbox" class="hidden" /></label>
+        <label class="section-label fs-big m-b-3 dis-b">%%forms_labels.Shop Products%%<input type="checkbox" class="hidden fold-checkbox" /></label>
         <fieldset class="fieldset foldable-section">
           <div class="products-container"></div>
           <button class="button button-green" type="button" onclick="addProduct()">%%buttons.Add Product%%</button>
@@ -394,7 +400,14 @@
             </fieldset>
           </template>
         </fieldset>
-        <button class="button submit-button" type="submit">%%buttons.Save Changes%%</button>
+        <div class="msg msg-ok hidden" id="msg-changes-saved">
+          <p>changes were saved.</p>
+        </div>
+        <div class="msg msg-error hidden" id="msg-changes-field">
+          <p>filed to save changes.</p>
+        </div>
+        <button id="submitButton1" class="button submit-button" type="button">%%buttons.Save Changes%%</button>
+        <button id="submitButton2" class="hidden" type="submit">Submit</button>
       </form>
     </div>
     <script type="text/javascript" src="public/scripts/settings.js"></script>

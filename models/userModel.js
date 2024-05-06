@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
@@ -188,6 +189,8 @@ const userSchema = new mongoose.Schema({
     },
     subscriptionlastupdatedate: Date,
     subscriptiontype: String,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
   },
 });
 
@@ -207,6 +210,10 @@ userSchema.pre("save", async function (next) {
 
   this.passwordConfirmation = undefined;
 
+  if (!this.$isNew) {
+    this.accountdata.passwordChangedAt = Date.now() - 2000;
+  }
+
   next();
 });
 
@@ -215,51 +222,55 @@ userSchema.pre("save", async function (next) {
 //   next();
 // });
 
-userSchema.pre("save", async function (next) {
-  this.userMediaAndContent.media.images = [
-    `public/images/${this.username}/gallery/img-1.webp`,
-    `public/images/${this.username}/gallery/img-2.webp`,
-    `public/images/${this.username}/gallery/img-3.webp`,
-    `public/images/${this.username}/gallery/img-4.webp`,
-    `public/images/${this.username}/gallery/img-5.webp`,
-    `public/images/${this.username}/gallery/img-6.webp`,
-    `public/images/${this.username}/gallery/img-7.webp`,
-  ];
-  this.products = [
-    {
-      id: "1",
-      title: "SkinMedica TNS Advanced+ Serum",
-      price: "$295.00",
-      description: "A powerful anti-aging serum that targets fine lines, deep wrinkles and sagging skin.",
-      link: `wa.me/${this.phoneNumber}`,
-    },
-    {
-      id: "2",
-      title: "SkinCeuticals Triple Lipid Restore 242",
-      price: "$150.00",
-      description: "An anti-aging facial treatment with essential lipids for mature skin types.",
-      link: `wa.me/${this.phoneNumber}`,
-    },
-    {
-      id: "3",
-      title: "Augustinus Bader The Rich Cream 50ml",
-      price: "$300.00",
-      description: `Formulated with high potency botanicals rich in omega 6 fatty acids and antioxidants this cream helps to revive the complexion and
-      help soothe dryness for skin that looks and feels smoother, softer and more supple. Backed by 30 years of visionary science. Powered
-      by TFC8®.`,
-      link: `wa.me/${this.phoneNumber}`,
-    },
-    {
-      id: "4",
-      title: "Neocutis LUMIÈRE FIRM Illuminating & Tightening Eye Cream",
-      price: "$114.00",
-      description: `An anti-aging eye cream that firms, smooths and restores delicate eye area. Neocutis LUMIÈRE® FIRM Illuminating & Tightening Eye Cream
-      targets dull and aging skin surrounding the eyes. A blend of growth factors and proprietary peptides boost collagen production,
-      encouraging firmer, smoother and more resilient skin without the appearance of fine lines and wrinkles. Caffeine helps reduce
-      under-eye puffiness, while vitamin C delivers antioxidant protection.`,
-      link: `wa.me/${this.phoneNumber}`,
-    },
-  ];
+userSchema.pre("save", function (next) {
+  if (this.$isNew) {
+    this.userMediaAndContent.media.images = [
+      `public/images/${this.username}/gallery/img-1.webp`,
+      `public/images/${this.username}/gallery/img-2.webp`,
+      `public/images/${this.username}/gallery/img-3.webp`,
+      `public/images/${this.username}/gallery/img-4.webp`,
+      `public/images/${this.username}/gallery/img-5.webp`,
+      `public/images/${this.username}/gallery/img-6.webp`,
+      `public/images/${this.username}/gallery/img-7.webp`,
+    ];
+
+    this.products = [
+      {
+        id: "1",
+        title: "SkinMedica TNS Advanced+ Serum",
+        price: "$295.00",
+        description: "A powerful anti-aging serum that targets fine lines, deep wrinkles and sagging skin.",
+        link: `wa.me/${this.phoneNumber}`,
+      },
+      {
+        id: "2",
+        title: "SkinCeuticals Triple Lipid Restore 242",
+        price: "$150.00",
+        description: "An anti-aging facial treatment with essential lipids for mature skin types.",
+        link: `wa.me/${this.phoneNumber}`,
+      },
+      {
+        id: "3",
+        title: "Augustinus Bader The Rich Cream 50ml",
+        price: "$300.00",
+        description: `Formulated with high potency botanicals rich in omega 6 fatty acids and antioxidants this cream helps to revive the complexion and
+        help soothe dryness for skin that looks and feels smoother, softer and more supple. Backed by 30 years of visionary science. Powered
+        by TFC8®.`,
+        link: `wa.me/${this.phoneNumber}`,
+      },
+      {
+        id: "4",
+        title: "Neocutis LUMIÈRE FIRM Illuminating & Tightening Eye Cream",
+        price: "$114.00",
+        description: `An anti-aging eye cream that firms, smooths and restores delicate eye area. Neocutis LUMIÈRE® FIRM Illuminating & Tightening Eye Cream
+        targets dull and aging skin surrounding the eyes. A blend of growth factors and proprietary peptides boost collagen production,
+        encouraging firmer, smoother and more resilient skin without the appearance of fine lines and wrinkles. Caffeine helps reduce
+        under-eye puffiness, while vitamin C delivers antioxidant protection.`,
+        link: `wa.me/${this.phoneNumber}`,
+      },
+    ];
+  }
+
   next();
 });
 
@@ -268,13 +279,24 @@ userSchema.methods.checkPassword = async function (candidatePassword, userPasswo
 };
 
 userSchema.methods.passwordChangrdAfter = function (JWTTimeStamp) {
-  if (this.passwordChangedAt) {
-    const passwordChangedAt = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+  if (this.accountdata.passwordChangedAt) {
+    const passwordChangedAt = parseInt(this.accountdata.passwordChangedAt.getTime() / 1000, 10);
     return JWTTimeStamp < passwordChangedAt;
   }
   // false means not changed
   return false;
 };
+
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString("hex");
+
+  this.accountdata.passwordResetToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+
+  this.accountdata.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
+};
+
 const user = mongoose.model("users", userSchema);
 
 module.exports = user;
