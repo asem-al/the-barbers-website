@@ -59,7 +59,7 @@ app.use(mongoSanitize());
 // 3) Add some information to the request obj
 app.use((req, res, next) => {
   // 1) Add user name to req.
-  if (req.subdomains[0] !== "thebarberswebsite-bd23b144c280") {
+  if (req.subdomains[0] !== "asem344-063c26c14f1d") {
     req.username = req.subdomains[0];
   }
 
