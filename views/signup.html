@@ -18,6 +18,7 @@
             <small class="fs-small hidden" id="msg-error-username-taken">Sorry, this username is already taken. Please choose another one.</small>
           </div>
           <div class="field"><input type="tel" name="phone" placeholder=" Phone" id="phone" required /></div>
+          <div class="field"><input type="tel" name="email" placeholder=" Email" id="email" required /></div>
           <div class="field"><input type="password" name="password" placeholder=" Password" required id="password" /></div>
           <div class="field"><input type="password" name="passwordconfirmation" placeholder=" Confirm Password" id="password-again" required /></div>
           <div class="field"><input class="button" type="submit" value="Sign in" /></div>
@@ -49,6 +50,7 @@
         return {
           username: formData.get("username"),
           phoneNumber: formData.get("phone"),
+          email: formData.get("email"),
           password: formData.get("password"),
           passwordConfirmation: formData.get("passwordconfirmation"),
         };

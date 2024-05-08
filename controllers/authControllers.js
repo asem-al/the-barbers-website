@@ -12,7 +12,7 @@ const signToken = (payload) =>
   });
 
 const cookie_options = {
-  expires: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+  maxAge: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
   // secure: true, /// !!!!!!!!!!!!! Most turn on. it prevent sending the cookie over http.
   httpOnly: true,
   // domain: `${newUser.username}.ofset.localhost`,
@@ -180,7 +180,7 @@ exports.forgotPassword = async (req, res) => {
     await user.save({ validateBeforeSave: false });
 
     // 3. send it to user via email
-    const resetURL = `${req.protocol}://${req.get("host")}/resetpassword/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get("host")}/user/resetpassword/${resetToken}`;
     const message = `If you forgot your password you can reset it from the password Reset page at this link: ${resetURL}
     If you didn't, please ignore this email`;
     const html = `<p>If you forgot your password you can reset it from <a href="${resetURL}">the password Reset page</a>.<br/>If you didn't, please ignore this email</p>`;
