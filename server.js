@@ -17,6 +17,13 @@ mongoose
 
 const app = require("./app");
 
-app.listen(process.env.PORT || 8000, () => {
+const server = app.listen(process.env.PORT || 8000, () => {
   console.log("Listening ...");
+});
+
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received.");
+  server.close(() => {
+    console.log("Process gracefully terminated.");
+  });
 });

@@ -6,16 +6,10 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const sendEmail = require("../modules/email.js");
 
-const signToken = (payload) =>
+const signToken = (payload) => {
   jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
-
-const cookie_options = {
-  maxAge: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-  // secure: true, /// !!!!!!!!!!!!! Most turn on. it prevent sending the cookie over http.
-  httpOnly: true,
-  // domain: `${newUser.username}.ofset.localhost`,
 };
 
 // Function to copy a directory recursively
@@ -82,6 +76,11 @@ exports.login = async (req, res) => {
       });
     }
     const token = signToken({ id: user._id });
+    const cookie_options = {
+      expires: new Date(new Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+    };
     res.cookie("jwt", token, cookie_options);
     //const redirectUrl = req.query.redirect ? req.query.redirect : "/";
     res.status(200).end();
@@ -152,6 +151,11 @@ exports.logout = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: 1,
     });
+    const cookie_options = {
+      expires: new Date(new Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+    };
     res.cookie("jwt", token, cookie_options);
     res.status(200).redirect("/");
   } catch (err) {
@@ -228,6 +232,11 @@ exports.resetPassword = async (req, res) => {
 
   // 3. log in.
   const token = signToken({ id: user._id });
+  const cookie_options = {
+    expires: new Date(new Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+    secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+  };
   res.cookie("jwt", token, cookie_options);
   res.status(200).redirect("/dashboard");
 };

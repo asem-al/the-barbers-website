@@ -15,6 +15,8 @@ const ViewEngine = require("./modules/ViewEngine");
 
 const app = express();
 
+app.enable("trust proxy");
+
 const avaliable_languages = ["en", "tr", "ar", "de"]; // lan at index 0 is the default.
 
 const users = require("./models/userModel");
